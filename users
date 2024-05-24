@@ -1,0 +1,99 @@
+{% from 'func.twig' import rwurl,get,login,lever,up,add %} 
+{% use '_template.php' %}
+{% set url=get_uri_segments() %}
+{% set lk = url[1] %}
+{% if lk == 'bxh' %}
+{% set title = 'Bảng xếp hạng' %}
+{% else %}
+{% set title='Danh sách thành viên' %}
+{% endif %}
+{{ block('header') }}
+ {% from 'func.twig' import paging %}
+{% if lk == 'bxh' %}
+{% macro top(key) %}
+{% from 'func.twig' import add,get,up,lever %}
+{% set data=[] %}{% for i in 1..100 %}{% set data=get_data('id_users',100,i)|merge(data) %}{% endfor %}
+{% set listxu %}{% for i in data %}{% set user = i.data %}{% set xu = get('user_'~user,key)|trim|default(0) %}{{xu|number_format}}#{% endfor %}{% endset %}
+{% set listname %}{% for i in data %}{% set user = i.data %}{% set xu = get('user_'~user,key)|trim|default(0) %}{{user}}#{{xu|number_format}}.{% endfor %}{% endset %}
+{% set listtop %}{% for i in listxu|split('#')|sort|reverse %}{% for top in listname|split('.') %}{% if '#'~i in top %}{{top}}.{% endif %}{% endfor %}{% endfor %}{% endset %}
+{% set list=[] %}{% for i in listtop|split('.') %}{% if i not in list %}{% set list=list|merge([i]) %}{% endif %}{% endfor %}
+{% for i in list|slice(0,11) %}
+{% set copecute = i|split('#') %}
+{% set lv = get('user_'~copecute[0],'lever')|trim %}
+{% set avt = get('user_'~copecute[0],'avt') %}
+{% set status = get('user_'~copecute[0],'tamtrang')|trim %}
+{% set names = get('user_'~copecute[0],'nick')|trim %}
+{% if loop.last==false %}
+<div class="menu"><table cellpadding="0" cellspacing="0" width="100%"><tr valign="top"><td width="38"><img src="{{avt}}" width="32" height="32" alt="{{names}}" style="margin-top: 5px;" /></td><td><a id="mi" href="/profile/{{copecute[0]}}"><b class="{{lv}}">{{names}}</b></a><br />{{copecute[1]}}</td><td align="right">{{lever(lv)}}<br />
+{{status}}</td></tr></table></div>
+{% endif %}
+{% endfor %}
+{% endmacro %}
+{% set act = get_get('act') %}
+{% import _self as key %}
+<div class="phdr"><span>Bảng xếp hạng</span></div>
+{% if act == 'like' %}
+<div class="list1"><a id="mi" href="/users/bxh">Xu</a> · <a id="mi" href="?act=cmt">Bình luận</a> · Thích
+</div>
+{{key.top('like')}}
+{% elseif act == 'cmt' %}
+<div class="list1"><a id="mi" href="/users/bxh">Xu</a> · Bình luận · <a id="mi" href="?act=like">Thích</a>
+</div>
+{{key.top('cmt')}}
+{% else %}
+<div class="list1">Xu · <a id="mi" href="?act=cmt">Bình luận</a> · <a id="mi" href="?act=like">Thích</a>
+</div>
+{{key.top('xu')}}
+{% endif %}
+{% else %}
+<div class="menublock">
+<div class="phdr"><span>Danh sách thành viên</span></div>
+{% set data=[] %} 
+{% set play='yes' %} 
+{% for i in 1..100 %} 
+{% if play=='yes' %} 
+{% set data2=get_data( 'id_users',100,i) %} 
+{% endif %} 
+{% if data2 %} 
+{% set data=data2|reverse|merge(data) %} 
+{% else %} 
+{% set play='no' %} 
+{% set data2='' %} 
+{% endif %} 
+{% endfor %}
+{% set total=data|length %} 
+{% set page_max=total//10 %} 
+{% if total//10 != total/10 %} 
+{% set page_max=total//10+1 %} 
+{% endif %} 
+{% set url=get_uri_segments() %} 
+{% set p=url[1]|split('.')|first|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %} 
+{% set p=1 %} 
+{% endif %} 
+{% if p>page_max %} 
+{% set p=page_max %} 
+{% endif %} 
+{% set st=p*10-10 %} 
+{% if total == '0' %}
+<div class="rmenu">Chưa có thành viên nào</div>
+{% endif %}
+{% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,10) %} 
+{% set data='' %} 
+{% for taolap in entries %}
+{% set tung = taolap.data %}
+ {% set user = 'user_'~tung|striptags~get(key,'ten')|trim %}
+{% set lever =get(user,'lever') %}
+{% set on=get(user,'on')|trim %}
+{% set ic =get(user,'icon') %}
+<table class="menu" width="100%" border="0"><tr><td width="50px" align="center">
+<img style="border: none;border-radius: 50%;" width="40" height="40" class="avt" src="{{get(user,'avt')}}">{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 33px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>
+ <a id="mi" href="/profile/{{tung|striptags}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a> <br />Chức vụ: {{lever(lever)}}</span>
+</td></tr></table>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }}
+{% endif %} 
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+{{ block('footer') }}

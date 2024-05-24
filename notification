@@ -1,0 +1,164 @@
+{% use '_template.php' %}
+ {{ block( 'header' ) }} 
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}
+@media only screen and (max-width: 800px){.gamepc{display:none;}}</style>
+{% set url=get_uri_segments() %}
+{% if url[1] == 'like' %}
+{% from 'func.twig' import rwurl,up,ca,bo,get,add,login,lever,bbcode,ago %}
+ {% set login=login()|trim %}
+{% if login %}
+ <div class="phdr">Thông báo like của tôi - My notification like</div>
+<div class="list1"><a id="mi" href="/notification">Bình luận</a> · Thích · <a id="mi" href="/notification/follow">Đang theo dõi</a></div>
+{% set data=get('notification_like_list_'~login)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set p=1 %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+ {% for entry in data|slice(0,total)|slice(st,10) %}
+{% set entry=entry|trim %}
+{% set key='cmt_'~entry %} 
+{% set user='user_'~get(key,'ten') %}
+ {% set nd=get(key,'nd') %} 
+ {% set nd_edit=get(key,'nd_edit') %} 
+ {% set time=get(key,'time') %}
+{% set on=get(user,'on')|trim %}
+
+ {% if login() and login != get(key,'ten') %}
+{% endif %} 
+{% set like=get('like_'~entry)|trim|json_decode %}
+ {% if like|length-1 > 0 %} 
+<div class="list1"><button class="button_like"><i class="fa fa-heart"></i> {{like|length-1}}</button> {% for v in like|slice(1,like|length-1) %}<font class="{{get('user_'~v,'lever')}}">{{get('user_'~v,'nick')}}</font>{% if loop.last==false %}, {% endif %}{% endfor %} thích <a href="/threads/{{entry}}#{{entry}}">bài viết</a> của bạn</span></div>
+{% endif %} 
+
+{% endfor %} 
+
+ {% set fol = get('notification_like_unread_'~login)|trim|split('@')|length %}
+{% if fol > 1 %}
+{{ up('notification_like_name_'~login,' ') }}
+ {{ up('notification_like_unread_'~login,' ') }} 
+{% endif %} 
+{% if total==0 %}
+<div class="rmenu">Chưa có thông báo nào!</div>
+{% endif %}{% endif %}
+{% elseif url[1] == 'follow' %}
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login,lever,bbcode,ago %}
+ {% set login=login()|trim %}
+{% if login %}
+ <div class="phdr"><span>Theo dõi của tôi</span></div>
+<div class="list1"><a id="mi" href="/notification">Bình luận</a> · <a id="mi" href="/notification/like">Thích</a> · Đang theo dõi</div>
+{% set data=get('follow_list_'~login)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+
+{% set p=1 %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %} 
+
+{% set st=p*10-10 %}
+
+ {% for entry in data|slice(0,total)|slice(st,10) %}
+{% set entry=entry|trim %}
+{% set key='cmt_'~entry %} 
+{% set user='user_'~get(key,'ten') %}
+ {% set nd=get(key,'nd') %} 
+ {% set nd_edit=get(key,'nd_edit') %} 
+ {% set time=get(key,'time') %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+<div class="list1">
+<img src="{{get(user
+,'avt')}}" class="avt" width="36" height="36" style="border-radius: 50%;border: none;">
+<span style="position: absolute;left: 42px;"><i class="fal fa-comment-alt" style="background: green;border-radius: 45%;padding: 5px 3px 3px 3px;position: absolute;top: 24px;font-size: smaller;color: white;left: -4px;"></i></span><span style="position: relative;top: -9px;">
+<font class="{{lever}}">{{get(user
+,'nick')}}</font></a>
+ đã bình luận về một <a href="/threads/{{entry}}#post">bài viết</a> mà bạn đang quan tâm
+<span></div>
+
+{% endfor %} 
+ {% set fol = get('follow_unread_'~login)|trim|split('@')|length %}
+{% if fol > 1 %}
+{{ up('follow_name_'~login,' ') }}
+ {{ up('follow_unread_'~login,' ') }} 
+{% endif %} 
+{% if total==0 %}
+<div class="rmenu">Chưa có thông báo nào!</div>
+{% endif %}{% endif %}
+{% else %}
+
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login,lever,bbcode,ago %}
+ {% set login=login()|trim %}
+{% if login %}
+ <div class="phdr">Thông Báo</div> 
+<div class="list1">Bình luận· <a id="mi" href="/notification/like">Thích</a> · <a id="mi" href="/notification/follow">Đang theo dõi</a>
+</div>
+{% set data=get('notification_list_'~login)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+
+{% set p=1 %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %} 
+
+
+ 
+ 
+
+{% set st=p*10-10 %}
+
+ {% for entry in data|slice(0,total)|slice(st,10) %}
+{% set entry=entry|trim %}
+{% set key='cmt_'~entry %}
+
+
+
+{% if get_data_count(key)>0 %}
+{% set user='user_'~get(key,'ten') %}
+ {% set nd=get(key,'nd') %} 
+ {% set nd_edit=get(key,'nd_edit') %} 
+ {% set time=get(key,'time') %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+<div class="list1">
+<img src="{{get(user
+,'avt')}}" class="avt" width="36" height="36" style="border-radius: 50%;border: none;">
+<span style="position: absolute;left: 42px;"><i class="fal fa-comment-alt" style="background: green;border-radius: 45%;padding: 5px 3px 3px 3px;position: absolute;top: 24px;font-size: smaller;color: white;left: -4px;"></i></span><span style="position: relative;top: -9px;">
+<font class="{{lever}}">{{get(user
+,'nick')}}</font></a>
+ đã trả lời 
+ <a href="/threads/{{entry}}#post">bình luận</a> của bạn
+{% endif %}
+<span></div>
+{% endfor %}
+ {% set noti=get('user_'~login,'notification')|trim %}
+{% if noti and noti>0 %}
+{{ up('notification_name_'~login,' ') }}
+ {{ add('user_'~login,'notification',0) }}
+{% endif %} 
+{% if total==0 %}
+<div class="rmenu">Chưa có thông báo nào!</div>
+{% endif %}{% endif %}{% endif %}
+ {{ block( 'footer' ) }}

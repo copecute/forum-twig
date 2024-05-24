@@ -1,0 +1,728 @@
+ {% use '_template.php' %}
+{% from 'func.twig' import login %}
+{{ block( 'header' ) }}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}
+@media only screen and (max-width: 800px){.gamepc{display:none;}}</style>
+{% set url=get_uri_segments() %}
+{% set login=login()|trim %}
+{% if login %}
+{% if url[1] == 'farm' %}
+{% spaceless %}
+{% from 'func.twig' import add,get %}
+{% import 'func.twig' as m %}
+{% from 'func.twig' import farm_status,farm_timer,farm_nangsuat %} 
+ {% set title='Nông trại' %}
+{% set time = "now"|date('U') %}
+{% set timesangtoi = "now"|date('H', 'Asia/Ho_Chi_Minh') %}
+{% set html %}
+{% if login %}
+{% set user=get_data('user_'~login|trim)[0].data|json_decode %}
+{% set farm=get_data('farm_id_'~login|trim)[0].data|json_decode %}
+{% set id = get_get('id') %}
+{% set act = get_get('act') %}
+{# info hạt giống #}
+{% set name_hatgiong = {
+"c1":"Cà chua",
+"c2":"Cà rốt",
+"c3":"Khóm",
+"c4":"Dưa hấu",
+"c5":"Nho",
+"c6":"Hoa hồng",
+"c7":"Lúa",
+"c8":"Xoài",
+"c9":"Thanh long",
+"c10":"Hoa hướng dương",
+"c11":"Hoa tulip",
+"c31":"Khế",
+} %}
+{% set time_hatgiong = {
+"c1":4,
+"c2":6,
+"c3":10,
+"c4":8,
+"c5":26,
+"c6":2,
+"c7":48,
+"c8":24,
+"c9":12,
+"c10":12,
+"c11":6,
+} %}
+{% set sl_hatgiong = {
+"c1":45,
+"c2":60,
+"c3":105,
+"c4":80,
+"c5":240,
+"c6":25,
+"c7":720,
+"c8":360,
+"c9":189,
+"c10":189,
+"c11":60,
+} %}
+{% set gia_sl = {
+"c1":3,
+"c2":3,
+"c3":3,
+"c4":3,
+"c5":3,
+"c6":3,
+"c7":3,
+"c8":3,
+"c9":3,
+"c10":3,
+"c11":3,
+"c31":10,
+} %}
+{#{% set sl = {
+"c1":,
+"c2":,
+"c3":,
+"c4":,
+"c5":,
+"c6":,
+"c7":720,
+"c8":,
+"c9":,
+"c10":,
+"c11":,
+} %}
+#}
+{# set khế #}
+{% set sft_max_level = 13 %}
+{% set sft_time = 28800 %} {# 8 hours #}
+{% set sft_time_per_level = 600 %}
+{% set sft_level = farm.levelkhe|default('1')|trim %}
+{% set sft_time = sft_time - (sft_level - 1) * sft_time_per_level %}
+
+{% if sft_time < 7200 %} {% set sft_time = 7200 %} {% endif %}
+{% set sft_timer = farm.timekhe + sft_time >= "now"|date('U') ? farm.timekhe + sft_time - "now"|date('U') : 0 %}
+{# end set khế #}
+{% if url[2] == 'caycoi.php' %}
+{% if id >= 1 and id <=11 %}
+{% set text = get_post('text') %}
+{% if request_method()|lower == "post" %}
+{% if text|trim == text|round|trim and text|trim <= 99 and text|trim >=1 %}
+  {% set tra = (10*text|trim) %}
+  {% if get('user_'~login,'xu')|trim >= tra|trim %}
+  {% set key = 'farm_id_'~login|trim %}
+  {{add(key,'ns'~id,get(key,'ns'~id)|trim+text)}}
+  {{add('user_'~login,'xu',user.xu|trim-tra|trim)}}
+<div class="rmenu">  Mua thành công <b>{{text}}</b> hạt giống. giá {{tra|number_format}} xu. </div>
+ 
+    {% else %}
+  <div class="rmenu"> Số tiền bạn không đủ. Số tiền phải trả là {{tra|number_format}} xu</div>
+{% endif %}
+  {% else %}
+  <div class="rmenu"> Số cây mua phải từ 1 đến 99 và là số nguyên.</div>
+{% endif %}
+{% endif %}
+<div class="phdr"><a id="mi" href="/map/farm/shop.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Cửa hàng</a> | Mua rau củ</div>
+<div class="topmenu">
+  <font color="">{{user.nick}}</font>  bạn có {{user.xu|number_format}} xu</div>
+<div class="menu list-bottom">
+  <table cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td>
+          <img id="raucu" src="https://choivoitoi.com/giang/item/i_{{id}}.png" alt="*">
+        </td>
+        <td>[ <b>{{name_hatgiong['c'~id]}}</b> ]<br>
+          Giá: <b>10</b> xu/1 cây<br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="menu">Thời Gian Sinh truởng: [ <b>{{time_hatgiong['c'~id]}} Giờ</b> ]<br>
+Số Lượng Thu hoạch: [ <b>{{sl_hatgiong['c'~id]}}</b> cây ]<br>
+Tổng thu nhập [ <b>{{(sl_hatgiong['c'~id]*gia_sl['c'~id])|number_format}}</b> xu ]
+  <form method="post" action="">
+Số Lượng Mua 
+    <input type="text" name="text" size="4">
+    <input type="submit" name="save" value="Mua">
+</form>
+</div>      
+{% endif %}
+{% elseif url[2] == 'shop.html' %}
+{# farm shop #}
+<div class="main-xmenu">
+  <div class="phdr"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Nông trại</a> | Cửa hàng</div>
+  <div class="topmenu">Bạn có {{user.xu|number_format}} xu</div>
+  {% for i in 1..11 %}
+  <div class="menu">
+    <table cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="width: 40px;">
+            <img id="raucu" src="https://choivoitoi.com/giang/item/i_{{i}}.png" alt="*"></td>
+          <td style="width: 500px;">
+            <a id="mi" href="/map/farm/caycoi.php?id={{i}}">[ <b>{{name_hatgiong['c'~i]}}</b> ]</a><br>
+            Thời gian: {{time_hatgiong['c'~i]}} giờ<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+{% elseif url[2] == 'nhakho.html' %}
+{# farm nhà kho #}
+ <div class="phdr"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Nông trại</a> | Nhà kho</div>
+{% if id %}
+{% if farm['thu_'~id] >= 1 %}
+{% if request_method()|lower == "post" and get_post('save') %}
+{% set key = 'user_'~login %}
+{{add(key,'xu',get(key,'xu')|trim+(farm['thu_'~id]*gia_sl['c'~id])) }}
+  {% set key2 = 'farm_id_'~login|trim %}
+{{m.uplist(key2,'list_kho',id)}}
+{{add(key2,'thu_'~id,'0')}}
+<div class="menu">Bán thành công!</div>
+{% else %}
+<div class="menu">
+  <table cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;width: 30px;">
+          <img id="raucu" src="https://choivoitoi.com/giang/item/{% if id=='31' %}p_1{% else %}i_{{id}}{% endif %}.png" alt="*">
+        </td>
+        <td style="width: 500px;">[ <b>{{name_hatgiong['c'~id]}}</b> ]<br>
+          [ Sản lượng: <b>{{farm['thu_'~id]}}</b> ]<br>
+[ Thu nhập: <b>{{(farm['thu_'~id]*gia_sl['c'~id])|number_format}} xu</b> ]<br>
+          <form method="post" action="">
+<input type="submit" name="save" value="Bán">
+</form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="menu"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> nhà kho</a></div>
+{% endif %}
+{% else %}
+ <div class="rmenu">Vật phẩm này không còn nông sản.</div> 
+{% endif %}
+{% else %}
+{% set data=farm.list_kho|split('@') %}
+ {% set total=data|length-1 %} 
+ {% if total==0 %}
+ <div class="rmenu">Kho của bạn hiện không có gì.</div> 
+{% endif %}
+{% for v in data|slice(0,total) %} 
+{% set v = v|trim %}
+<div class="menu">
+  <table cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;">
+          <img src="https://choivoitoi.com/giang/item/{% if v=='31' %}p_1{% else %}i_{{v}}{% endif %}.png" alt="*" class="portrait">
+        </td>
+        <td>
+          <a id="mi" href="?id={{v}}">[ <b>{{name_hatgiong['c'~v]}}</b> ]</a><br>
+          Sản lượng: {{farm['thu_'~v]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endif %}
+{% elseif url[2] == 'laibuon.html' %}
+<div class="farm">
+<div class="phdr"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Nông trại</a> | Lái buôn</div>
+<div class="farm_bg"><marquee behavior="scroll" direction="left" scrollamount="1" class="cloud_1"><img src="/images/farm_may.png"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" class="cloud_2"><img src="/images/farm_may2.png"></marquee></div>
+<div style="text-align: center;"><img src="/images/farm_laibuon.jpg"></div>
+<div class="list1"><a href="/game?act=oantuti">Oẳn tù tì</a></div>
+<div class="list1"><a href="/game/duameo">Đua mèo</a></div>
+</div>
+{% elseif url[2] == 'nhabep.html' %}
+{# farm nhà bếp #}
+ <div class="phdr"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Nông trại</a> | Nhà Bếp</div>
+    <div class="menu">đang nâng cấp
+</div>
+{% elseif url[2] == 'bxh.php' %}
+{% include '_top_farm' %}
+{% elseif url[2] == 'thuhoachkhe.html' %}
+ {% set sft_product_per_level = 10 %}
+{% set sft_product = 40 + sft_level * sft_product_per_level %}
+
+{# farm khế #}
+<div class="farm"><div class="phdr"><a id="mi" href="/map/farm/nongtrai.html" class="like" style="border-radius: 5px;padding: 3px;"><i class="far fa-chevron-left"></i> Nông trại</a> | {{act ? '<a id="mi" href="thuhoachkhe.html">Cây khế</a>' : 'Cây khế' }}</div>
+<div class="farm_bg"><marquee behavior="scroll" direction="left" scrollamount="1" class="cloud_1"><img src="/images/farm_may.png"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" class="cloud_2"><img src="/images/farm_may2.png"></marquee></div>
+<div class="star_fruit_tree_2" style="text-align: center;">
+  <div>
+    <img src="/images/farm_caykhe{{sft_timer ? '' : '1'}}.png" />
+  </div>
+  <span class="textbox ib bold">Cây khế Lv{{sft_level}} {{sft_level < sft_max_level and sft_timer and act != 'upgrade' ? ' - <a id="mi" href="?act=upgrade">Nâng cấp</a>':''}}</strong></span></div>
+<div class="controls">
+{% if sft_timer %}
+	{% if act == 'upgrade' %}
+		{% if sft_level < sft_max_level %}
+{% set upkhe %}{% if sft_level==1 %}2000{% elseif sft_level==2 %}4000{% elseif sft_level==3 %}6000{% elseif sft_level==4 %}8000{% elseif sft_level==5 %}10000{% elseif sft_level==6 %}12000{% elseif sft_level==7 %}14000{% elseif sft_level==8 %}16000{% elseif sft_level==9 %}18000{% elseif sft_level==10 %}20000{% elseif sft_level==11 %}22000{% else %}30000{% endif %}{% endset %}
+{% if get('user_'~login|trim,'xu')|trim >= upkhe %}
+{{add('farm_id_'~login|trim,'levelkhe',sft_level+1)}}
+{{add('user_'~login|trim,'xu',get('user_'~login|trim,'xu')|trim-upkhe|trim)}}
+<div class="textbox">Bạn đã nâng cấp thành công cây khế lên cấp {{levelkhe+1}}, bạn bị tốn {{upkhe}} xu!</div>
+{% else %}
+{{add('farm_id_'~login|trim,'levelkhe',sft_level)}}
+<div class="textbox">Nâng cấp không thành công. Bạn cần tối thiểu {{upkhe}} xu để nâng cấp cây khế của bạn!</div>
+{% endif %}
+			{# nâng cấp #}
+		{% else %}
+			<div class="textbox">Cây khế đã đạt cấp tối đa!</div>
+		{% endif %}
+  {% else %}
+	<div class="textbox">Sản lượng: {{sft_product}}<br/>
+      Còn {{farm_timer(sft_timer, 2)}} mới có thể thu hoạch</div>
+			{{sft_level < sft_max_level ? '<div class="textbox">Cây khế level càng cao phát triển càng nhanh. Khi khế đang phát triển mới có thể tiến hành nâng cấp!</div>' : ''}}
+	{% endif %}
+                                       
+{% else %}
+{% set key = 'farm_id_'~login()|trim %}
+{{m.uplist(key,'list_kho',31,'up')}}
+  {{add(key,'timekhe',time|trim)}}
+{{add(key,'thu_31',get(key,'thu_31')|trim + sft_product|trim)}}
+	<div class="textbox">Thu hoạch thành công! Bạn nhận {{sft_product}} quả khế vào kho!<br/>
+  <a id="mi" href="?act=upgrade">Nâng cấp</a> cây khế để tăng sản lượng và giảm thời gian sinh trưởng!</div>
+                                         {% endif %}  
+</div></div>
+
+{% elseif url[2] == 'nongtrai.html' %}
+{% set u = get_get('u') %}
+{% if u == m.user('id')|trim or not u %}
+{% set u = login|trim %}
+{% endif %}
+{% if get_data_count('user_'~u)==1 and u != 2 %}
+{% set farmU=get_data('farm_id_'~u|trim)[0].data|json_decode %}
+{% set key = 'farm_id_'~u %}
+          {% if get_data_count(key) == 0 %}
+{% set data = {'id':u,
+'sodat':6,
+'dat1':'',
+'dat2':'',
+'dat3':'',
+'dat4':'',
+'dat5':'',
+'dat6':'',
+'dat7':'',
+'dat8':'',
+'dat9':'',
+'dat10':'',
+'dat11':'',
+'dat12':'',
+'dat13':'',
+'dat14':'',
+'dat15':'',
+'dat16':'',
+'dat17':'',
+'dat18':'',
+'dat19':'',
+'dat20':'',
+'dat21':'',
+'dat22':'',
+'dat23':'',
+'dat24':'',
+'dat25':'',
+'dat26':'',
+'dat27':'',
+'dat28':'',
+'dat29':'',
+'dat30':'',
+'dat31':'',
+'dat32':'',
+'dat33':'',
+'dat34':'',
+'dat35':'',
+'dat36':'',
+'dat37':'',
+'dat38':'',
+'dat39':'',
+'dat40':'',
+'dat41':'',
+'dat42':'',
+'dat43':'',
+'dat44':'',
+'dat45':'',
+'dat46':'',
+'dat47':'',
+'dat48':'',
+'ns1':'',
+'ns2':'10',
+'ns3':'',
+'ns4':'',
+'ns5':'',
+'ns6':'',
+'ns7':'',
+'ns8':'',
+'ns9':'',
+'ns10':'',
+'ns11':'',
+'ns12':'',
+'ns13':'',
+'ns14':'',
+'ns15':'',
+'ns16':'',
+'ns17':'',
+'ns18':'',
+'ns19':'',
+'ns20':'',
+'timekhe':'now'|date('U'),
+} %}
+{% set save=save_data(key,data|json_encode) %}
+{% endif %}
+{% set muadat = get_get('muadat') %}
+{% set sadit = get_post('sadit') %}
+{% set gieohat = get_post('gieohat') %}
+{% set tuoinuoc = get_post('tuoinuoc') %}
+{% set thuhoach = get_post('thuhoach') %}
+{% set dattrong = get_post('dattrong') %}
+{% if muadat == 1 and u == login|trim %}
+{% set giadat = {
+'dat7': 2000,
+'dat8': 4000,
+'dat9': 6000,
+'dat10': 8000,
+'dat11': 9000,
+'dat12': 10000,
+'dat13': 11000,
+'dat14': 12000,
+'dat15': 14000,
+'dat16': 16000,
+'dat17': 18000,
+'dat18': 20000,
+'dat19': 22200,
+'dat20': 24300,
+'dat21': 25000,
+'dat22': 26300,
+'dat23': 28200,
+'dat24': 30700,
+'dat25': 32800,
+'dat26': 34500,
+'dat27': 35800,
+'dat28': 37300,
+'dat29': 38200,
+'dat30': 39300,
+'dat31': 40000,
+'dat32': 42300,
+'dat33': 43200,
+'dat34': 44700,
+'dat35': 46800,
+'dat36': 47500,
+'dat37': 48800,
+'dat38': 49700,
+'dat39': 50200,
+'dat40': 52300,
+'dat41': 54000,
+'dat42': 56300,
+'dat43': 58200,
+'dat44': 59700,
+'dat45': 60800,
+'dat46': 62500,
+'dat47': 63800,
+'dat48': 66700,
+} %}
+<div class="phdr">Mua Đất</div>
+ {% set datmua = (get('farm_id_'~login|trim,'sodat')|trim +1)|trim %}
+{% if datmua <= 48 %}
+{% if user.xu|trim >= giadat['dat'~datmua] %}
+  {{add('farm_id_'~login|trim,'sodat',datmua)}}
+  {{add('user_'~login|trim,'xu',user.xu|trim-giadat['dat'~datmua])}}
+{{add('user_'~login|trim,'db',user.db|trim+2)}}
+  <div class='topmenu'>Mua thành công đất số {{datmua}}.  <b>Giá: {{ giadat['dat'~datmua]|number_format }} xu</b>.</div>
+<div class="menu list-top congdong"><a id="mi" href="/map/farm/nongtrai.html">[ <b>Quay Lại</b> ]</a> <a class="btn_status" href="/map/farm/nongtrai.html?muadat=1" style="color: #fff;background: #455b64;border-radius: 4px;display: inline-block;padding: 5px 15px;margin: 5px;">Mua tiếp</a></div>
+  {% else %}
+  <div class='rmenu'>Bạn không đủ xu để mua đất số {{datmua}}.  <b>Giá: {{ giadat['dat'~datmua]|number_format }} xu</b></div>
+<div class="menu list-top congdong"><a id="mi" href="/map/farm/nongtrai.html">[ <b>Quay Lại</b> ]</a></div>
+  {% endif %}
+{% endif %}
+{% else %}
+
+{% if request_method()|lower == "post" %}
+  {# tuoi nuoc #}
+{% if tuoinuoc %}
+{% for i in dattrong %}
+   {% set dat = farmU['dat'~i]|trim|split('_') %}
+                    {% set timetrong = dat[1] %}
+      {% set cay = dat[0]|default('0') %}
+      {% set timethu = (timetrong+(3600*time_hatgiong['c'~cay])) %}
+  {% set time = "now"|date('U') %}
+{% if dat[0] >=1 and timethu > time and timethu > (3600*time_hatgiong['c'~cay]) %}
+{{add(key,'dat'~i|trim,dat[0]|trim~'_'~dat[1]|trim~'_'~"now"|date('U'))}}
+{% endif %}
+{% endfor %}
+  {% endif %}
+{# gieo hat #}
+{% if gieohat %}
+{% if farm['ns'~sadit]|trim >= 1 and dattrong|length >= 1 %}
+{% set dem = '0' %}
+{% for i in dattrong %}
+   {% set dat = farm['dat'~i]|trim|split('_') %}
+                    {% set timetrong = dat[1] %}
+      {% set cay = dat[0]|default('0') %}
+      {% set timethu = (timetrong+(3600*time_hatgiong['c'~cay])) %}
+{% if sadit and get(key,'ns'~sadit)|trim >= loop.index and timethu <= (3600*time_hatgiong['c'~cay]) %}
+{{add(key,'dat'~i|trim,sadit|trim~'_'~"now"|date('U')~'_'~"now"|date('U'))}}
+{% set dem = dem+1 %}
+{% endif %}
+{% endfor %}
+{{add('farm_id_'~login|trim,'ns'~sadit|trim,farm['ns'~sadit]|trim-dem)}}
+{% if dem >= 1 %}
+<div class='rmenu'>Gieo thành công <b>{{dem}}</b> cây {{sadit|trim|replace({'1':'Cà chua','2':'Cà rốt','3':'Khóm','4':'Dưa hấu','5':'Nho','6':'Hoa hồng','7':'Lúa','8':'Xoài','9':'Thanh long','10':'Hoa hướng dương','11':'Hoa tulip'})}}. </div>
+{% else %}
+<div class='rmenu'> Đất bạn chọn đã được trông cầy hoặc hết hạt giống</div>
+{% endif %}
+{% endif %}
+  {% endif %}
+ {# thu hoach #} 
+  {% if thuhoach and u|trim == login|trim %}
+{% if dattrong|length >= 1 %}
+{% set dem = '0' %}
+{% for i in dattrong %}
+   {% set dat = farm['dat'~i]|trim|split('_') %}
+                  {% set timetrong = dat[1] %}
+      {% set cay = dat[0]|default('0') %}
+      {% set timethu = (timetrong+(3600*time_hatgiong['c'~cay])) %}
+  {% set sl_thu = (sl_hatgiong['c'~cay]*(farm_nangsuat('100', timetrong, timethu, dat[2])|trim/100))|round(0,'ceil')  %}
+  {% if cay >= 1 and timethu > (3600*time_hatgiong['c'~cay]) and timethu < ("now"|date('U')) %}
+{{add(key,'dat'~i|trim,dat[0]~'_0_0')}}
+{{add(key,'thu_'~cay|trim,get(key,'thu_'~cay|trim)|trim + sl_thu|trim)}}
+{% set key2='farm_id_'~login|trim %}
+{{m.uplist(key2,'list_kho',cay,'up')}}
+{% set dem = dem+1 %}
+{% endif %}
+{% endfor %}
+{% if dem >= 1 %}
+<div class='rmenu'>Thu hoạch thành công {{dem}} cây.</div>
+{% else %}
+<div class='rmenu'> Đất bạn chọn hiện chưa có cây để thu hoạch </div>
+{% endif %}
+{% endif %}
+  {% endif %}
+  {# end #}
+{% endif %}
+{% set farm=get_data('farm_id_'~u|trim)[0].data|json_decode %}
+<form action="/map/farm/nongtrai.html?act=farm" method="post">
+<style>
+.animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}@-webkit-keyframes pulse{from{-webkit-transform:scale3d(0.5,0.5,0.5);transform:scale3d(0.5,0.5,0.5)}50%{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}to{-webkit-transform:scale3d(0.5,0.5,0.5);transform:scale3d(0.5,0.5,0.5)}}@keyframes pulse{from{-webkit-transform:scale3d(0.5,0.5,0.5);transform:scale3d(0.5,0.5,0.5)}50%{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}to{-webkit-transform:scale3d(0.5,0.5,0.5);transform:scale3d(0.5,0.5,0.5)}}.pulse{-webkit-animation-name:pulse;animation-name:pulse}.farm_bottom::after{display:block;content:'';clear:both}.farm_cote_item,.farm_pond_item{display:inline-block;position:absolute;z-index:2}.inf{background:#232125;padding:5px;line-height:14px;color:#fff;font-family:monospace;font-size:15px;margin:3px 0;word-break:break-word}
+</style>
+<div class="phdr">Nông trại</b></div>
+  			{% if id <= farm.sodat and id >= 1 %}
+   {% set dat = farmU['dat'~id]|trim|split('_') %}
+                    {% set timetrong = dat[1] %}
+      {% set cay = dat[0]|default('0') %}
+      {% set timethu = (timetrong+(3600*time_hatgiong['c'~cay])) %}
+  {% set time = "now"|date('U') %}
+				{% if cay >= 1 %}
+<div class="menu">Cây trồng: {{name_hatgiong['c'~cay]}} ({{farm_nangsuat('100', timetrong, timethu, dat[2]) }}%)</div>
+  <div class="menu">{{timethu > time ? 'Thời gian còn: '~farm_timer(timethu - time)~'' : 'Có thể thu hoạch'}}</div>
+				{% else %}
+  <div class="menu">Cây trồng: Chưa có</div>
+								 {% endif %} {% endif %}
+  <script type="text/javascript">
+function toggle(source) {
+checkboxes = document.getElementsByName('dattrong[]');
+for(var i=0, n=checkboxes.length;i<n;i++) {
+checkboxes[i].checked = source.checked;
+}
+}
+</script>
+<div id="farm" class="farm">
+<div class="farm_bg">
+{% if u != login|trim %}
+<span style="padding-top: 5px;" class="inf">{% if get('user_'~u,'gt') == 'boy' %}<i class="fa fa-mars" aria-hidden="true"></i>{% else %}<i class="fa fa-venus" aria-hidden="true"></i>{% endif %} {{get('user_'~u,'nick')}}</span>
+{% endif %}
+  <marquee behavior="scroll" direction="left" scrollamount="1" class="cloud_1">
+    <img src="/images/farm_may.png">
+  </marquee>
+  <marquee behavior="scroll" direction="left" scrollamount="2" class="cloud_2">
+    <img src="/images/farm_may2.png">
+  </marquee>
+  </div>
+<div class="farm_body">
+  <div class="construction">
+{% if u==login|trim %}
+<a id="mi" href="/map/farm/nhabep.html"><img src="/images/farm_nhabep.png"><img src="/images/farm_vao.png" style="position: absolute;bottom:-3px;right:27px;"></a>
+<a id="mi" href="/map/farm/shop.html" class="to_store"><img src="/images/farm_vao.png" style="position: absolute;bottom: -15px;right: 31px;"></a>
+    <a id="mi" href="/map/farm/nhakho.html" class="to_warehouse"><img src="/images/farm_vao.png" style="position: absolute;bottom: -15px;right: 22px;"></a> 
+{% endif %}
+    <a id="mi" href="{% if u==login|trim %}/map/farm/thuhoachkhe.html{% else %}#caykhe{% endif %}" class="to_star_fruit_tree{{sft_timer ? '' : ' star_fruit_tree_1'}}">
+      <span class="timer" id="timer" data-timer="{{sft_timer}}"><center>{{farm_timer(sft_timer, 1)}} {{sft_timer ? '' : 'Có thể thu hoạch!'}}</center></span></a>
+<a href="/map/farm/laibuon.html"><img src="/images/farm_laibuon.jpg"></a>
+</div>
+<div class="plant_area">
+{% for i in 1..farm.sodat %}
+   {% set dat = farm['dat'~i]|trim|split('_') %}
+            {% set timetrong = dat[1] %}
+      {% set cay = dat[0] %}
+  {% set timethuhoach = (timetrong+(3600*time_hatgiong['c'~cay])) %}
+ <label class="plot"> 
+  <a id="mi" href="?{% if u != login|trim %}u={{u}}&{% endif %}act=farm&id={{i}}" class="item_{{cay}}" style="background-image:url(https://choivoitoi.com/giang/item/{{cay|default('0')}}_{{farm_status(cay,timetrong,timethuhoach,dat[2])|trim}}.png)"></a>
+  <input type="checkbox" name="dattrong[]" value="{{i}}"{{id == i ? 'checked ':''}}>
+  </label>
+        {% endfor %}
+			{% if u==login|trim %}
+{{ farm.sodat < 48 ? '<label class="plot buy_plot"><a id="mi" href="?muadat=1"></a></label>' : ''}}{% endif %} </div>
+<div style="height: 28px; background: url('/images/farm_divide.png') repeat-x">
+<img src="http://mxhavatar.com/farm/icon/thunuoi/cho.png" onclick="alert('Gâu gâu..!');" alt="cho" style="position: absolute;vertical-align: 0px;margin: -{{ random(40) }}px 0 0 {{ random(200) }}px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/1.gif" onclick="alert('Chíp chíp');" style="position: absolute;vertical-align: 0px;margin: 31px 0 0 194px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/2/1.gif" onclick="alert('Cục cục cục.... cục xì lầu ông bê lắp');" style="position: absolute;vertical-align: 0px;margin: 58px 0 0 157px;"></div>
+<div class="farm_bottom">
+<div class="farm_cote">
+<img src="http://mxhavatar.com/farm/vatnuoi/mangan.png" onclick="alert('Đã cho ăn');" style="position: absolute;vertical-align: 0px;margin:15px 0 0 108px">
+<img src="http://mxhavatar.com/farm/vatnuoi/xodung.png" onclick="alert('Chưa có sữa');" style="position: absolute;vertical-align: 0px;margin: 84px 0 0 119px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/mangcuu.png" onclick="alert('Chưa có lông cừu');" style="position: absolute;vertical-align: 0px;margin: 85px 0 0 131px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/2/3.gif" onclick="alert('Ùmm bò');" style="position: absolute;vertical-align: 0px;margin: 72px 0 0 37px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/3.gif" onclick="alert('Ùmm bò');" style="position: absolute;vertical-align: 0px;margin:19px 0 0 37px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/4.gif" onclick="alert('Be beee');" style="position: absolute;vertical-align: 0px;margin: 29px 0 0 102px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/2.gif" onclick="alert('Éc éc');" style="position: absolute;vertical-align: 0px;margin: 41px 0 0 39px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/2/2.gif" onclick="alert('Éc éc');" style="position: absolute;vertical-align: 0px;margin: 34px 0 0 87px;">
+</div>
+<img src="http://mxhavatar.com/farm/vatnuoi/oga.png" onclick="alert('Chưa có trứng');" style="position: absolute;">
+{# <img src="https://choivoitoi.com/giang/item/p_13.png" alt="*" style="position: absolute;margin: 1px 0 0 3px;"> #}
+<div class="farm_pond">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/5.gif" onclick="alert('Ấn vào con cá làm gì?');" style="position: absolute;vertical-align: 0px;margin: 37px 0 0 11px;">
+<img src="http://mxhavatar.com/farm/vatnuoi/1/5.gif" onclick="alert('Ấn vào con cá làm gì?');" style="position: absolute;vertical-align: 0px;margin: 18px 0 0 46px;">
+</div></div>
+    </div>
+  </div>
+    <div class="phdr">Thao tác chăm sóc</div>
+    <div class="menu">
+      <input type="checkbox" onclick="toggle(this)">Tất cả 
+{% if u==login|trim %}
+      <select name="sadit">
+         <option value="">Chọn giống</option>
+        {% for i in 1..11 %}
+        {% set nongsan = get('farm_id_'~login|trim,'ns'~i|trim) %}
+        {% if nongsan|trim>=1 %}
+        <option value="{{i}}">{{i|trim|replace({'1':'Cà chua','2':'Cà rốt','3':'Khóm','4':'Dưa hấu','5':'Nho','6':'Hoa hồng','7':'Lúa','8':'Xoài','9':'Thanh long','10':'Hoa hướng dương','11':'Hoa tulip'})}} [{{get('farm_id_'~login|trim,'ns'~i)}}]</option>
+       {% endif %}
+        {% endfor %}
+      </select>
+{% endif %}<br />
+{% if u==login|trim %}
+<input type="submit" name="gieohat" value="Gieo hạt">
+{% endif %}
+      <input type="submit" name="tuoinuoc" value="Tưới nước">
+      {% if u == login|trim %}<input type="submit" name="thuhoach" value="Thu hoạch">
+{% endif %}
+      </form>
+  </div>
+  {% endif %}
+{% else %}
+<div class="rmenu"><p><b>LỖI!</b><br>Người dùng này không tồn tại</p></div>
+  {% endif %}
+{% else %}
+<div class="phdr">Nông trại</div>
+<div class="farm"><div class="farm_bg"><marquee behavior="scroll" direction="left" scrollamount="1" class="cloud_1"><img src="/images/farm_may.png"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" class="cloud_2"><img src="/images/farm_may2.png"></marquee></div><div style="margin-top: -69px;text-align: center;" class="construction"><a id="mi" href="/map/farm/nongtrai.html"><img src="/images/cong_farm.png">
+<img src="/images/farm_vao.png" style="position: absolute;bottom: -5px;right: 31px;z-index: 1;">
+<p style="background: url('/images/farm_dat.png') repeat;margin-top: -7px;height: 17px;width: 46px;margin-left: 26px;position: relative;"></p></a><a id="mi" href="/atm/"><img src="/images/atm.png"></a>
+
+<a id="mi" href="/map/farm/shop.html" class="to_store"></a></div>
+<div style="background: url('/images/farm_dat.png') repeat;"><a href="/map/farm/laibuon.html"><img src="/images/farm_laibuon.jpg"></a></div></div>
+<div style="height: 25px;background: url('/images/farm_duong.png') repeat-x;margin: 0;width: 100%;"><a id="mi" href="/map"style="position: absolute;left: 50%;margin-top: -30px;z-index: 2;" ><img src="/images/farm_vao.png"></a><marquee loop="1" align="center" direction="left" width="100%" scrollamount="10" style="z-index:1;position:absolute;margin-top: -73px;" onmouseover="this.stop();" onmouseout="this.start();"><a id="mi" href="/map"><img src="/images/xekhach.png"></a></marquee></div>
+{% endif %}
+  {% endif %}
+  {% endset %}
+
+{{html}}
+<style>
+.farm{background-image:url('/images/farm_grass.png');background-repeat:repeat}
+.farm_bg{height:141px;background-image:url('/images/farm_bg_light.png');background-repeat:repeat-x};
+.farm_bg .cloud_1{margin-top:5px}
+.farm_bg .cloud_2{margin-top:10px}
+.farm_body {margin-top:-41px}
+.construction{text-align:left}
+.construction a{display:inline-block;background-position:bottom left;background-repeat:no-repeat;height:70px;position:relative}
+.construction a.to_store{background-image: url('/images/farm_cuahang.png');width:93px;margin-right:5px}
+.construction a.to_warehouse{background-image: url('/images/farm_nhakho.png');width:78px;margin-right:10px}
+.construction a.to_star_fruit_tree{background-image: url('/images/farm_caykhe.png');width:66px}
+.construction a.to_star_fruit_tree>.timer{display:inline-block;font-size:smaller;position:absolute;width:100%;top:-10px;left:50%;margin-left:-33px;background:#fff;border-radius:5px;padding:2px;color:#000}
+.construction a.to_star_fruit_tree>.timer:before{position:absolute;bottom:-7px;left:9px;display:inline-block;border-right:7px solid transparent;border-top:7px solid #ccc;border-left:7px solid transparent;border-top-color:rgba(0,0,0,0.2);content:''}
+.construction a.to_star_fruit_tree>.timer:after{position:absolute;bottom:-6px;left:10px;display:inline-block;border-right:6px solid transparent;border-top:6px solid #ffffff;border-left:6px solid transparent;content:''}
+.construction a.to_star_fruit_tree.star_fruit_tree_1{background-image: url('/images/farm_caykhe1.png')}
+.plant_area{max-width:800px;padding:5px}
+.plant_area > .plot{margin:0;padding:0;height:50px;width:25px;text-align:center;position:relative;display:inline-block;font-size:smaller}
+.plant_area > .plot > a{display:block;position:absolute;bottom:15px;width:100%;height:35px;background-repeat:no-repeat;background-position: 50% 50%;background-size:28px 32px}
+.plant_area > .plot > a.item_0{background-image: url('/images/farm_datkho.png')}
+.plant_area > .plot > input{margin:0;padding:0;position:absolute;bottom:0;left:50%;margin-left:-6px}
+.plant_area > .plot.buy_plot > a{background-image:url('/images/farm_mua.png');bottom:10px}
+.controls{padding:5px}
+.farm_divide {height: 28px; background: url('/images/farm_divide.png') repeat-x}
+.farm_bottom::after {display: block; content: '';clear:both;}
+.farm_cote, .farm_pond {position: relative; z-index: 0; background-repeat: no-repeat;}
+.farm_cote {float:left; width: 159px; height: 102px; background-image: url('/images/farm_cote.png'); margin-top: -11px}
+.farm_pond {float:right; width: 99px; height: 73px; background-image: url('/images/farm_aoca.png')}
+.farm_cote_item, .farm_pond_item {display:inline-block; position: absolute;z-index: 2}
+.controls{padding:5px}
+.star_fruit_tree_2{padding:5px}
+.farm .textbox{background:#fff;padding:2px 3px;font-size:0.9em;border-radius:5px;margin-top:5px}
+.dat{background:url('/images/farm_dat');padding:6px}</style>
+{% endspaceless %}
+
+{% elseif url[1] == 'ngoaio' %}
+ {% set title='Ngoại ô' %}
+<style>
+.farm_grass{background-image:url('/images/farm_grass.png');background-repeat:repeat;height: 100%;}
+.ngoaio_bg{height:141px;background-image:url('/images/farm_bg_light.png');background-repeat:repeat-x};
+.ngoaio_bg .cloud_1{margin-top:5px}
+.ngoaio_bg .cloud_2{margin-top:10px}
+.ngoaio_body {margin-top:100px}
+.buico {background: url('/images/buico.png') repeat-x; height: 24px;margin-top: -5px;}
+.nenda {background: url('/images/nen_da.png');height: 100px}
+</style>
+<div class="farm_grass">
+<div class="ngoaio_bg"><marquee behavior="scroll" direction="left" scrollamount="1" class="cloud_1"><img src="/images/farm_may.png"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" class="cloud_2"><img src="/images/farm_may2.png"></marquee></div>
+<div class="buico"></div>
+<div class="ngoaio_body">
+<a id="mi" href="/game/duameo"><img src="/images/npc_duathu.gif" style="margin-top: -100px;"><img src="/images/nha_duathu.png" style="margin-top: -120px;"></a>
+<img src="/images/cay.png" style="float:right;margin-top: -70px;">
+<div class="nenda">
+<p style="margin-left: 20px;margin-top: 18px;z-index:150;position:absolute;overflow: auto;"><font color="#fff" style="margin-left:0px;">
+<small><small><font color="red">Đàm Minh Giang</font></font></small></small><font color="#fff" style="margin-left:0px;"><br></font><img src="https://tinhban.tk/images/cv4.gif" style="margin-top:-10px;width:35px;height:35px;"></p></div>
+</div></div>
+<div style="background: url('/images/duong.png');margin: 0;width: 100%;height: 104px;"><a id="mi" href="/map" style="position: absolute;left: 50%;margin-top: -30px;z-index: 5;"><img src="/images/farm_vao.png"></a><marquee loop="1" align="center" direction="left" width="100%" scrollamount="10" style="z-index:1;position:absolute" onmouseover="this.stop();" onmouseout="this.start();"><a id="mi" href="/map"><img src="/images/xekhach.png"></a></marquee></div>
+
+{% elseif url[1] == 'khugiaitri' %}
+ {% set title='Khu giải trí' %}
+<style>.farm_grass{background-image:url('/images/farm_grass.png');background-repeat:repeat;height: 100%;}
+.khugiaitri_body {}
+.nencay {background: url(/images/nencanh1.png) repeat-x;height: 96px;width: 100%;}
+.leduong {background-image: url(/images/leduong.png);height: 30px;margin: 0;width: 100%;}
+.duong {background-image: url(/images/duong.png);margin: 0;width: 100%;}
+.nenda {background: url('/images/nen_da.png');height: 100px}
+</style>
+<div class="farm_grass">
+<div class="nencay" style="height:120px; margin:0;"><marquee behavior="scroll" direction="left" scrollamount="1" style="margin-top: 5px"><img src="/images/farm_may.png"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" style="margin-top: 10px"><img src="/images/farm_may2.png"></marquee></div>
+<div class="leduong"></div>
+<div class="khugiaitri_body">
+<img src="/images/cay.png" alt="cây">
+<img src="/images/cay.png" alt="cây">
+<img src="/images/cay.png" alt="cây"><br/>
+<a id="mi" href="game"><img src="/images/game.png" alt="game"></a>
+<img src="/images/npc_chuhon.gif" alt="Chủ Hôn">
+<img src="/images/atm.png">
+</div>
+<div class="nenda">
+<p style="margin-left: 20px;margin-top: 18px;z-index:150;position:absolute;overflow: auto;"><font color="#fff" style="margin-left:0px;">
+<small><small><font color="red">Đàm Minh Giang</font></small></small></font><font color="#fff" style="margin-left:0px;"><br></font><img src="https://tinhban.tk/images/cv4.gif" style="margin-top:-10px;width:35px;height:35px;"></p>
+
+<p style="margin-left: 219px;margin-top: 56px;z-index:150;position:absolute;overflow: auto;"><font color="#fff" style="margin-left:8px;">
+<small><small><font color="red">bot</font></small></small></font><font color="#fff" style="margin-left:0px;"><br></font><img src="https://aotbksfden.cloudimg.io/width/45/x/https://viblog.tk/avatar.php" style="margin-top:-10px;width:35px;height:35px;"></p>
+<img src="/images/choxebuyt.png" alt="icon" style="position:absolute;margin:18px 0 0 100px">
+</div>
+<div class="leduong"></div>
+<div class="duong" style="height:104px">
+<a id="mi" href="/map" style="position: absolute;left: 50%;margin-top: -30px;z-index: 5;"><img src="/images/farm_vao.png"></a>
+<marquee loop="1" align="center" direction="left" width="100%" scrollamount="10" style="z-index:1;position:absolute;" onmouseover="this.stop();" onmouseout="this.start();"><a id="mi" href="/map"><img src="/images/xekhach.png"></a></marquee></div>
+{% else %}
+<div style="height:37px;background-image:url(https://copecute.github.io/images/game/avatar_nha.png);background-repeat:repeat">
+<marquee behavior="scroll" direction="left" scrollamount="3" style="margin-top: -10px"><img src="https://copecute.github.io/images/game/avatar_dammaynho.png" width="15"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" style="margin-top: 6px"><img src="https://copecute.github.io/images/game/avatar_dammaylon.png" width="20"></marquee></div>
+<table style="width:100%;background-image:url(https://copecute.github.io/images/game/avatar_bmap.png);background-repeat:repeat"><tbody><tr><td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay">
+<span style=""><a id="mi" href="/map/ngoaio"><img src="http://mxhavatar.com/icon/iconxoan/ngoaio.png" width="26px" title="Ngoại Ô"><br><b><font color="white">Khu ngoại ô</font></b></a></span></div></td>
+<td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay">
+<span style=""><a id="mi" href="/map/khugiaitri"><img src="http://mxhavatar.com/images/giaitri.png" width="26px" title="Khu giải trí"><br><font color="white"><b>Khu giải trí</b></font></a></span></div></td>
+<td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay"><span style=""><a id="mi" href="/map/farm"><img src="https://copecute.github.io/images/farm/farm.png" width="26px" title="Nông Trại"><br><b><font color="white">Khu Nông Trại</font></b></a></span></div>
+</td></tr></tbody></table>
+<div style="height:26px;background-image:url(https://copecute.github.io/images/game/avatar_nhamap2.png);background-repeat:repeat"><marquee behavior="scroll" direction="left" scrollamount="4" style="margin-top: 5px"><img src="https://copecute.github.io/images/game/avatar_dammaynho.png" width="15"></marquee></div>
+{% endif %}{% else %}<div class="rmenu">vui lòng đăng nhập để sử dụng các chức năng của diễn đàn!</div>{% endif %}
+{{ block( 'footer' ) }}

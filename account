@@ -1,0 +1,811 @@
+{% use '_template.php' %}
+ {% set url=get_uri_segments() %}
+{% if url[1] == 'auto' %}
+ {% from 'func.twig' import rwurl,login,get,lever,ago %}
+{% if login() %}
+ {% set login=login()|trim %}
+{% endif %}
+ {% set url=get_uri_segments() %} 
+ {% if login and not url[2] %} 
+ {{ block( 'header' ) }} 
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+<div class="phdr"><span>Autologin - Tự động đăng nhập</span></div>
+<div class="menu">
+Để đăng nhập nhanh chóng vào tài khoản của bạn. Chúng tôi đã đưa ra cho bạn 1 link autologin. Bạn sẽ cần đến nó khi cần thiết. Và đảm bảo an toàn cho bạn khi bị mất link autologin hay vô tình truy cập link chứa mã độc nhằm ăn cắp cookie chứa mã autologin của bạn. Bạn chỉ cần <a id="mi" class="like" href="/account">đăng nhập mới tại đây</a>. Và mỗi lần đăng nhập mới, mã autologin của bạn sẽ tự động thay đổi. Hãy đăng nhập mới và đánh dấu vào checkbox - Thay đổi autologin, khi nghi ngờ bạn click vào 1 link độc trên diễn đàn.</div>
+<div class="gmenu">Link autologin:<br><input type="text" value="http://forum.android-developer.tk/account/auto/{{get('user_'~login,'auto')}}"></div>
+
+ {{ block( 'footer' ) }} 
+{% elseif not login and url[2] and get_data_count('auto_'~url[2]) > 0 %}
+{{ set_cookie('auto',url[2]) }}
+ <script>window.location.href='/'</script> 
+{% else %}
+ <script>window.location.href='/'</script> 
+{% endif %}
+{% elseif url[1] == 'logout.php' %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi">
+<head>
+<title>Đăng xuất</title>
+</head><body>
+{% set logout=get_post('logout') %}
+{% if request_method()|lower == "post" %}
+{% if logout %}
+{{ delete_cookie('auto') }}
+<script>window.location.href='/'</script>
+{% endif %}
+{% else %}
+{{ block('header') }}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+<div class="menublock">
+ <div class="phdr"><span>Đăng Xuất</span></div>
+<div class="gmenu"><br/><center>Bạn muốn đăng xuất.!?</center><br/>
+<table width="100%" border="0"><tr>
+<td width="50%" align="center"><form method="post" action=""> <input type="submit" name="logout" value="Đồng ý" /> </form></td>
+<td width="50%" align="center"><form action="/"><input type="submit" value="Không" /> </form></td></tr></table>
+ </div>
+</div> {{ block('footer') }} 
+{% endif %}
+
+{% elseif url[1] == 'faq.php' %}
+<html><head><style>::-webkit-scrollbar {width: 6px;height: 8px;}</style>
+<title>Nội Quy tài khoản</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-util.css">
+<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-main.css">
+<link rel="stylesheet" href="https://copecute.github.io/forum/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://copecute.github.io/forum/js/jQuery.nicenotify.js" type="text/javascript"></script>
+<link href="https://copecute.github.io/forum/css/jQuery.nicenotify.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="https://android-developer.tk/favicon.ico" type="image/png">
+</head><body>
+<div class="limiter">
+<div class="container-login100">
+<div class="wrap-login100">
+<form class="login100-form validate-form" method="post" action="">
+<h2>Nội Quy</h2>
+<div class="list1"><p><b>1) CẤM:</b><br><br><b>1.1</b> Đăng tin quảng cáo.<br><b>1.2</b> Đăng nội dung liên quan đến vấn đề phân biệt sắc tộc, tôn giáo, quốc gia.<br><b>1.3</b> Không đăng nội dung thô tục, khiêu dâm, quấy rối tình dục, vu khống, đe dọa người khác.<br><b>1.4</b> Không được đăng nội dung xúc phạm một chủ thể cụ thể, đặc biệt là thành viên trong diễn đàn.<br><b>1.5</b> Cố tình giả mạo thành viên khác với bất kỳ mục đích nào.<br><b>1.6</b> Đăng bài cùng một nội dung nhiều lần trong một hay nhiều chủ đề khác nhau.<br><b>1.7</b> Đăng lại bài viết hoặc tạo lại chủ đề đã bị xóa bởi Ban quản trị.<br><b>1.8</b> Đăng bài có nội dung không liên quan đến tiêu đề.<br><br><b>2) TUYỆT ĐỐI CẤM:</b><br><br><b>2.1</b> Tạo chủ đề than phiền về thành viên hoặc cách hoạt động của điều hành viên. Hãy sử dụng tin nhắn riêng cho vấn đề này<br><b>2.2</b> Đăng ký nick chứa ký tự gây khó chịu cho người khác<br><br><b>3) KHÔNG CHẤP NHẬN:</b><br><br><b>3.1</b> Trích dẫn nội dung quá dài hoặc trích dẫn lại một bài đăng chứa một trích dẫn khác.<br><b>3.2</b> Bài viết tin chỉ chứa liên kết đến các trang web khác. <br><b>3.3</b> Đăng bài bằng ngôn ngữ không sử dụng chữ cái latin (a-z).<br><b>3.4</b> Đăng bài không có mục đích: chỉ có biểu tượng vui hoặc bài như "Ok", "Có ai không?",... <br><br>Quy định trên đây có thể thay đổi bất kỳ lúc nào.<br>Quy định này áp dụng cho tất cả các thành viên và Ban quản trị, thành viên vi phạm nhiều lần sẽ bị ban, vi phạm nặng có thể dẫn đến xóa bỏ tài khoản vĩnh viễn.</p></div>
+<div class="w-full text-center">
+<a href="/account/register.php" class="txt3">Đăng kí</a>
+</div></form>
+<div class="login100-more" style="background-image: url('https://copecute.github.io/images/game/android-matran.jpg');"></div>
+</div></div></div>
+<div id="dropDownSelect1"></div>
+</body></html>
+
+{% elseif url[1] == 'register.php' %}
+<style>::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+}</style>
+<html>
+<head>
+ {% from 'func.twig' import rwurl,auto %}
+<title>Đăng kí tài khoản</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-util.css">
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-main.css">
+  <link rel="stylesheet" href="https://copecute.github.io/forum/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://copecute.github.io/forum/js/jQuery.nicenotify.js" type="text/javascript"></script>
+<link href="https://copecute.github.io/forum/css/jQuery.nicenotify.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="https://android-developer.tk/favicon.ico" type="image/png" />
+</head>
+<body>
+{# kiểm tra và lưu tài khoản #}
+{% set id=get_data_count('id_users') %}
+{% set user = get_post('user') %}
+ {% set pass = get_post('pass') %} 
+ {% set repass = get_post('repass') %} 
+ {% set gt = get_post('gt') %} 
+
+ {% if request_method()|lower == "post" %}
+   {% if user and pass and repass and gt %} 
+  {% if ("now"|date("U") < get_data_by_id('stop_user',get_data('stop_user')|last.id).data) %}
+<div id="HPs" class="default"><div class="HP HP-default HP-medium">
+  <div class="HP-close">×</div>
+<div class="HP-title"></div>
+<div class="HP-message">Xin lỗi vì sự cố này, bạn có thể tiếp tục đăng ký tài khoản sau {{ get_data_by_id('stop_user',get_data('stop_user')|last.id).data - "now"|date("U") }} giây</div>
+</div></div>
+   {% elseif pass!=repass %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Mật khẩu xác nhận không đúng.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+      {% else %}
+         {% if get_data_count('user_'~rwurl(user))>0 %} 
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Tài khoản đã tồn tại.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+         {% elseif user|length>30 %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Tài khoản không dài quá 30 ký tự",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+         {% else %} 
+               {% if user matches '/^[a-zA-Z0-9\\-\\_]+[a-zA-Z0-9\\-\\_]$/' %} 
+<style>.HP.HP-default{background: #2ECC71!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Đăng ký thành công. Bạn có thể đăng nhập",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+<meta http-equiv="refresh" content="2;url=/account/login.php">
+{% if rwurl(user) == 'admin' or rwurl(user) == 'bot' %}
+{% else %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"Chào mừng @"~rwurl(user)~" vừa gia nhập vào diễn đàn!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+  {% set save=save_data('id_users',''~rwurl(user)~'') %}
+{% set auto=auto()|trim %}
+{% set data={"nick":user,"pass":pass,"auto":auto,"id":(id+1),"gt":gt,"avt":"/images/avatar.jpg","cover":"/images/default-cover-user.png","lever":"mem","xu":"5000","db":"100","tamtrang":"Thành Viên Cộng Đồng Mod","cmt":"0","like":"0","reg":"now"|date("U"),"top":"yes","act":"act"} %}
+{% set save=save_data( "user_"~rwurl(user),data|json_encode) %} 
+ {% set save=save_data('auto_'~auto,''~rwurl(user)~'') %} 
+{% if get_data_count('stop_user')==0 %}   
+   {% set save = save_data('stop_user', '12345') %}   
+   {% else %}   
+    {% set id = get_data('stop_user')|last.id %}   
+   {{ update_data_by_id('stop_user',id,("now"|date("U") + 600)) }}   
+   {% endif %}   
+   
+
+
+            {% else %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Tài khoản không được chứa ký tự đặc biệt.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+             {% endif %} 
+         {% endif %}
+      {% endif %}
+   {% else %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Vui lòng điền đầy đủ thông tin.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+   {% endif %}
+{% endif %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post" action="">
+					<span class="login100-form-title p-b-34">
+						Đăng ký tài khoản
+					</span>
+<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" style="height: 55px!important;" data-validate="Type user name">
+   <input class="input100" type="text" name="user" placeholder="Tên tài khoản">
+<span class="focus-input100"></span></div>
+<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" style="height: 55px!important;" data-validate="Type password">
+   <input class="input100" type="password"  name="pass" placeholder="Mật khẩu">
+<span class="focus-input100"></span></div>
+<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" style="height: 55px!important;" data-validate="Type password">
+   <input class="input100" type="password"  name="repass" placeholder="Nhập lại mật khẩu">
+<span class="focus-input100"></span></div>
+<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" style="height: 55px!important;" data-validate="Type sex">
+<select class="form-control" style="height: 57px;border-radius: 0px;" name="gt"><option value="boy">Nam</option> <option value="girl">Nữ</option></select></div>
+<div style="padding-bottom: 5px;" align="center">
+Chỉ ấn vào nút đăng kí nếu bạn đã đọc, hiểu rõ và sẽ chấp hành những <a href="/account/faq.php"><b style="color: red;">quy định</b></a> của cộng đồng Mod !</div>
+<div class="container-login100-form-btn">
+<input type="submit" name="submit" class="login100-form-btn" value="Đăng Kí">
+</div>
+					<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+							Quên
+						</span>
+
+						<a href="#" class="txt2">
+							Tài khoản / Mật khẩu?
+						</a>
+					</div>
+
+					<div class="w-full text-center">
+						<a href="/account/login.php" class="txt3">
+							Đăng nhập
+						</a>
+					</div>
+</form>
+				<div class="login100-more" style="background-image: url('https://copecute.github.io/images/game/android-matran.jpg');"></div>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+
+{% elseif url[1] == 'login.php' %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi">
+<head>
+<title>Chào mừng bạn đến với Cộng Đồng Mod</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-util.css">
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-main.css">
+  <link rel="stylesheet" href="https://copecute.github.io/forum/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://copecute.github.io/forum/js/jQuery.nicenotify.js" type="text/javascript"></script>
+<link href="copecute.github.io/forum/css/jQuery.nicenotify.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="https://android-developer.tk/favicon.ico" type="image/png" />
+<style>
+@media only screen and (max-width: 769px){.container-login100{padding:0;background: #fff;}.wrap-login100{width:100%;height:max-content;}}
+.pure-material-checkbox {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Input */
+.pure-material-checkbox > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Span */
+.pure-material-checkbox > span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Box */
+.pure-material-checkbox > span::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 3px 11px 3px 1px;
+    border: solid 2px; /* Safari */
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    border-radius: 2px;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Checkmark */
+.pure-material-checkbox > span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 5px;
+    border: solid 2px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(3px, 4px) rotate(-45deg);
+}
+
+/* Checked, Indeterminate */
+.pure-material-checkbox > input:checked,
+.pure-material-checkbox > input:indeterminate {
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::before,
+.pure-material-checkbox > input:indeterminate + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::after,
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+}
+
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-left: none;
+    transform: translate(4px, 3px);
+}
+
+/* Hover, Focus */
+.pure-material-checkbox:hover > input {
+    opacity: 0.04;
+}
+
+.pure-material-checkbox > input:focus {
+    opacity: 0.12;
+}
+
+.pure-material-checkbox:hover > input:focus {
+    opacity: 0.16;
+}
+
+/* Active */
+.pure-material-checkbox > input:active {
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+}
+
+.pure-material-checkbox > input:active + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked:active + span::before {
+    border-color: transparent;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+}
+
+/* Disabled */
+.pure-material-checkbox > input:disabled {
+    opacity: 0;
+}
+
+.pure-material-checkbox > input:disabled + span {
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+    cursor: initial;
+}
+
+.pure-material-checkbox > input:disabled + span::before {
+    border-color: currentColor;
+}
+
+.pure-material-checkbox > input:checked:disabled + span::before,
+.pure-material-checkbox > input:indeterminate:disabled + span::before {
+    border-color: transparent;
+    background-color: currentColor;
+}
+</style>
+</head>
+<body>
+ {% from 'func.twig' import rwurl,get,add,auto %}
+ {% set url=get_uri_segments() %}
+
+ {# kiểm tra và lưu tài khoản #}
+{% set user = get_post('user') %}
+ {% set pass = get_post('pass') %} 
+
+{% if request_method()|lower == "post" %} 
+   {% if user and pass %}
+      {% if get_data_count('user_'~rwurl(user))==0 %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Tài khoản không tồn tại",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+      {% else %}
+          {% if get('user_'~rwurl(user),'pass')!=pass %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Mật khẩu không đúng",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+         {% else %}
+<style>.HP.HP-default{background: #2ECC71!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Đăng nhập thành công",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+
+{% if get_post('auto')=='auto' %}
+{% set auto=auto()|trim %}
+{{ delete_data_by_id('auto_'~get('user_'~rwurl(user),'auto')|trim,get_data('auto_'~get('user_'~rwurl(user),'auto')|trim)|last.id) }}
+ {% set save=save_data('auto_'~auto,''~rwurl(user)~'') %} 
+{{ add('user_'~rwurl(user),'auto',auto) }}
+{{ set_cookie('auto',auto) }}
+{% else %}
+{% if rwurl(user) == 'bot' or rwurl(user) == 'admin' %}
+{% else %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"@"~rwurl(user)~" vừa đăng nhập. Chúc bạn online vui vẻ :ami27:"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+ {{ set_cookie('auto',get('user_'~rwurl(user),'auto')|trim) }} 
+{% endif %}
+<meta http-equiv=refresh content="1; URL=/">
+           {% endif %}
+       {% endif %}
+   {% else %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Vui lòng điền đầy đủ thông tin.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+   {% endif %}
+{% endif %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post" action="">
+					<span class="login100-form-title p-b-34">Chào mừng bạn đến với Diễn Đàn Cộng Đồng Mod</span>
+<div style="height: 55px!important;" class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+   <input class="input100" type="text" name="user" placeholder="Tài khoản">
+<span class="focus-input100"></span></div>
+<div style="height: 55px!important;" class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+   <input class="input100" type="password"  name="pass" placeholder="Mật khẩu">
+<span class="focus-input100"></span></div>
+<label class="pure-material-checkbox">
+  <input type="checkbox" name="auto" value="auto">
+  <span>Thay đổi autologin. (Đăng xuất tài khoản từ tất cả các trình duyệt khác)</span>
+</label><br /><br />
+<div class="container-login100-form-btn">
+<input type="submit" name="submit" class="login100-form-btn" value="Đăng Nhập">
+</div>
+					<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+							Quên
+						</span>
+
+						<a href="#" class="txt2">
+							Tài khoản / Mật khẩu?
+						</a>
+					</div>
+
+					<div class="w-full text-center">
+						<a href="/account/register.php" class="txt3">
+							Đăng kí
+						</a>
+					</div>
+</form>
+				<div class="login100-more" style="background-image: url('https://copecute.github.io/images/game/android-matran.jpg');"></div>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+    {% set checkpass = get('bot','pass') %}
+
+{% else %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi">
+<head>
+<title>Chào mừng bạn đến với Cộng Đồng Mod</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-util.css">
+	<link rel="stylesheet" type="text/css" href="https://copecute.github.io/forum/css/login-main.css">
+  <link rel="stylesheet" href="https://copecute.github.io/forum/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://copecute.github.io/forum/js/jQuery.nicenotify.js" type="text/javascript"></script>
+<link href="https://copecute.github.io/forum/css/jQuery.nicenotify.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="https://android-developer.tk/favicon.ico" type="image/png" />
+<style>
+@media only screen and (max-width: 769px){.container-login100{padding:0;background: #fff;}.wrap-login100{width:100%;height:max-content;}}
+.pure-material-checkbox {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Input */
+.pure-material-checkbox > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Span */
+.pure-material-checkbox > span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Box */
+.pure-material-checkbox > span::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 3px 11px 3px 1px;
+    border: solid 2px; /* Safari */
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    border-radius: 2px;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Checkmark */
+.pure-material-checkbox > span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 5px;
+    border: solid 2px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(3px, 4px) rotate(-45deg);
+}
+
+/* Checked, Indeterminate */
+.pure-material-checkbox > input:checked,
+.pure-material-checkbox > input:indeterminate {
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::before,
+.pure-material-checkbox > input:indeterminate + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::after,
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+}
+
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-left: none;
+    transform: translate(4px, 3px);
+}
+
+/* Hover, Focus */
+.pure-material-checkbox:hover > input {
+    opacity: 0.04;
+}
+
+.pure-material-checkbox > input:focus {
+    opacity: 0.12;
+}
+
+.pure-material-checkbox:hover > input:focus {
+    opacity: 0.16;
+}
+
+/* Active */
+.pure-material-checkbox > input:active {
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+}
+
+.pure-material-checkbox > input:active + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked:active + span::before {
+    border-color: transparent;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+}
+
+/* Disabled */
+.pure-material-checkbox > input:disabled {
+    opacity: 0;
+}
+
+.pure-material-checkbox > input:disabled + span {
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+    cursor: initial;
+}
+
+.pure-material-checkbox > input:disabled + span::before {
+    border-color: currentColor;
+}
+
+.pure-material-checkbox > input:checked:disabled + span::before,
+.pure-material-checkbox > input:indeterminate:disabled + span::before {
+    border-color: transparent;
+    background-color: currentColor;
+}
+</style>
+</head>
+<body>
+ {% from 'func.twig' import rwurl,get,add,auto %}
+ {% set url=get_uri_segments() %}
+
+ {# kiểm tra và lưu tài khoản #}
+{% set user = get_post('user') %}
+ {% set pass = get_post('pass') %} 
+
+{% if request_method()|lower == "post" %} 
+   {% if user and pass %}
+      {% if get_data_count('user_'~rwurl(user))==0 %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Tài khoản không tồn tại",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+      {% else %}
+          {% if get('user_'~rwurl(user),'pass')!=pass %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Mật khẩu không đúng",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+         {% else %}
+<style>.HP.HP-default{background: #2ECC71!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Đăng nhập thành công",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+
+{% if get_post('auto')=='auto' %}
+{% set auto=auto()|trim %}
+{{ delete_data_by_id('auto_'~get('user_'~rwurl(user),'auto')|trim,get_data('auto_'~get('user_'~rwurl(user),'auto')|trim)|last.id) }}
+ {% set save=save_data('auto_'~auto,''~rwurl(user)~'') %} 
+{{ add('user_'~rwurl(user),'auto',auto) }}
+{{ set_cookie('auto',auto) }}
+{% else %}
+{% if rwurl(user) == 'bot' or rwurl(user) == 'admin' %}
+{% else %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"@"~rwurl(user)~" vừa đăng nhập. Chúc bạn online vui vẻ :ami27:"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+ {{ set_cookie('auto',get('user_'~rwurl(user),'auto')|trim) }} 
+{% endif %}
+<meta http-equiv=refresh content="1; URL=/">
+           {% endif %}
+       {% endif %}
+   {% else %}
+<style>.HP.HP-default{background: #C0392B!important;</style>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $.HP({
+      title: "Vui lòng điền đầy đủ thông tin.",
+      message: ""
+    });
+    });
+}).call(this);
+</script>
+   {% endif %}
+{% endif %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post" action="">
+					<span class="login100-form-title p-b-34">Chào mừng bạn đến với Diễn Đàn Cộng Đồng Mod</span>
+<div style="height: 55px!important;" class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+   <input class="input100" type="text" name="user" placeholder="Tài khoản">
+<span class="focus-input100"></span></div>
+<div style="height: 55px!important;" class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+   <input class="input100" type="password"  name="pass" placeholder="Mật khẩu">
+<span class="focus-input100"></span></div>
+<label class="pure-material-checkbox">
+  <input type="checkbox" name="auto" value="auto">
+  <span>Thay đổi autologin. (Đăng xuất tài khoản từ tất cả các trình duyệt khác)</span>
+</label><br /><br />
+<div class="container-login100-form-btn">
+<input type="submit" name="submit" class="login100-form-btn" value="Đăng Nhập">
+</div>
+					<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+							Quên
+						</span>
+
+						<a href="#" class="txt2">
+							Tài khoản / Mật khẩu?
+						</a>
+					</div>
+
+					<div class="w-full text-center">
+						<a href="/account/register.php" class="txt3">
+							Đăng kí
+						</a>
+					</div>
+</form>
+				<div class="login100-more" style="background-image: url('https://copecute.github.io/images/game/android-matran.jpg');"></div>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+    {% set checkpass = get('bot','pass') %}
+{% endif %}
+</body>
+</html>

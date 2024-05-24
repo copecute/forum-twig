@@ -1,0 +1,50 @@
+{% use '_template.php' %}
+ {% from 'func.twig' import rwurl,get,up,add,ca,bo,breadcrumbs,lever,login,paging,bbcode %}
+ {% from 'time.twig' import ago %} 
+ {% set login=login()|trim %}
+ {{ block('header') }} 
+ 
+{% if login %}
+ <div class="phdr"><span>Bình Luận Mới</span></div> 
+{% set key='new_data' %}
+ {% set data=get(key)|trim|split('@') %}
+ {% set total=data|length-1 %} 
+ {% if total==0 %}
+ <div class="rmenu">Chưa có bài viết nào ở đây.</div> 
+{% endif %} 
+ 
+{{ up('new_data',' '~data|slice(0,total)|slice(0,30)|join('@')|trim~' @ ') }}
+ {% for id in data|slice(0,total)|slice(0,30) %}
+{% set entry=id|trim %}
+{% set key='cmt_'~entry %} 
+ {% set top=get('top_'~entry,'act')|trim %} 
+ {% set user = 'user_'~get(key,'ten')|trim %}
+ {% set nd = get(key,'nd') %} 
+
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+ {% set last=get('th_'~entry)|split('@')|first|trim %} 
+ <div class="list1"><span name="online">{% if on < ('now'|date('U')-600) %}<font color="red">[Off]</font>{% else %}<font color="green">[ON]</font>{% endif %}</span> <b><a id="mi" href="/profile/{{ get(key,'ten')|trim }}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b> : <br>{% set re=get(key,'re')|trim %}
+{% if re %}
+ <b>@{{get(('user_'~get('cmt_'~re,'ten')|trim),'nick')|trim}},</b>{% endif %} 
+ {% set nd_edit=get(key,'nd_edit') %} 
+{% if nd_edit %}{% set nd=nd_edit %}{% endif %}
+
+ {% if nd|length > 200 %}
+{{ nd|slice(0,200)|raw }} ...
+{% else %} 
+{{ bbcode(nd)|raw }}
+{% endif %}
+ <a id="mi" class="like" href="/threads/{{id|trim}}">[XEM]</a>
+ {% if nd_edit %}
+ <div class="edit">{{ get(key,'type_edit') }} bởi: {{get('user_'~get(key,'editer')|trim,'nick') }}</div>
+{% endif %} 
+
+
+
+</div> 
+{% endfor %} 
+
+ {% endif %} 
+ 
+{{ block('footer') }}

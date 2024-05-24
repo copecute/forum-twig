@@ -1,0 +1,601 @@
+{# Danh sách chuyên mục mẹ. - List catergories #}
+ {% macro ca(v) %}{% spaceless %} 
+{% set ca = {'mod-android':'Mod Android','chia-se':'Chia Sẻ','dai-ban-doanh':'Đại bản doanh','thu-gian':'Thư Giãn'} %}
+{% if v %}
+{{ ca[v] }}
+{% else %}
+{{ ca|json_encode|raw }}
+{% endif %}
+ {% endspaceless %}{% endmacro %}
+{# Danh sách chuyên mục con - List boards #}
+{% macro bo(ca,v) %}{% spaceless %} 
+{% set ca1 = {'status-bar':'Status Bar','notification':'Notification','man-hinh-khoa':'Màn Hình Khoá','apktool-va-deodex':'Apktool & Deodex','mod-tab':'Mod Tab','icon-font-va-linh-tinh':'Icon, Font và linh tinh','cac-loai-tang':'Các Loại Tầng','cac-mod-khac':'Các Mod Khác'} %}
+{% set ca2 = {'game-mod':'Game Mod','ung-dung-mod':'Ứng Dụng Mod','thu-thuat-hay':'Thủ thuật hay','huong-dan-root-rom-twrp':'Hướng dẫn Root - Rom - Twrp',} %}
+{% set ca3 = {'thong-bao':'Thông báo','gop-y-xay-dung-dien-dan':'Góp ý xây dựng diễn đàn','to-cao-lua-dao':'Tố cáo lừa đảo'} %}
+{% set ca4 = {'anh-hot-girl':'Ảnh hot girl - gái xinh','anh-vui':'Ảnh vui - Funny','tro-chuyen-linh-tinh':'Trò chuyện linh tinh'} %}
+{% for k,val in {'mod-android':ca1,'chia-se':ca2,'dai-ban-doanh':ca3,'thu-gian':ca4} %}
+   {%  if ca==k %}
+     {% if v %}
+{{ val[v] }}
+      {% else %}
+{{ val|json_encode|raw }}
+      {% endif %}
+   {% endif %}
+{% endfor %}
+ {% endspaceless %}{% endmacro %}
+
+ {% macro smile(msg) %}
+{% set smile=':D :)) :) :3 :v :P :p :* :O -_- :(( :( (y) (n) :shit: :thich: :love: :haha: :zuivl: :wow: :buon: :phanno: :e1: :e2: :e3: :e4: :e5: :e6: :e7: :e8: :e9: :e10: :e11: :e12: :e13: :e14: :e15: :e16: :e17: :e18: :e19: :e20: :e21: :e22: :e23: :e24: :e25: :e26: :e27: :ym: :yaoming: :troll: :troll: :troll1: :troll2: :troll3: :troll4: :troll5: :troll6: :troll7: :troll8: :troll9: :troll10: :troll11: :troll12: :troll13: :troll14: :troll15: :troll16: :troll17: :troll18: :troll19: :troll20: :troll21: :troll22: :troll23: :troll24: :troll25: :troll26: :troll27: :troll28: :troll29: :troll30: :troll31: :troll32: :troll33: :troll34: :troll35: :troll36: :troll37: :troll38: :troll39: :troll40: :troll41: :troll42: :troll43: :troll44: :troll45: :troll46: :troll47: :troll48: :troll49: :troll50: :troll51: :troll52: :troll53: :troll54: :troll55: :troll56: :troll57: :troll58: :troll59: :troll60: :troll61: :troll62: :troll63: :troll64: :troll65: :troll66: :troll67: :troll68: :1lol: :2lol: :buoi: :buonngu: :chay: :chay2: :choang: :choang2: :clgt: :decu: :dien: :fa: :fu: :help: :hohuha: :khong: :leuleu: :loa: :ngap: :ngau: :nono: :o: :oaoa: :oeoe: :x: :ami1: :ami2: :ami3: :ami4: :ami5: :ami6: :ami7: :ami8: :ami9: :ami10: :ami11: :ami12: :ami13: :ami14: :ami15: :ami16: :ami17: :ami18: :ami19: :ami20: :ami21: :ami22: :ami23: :ami24: :ami25: :ami26: :ami27: :ami28: :ami29: :ami30: :ami31: :ami32: :ami33: :ami34: :ami35: :ami36: :ami37: :ami38: :ami39: :ami40: :ami41: :ami42: :ami43: :ami44: :ami45: :ami46: :ami47: :ami48: :menhera1: :menhera2: :menhera3: :menhera4: :menhera5: :menhera6: :menhera7: :menhera8: :menhera9: :menhera10: :menhera11: :menhera12: :menhera13: :menhera14: :menhera15: :menhera16: :menhera17: :menhera18: :menhera19: :menhera20: :menhera21: :menhera22: :menhera23: :moew1: :moew2: :moew3: :moew4: :moew5: :moew6: :moew7: :moew8: :moew9: :moew10: :moew11: :moew12: :moew13: :moew14: :moew15: :moew16: :moew17: :moew18: :moew19: :moew20:'|split(' ') %}
+
+{% for smile in smile %}
+{% set img=smile|replace({':': ""}) %}
+{% set img %}
+<img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}"/>
+{% endset %}
+{% set msg=msg|replace({(smile): (img)}) %}
+{% endfor %}
+{{msg|raw}}
+ 
+ {% endmacro %} 
+
+{# BBCODE #}
+{% macro bbcode(nd) %} {% from 'func.twig' import bb_url,bb_url2,bb_link,bb_nick,bb,bb_code,bb_noi,bb_quote,bb_img,bb_b,smile  %}
+ {% set nd=bb_code(nd|nl2br|raw,'php') %} 
+ {% set nd=bb_code(nd,'code') %} 
+ {% set nd=bb_noi(nd|raw,'php') %} 
+ {% set nd=bb_noi(nd,'noi') %}
+ {% set nd=bb_quote(nd|raw,'php') %} 
+ {% set nd=bb_quote(nd,'quote') %} 
+ {% set nd=bb_url(nd,'url','http') %}
+ {% set nd=bb_url(nd,'url','/') %} 
+ {% set nd=bb_img(nd,'img','http') %} 
+ {% set nd=bb_url2(nd,'url','http') %} 
+ {% set nd=bb_url2(nd,'url','/') %} 
+{% set nd=bb_link(nd,'http://') %}
+ {% set nd=bb_link(nd,'Http://') %} 
+ {% set nd=bb_link(nd,'https://') %}
+ {% set nd=bb_nick(nd,'@') %} 
+ {% set nd=bb(nd,'h2') %} 
+ {% set nd=bb(nd,'b') %} 
+ {% set nd=bb(nd,'u') %} 
+ {% set nd=bb(nd,'i') %} 
+ {% set nd=bb(nd,'s') %} 
+ {% set nd=bb(nd,'red','font','color') %} 
+ {% set nd=bb(nd,'blue','font','color') %} 
+ {% set nd=bb(nd,'green','font','color') %} 
+{{smile(nd)|raw|replace({'<[>': "[",'<:>': ":",'<@>':"@",'<=>':"=",'<enter>' :'
+',' ,':",",' .':"."})|raw}} 
+{% endmacro %}
+{% macro bb(nd,v,k,c) %}{% for nd in nd|split('['~v~']') %}{% if '[/'~v~']' in nd and loop.first==false %}{% if k and c %}<{{k}} {{c}}="{{v}}">{{ nd|split('[/'~v~']',2)|join('</'~k~'>')|raw }}{% else %}<{{v}}>{{ nd|split('[/'~v~']',2)|join('</'~v~'>')|raw }}{% endif %}{% else %}{% if loop.first==false %}[{{v}}]{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+ {% macro bb_code(nd,v,k,c) %}{% for nd in nd|split('['~v~']') %}{% if '[/'~v~']' in nd and loop.first==false %}{% if k and c %}<{{k}} {{c}}="{{v}}">{{ nd|split('[/'~v~']',2)|join('</'~k~'>')|raw }}{% else %}<pre contenteditable="true">{{ nd|split('[/'~v~']',2)|first|replace({'[': "<[>",':': "<:>",'@':"<@>",'=':"<=>",'<br />': "",'\r\n':"<enter>"})|raw }}</pre>{{ nd|split('[/'~v~']',2)|last|raw }}{% endif %}{% else %}{% if loop.first==false %}[{{v}}]{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+ {% macro bb_noi(nd,v,k,c) %}{% for nd in nd|split('['~v~']') %}{% if '[/'~v~']' in nd and loop.first==false %}{% if k and c %}<{{k}} {{c}}="{{v}}">{{ nd|split('[/'~v~']',2)|join('</'~k~'>')|raw }}{% else %}<span style="font-size:12px;margin:0 4px;">đã gửi một clip thoại</span><br /><input style="color: #fff;background: #455b64;border-radius: 4px;display: inline-block;padding: 3px 7px;" onclick="responsiveVoice.speak('{{ nd|split('[/'~v~']',2)|first|replace({'[': "<[>",':': "<:>",'@':"<@>",'=':"<=>",'<br />': "",'\r\n':"<enter>"})|raw }}','Vietnamese Female');" type="button" value="🔊 Nghe">{{ nd|split('[/'~v~']',2)|last|raw }}{% endif %}{% else %}{% if loop.first==false %}[{{v}}]{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+ {% macro bb_nick(nd,v) %}{% set nd=' '~nd|replace({'<br />': " <br />",'\r\n': " \r\n ",',':" ,",'.':" .",'\n': " \n ",'\r': " \r ",(' '~v):("  "~v)})|raw~' ' %}{% for nd in nd|split(' '~v) %}{% if get_data_count('user_'~nd|split(' ')|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"}))>0 and loop.first==false and '<' not in nd|split(' ')|first %}{% from 'func.twig' import get %}<a id="mi" href="/profile/{{ nd|split(' ')|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|lower }}">{{v}}{{ get('user_'~nd|split(' ')|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"}),'nick') }}</a> {{nd|split(' ',2)|last|raw }}{% else %}{% if loop.first==false %}{{v}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+ {% macro bb_link(nd,v) %}{% set nd=' '~nd|replace({'<br />': " <br />",'\r\n': " \r\n ",'\n': " \n ",'\r': " \r ",(' '~v):("  "~v)})|raw~' ' %}{% for nd in nd|split(' '~v) %}{% if '.' in nd and loop.first==false and '<' not in nd|split(' ')|first %}<a href="{{v}}{{ nd|split(' ')|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}">{{ v }}{{ nd|split(' ')|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}</a> {{nd|split(' ',2)|last|raw|raw }}{% else %} {% if loop.first==false %}{{v}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+
+{% macro bb_quote(nd,v,k) %}{% for nd in nd|split('['~v~'='~k) %}{% if '[/'~v~']' in nd and loop.first==false and '<' not in nd|split('[/'~v~']',2)|first|split(']',2)|first %}<div class="bbcode_quote"><div class="quote_container"><div class="bbcode_quote_container"></div>{{k}}{{ nd|split('[/'~v~']',2)|first|split(']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }} đã nói: {{ nd|split('[/'~v~']',2)|first|split(']',2)|last|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}</div></div>{{ nd|split('[/'~v~']',2)|last|raw }}{% else %}{% if loop.first==false %}[{{v}}={{k}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+
+ {% macro bb_url(nd,v,k) %}{% for nd in nd|split('['~v~'='~k) %}{% if '[/'~v~']' in nd and loop.first==false and '<' not in nd|split('[/'~v~']',2)|first|split(']',2)|first %}<a href="{{k}}{{ nd|split('[/'~v~']',2)|first|split(']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}">{{ nd|split('[/'~v~']',2)|first|split(']',2)|last|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}</a>{{ nd|split('[/'~v~']',2)|last|raw }}{% else %}{% if loop.first==false %}[{{v}}={{k}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+
+
+
+ {% macro bb_url2(nd,v,k) %}{% for nd in nd|split('['~v~']'~k) %}{% if '[/'~v~']' in nd and loop.first==false and '<' not in nd|split('[/'~v~']',2)|first %}<a href="{{k}}{{ nd|split('[/'~v~']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}">{{k}}{{ nd|split('[/'~v~']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}</a>{{ nd|split('[/'~v~']',2)|last|raw }}{% else %}{% if loop.first==false %}[{{v}}]{{k}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+{% macro bb_img(nd,v,k) %}{% for nd in nd|split('['~v~']'~k) %}{% if '[/'~v~']' in nd and loop.first==false and '<' not in nd|split('[/'~v~']',2)|first %}<center><a href="https://images.weserv.nl/?url={{k}}{{ nd|split('[/'~v~']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}"><img class="bbimg" src="https://images.weserv.nl/?url={{k}}{{ nd|split('[/'~v~']',2)|first|replace({'[':"<[>",':': "<:>",'@':"<@>",'=':"<=>"})|raw }}" /></a></center><br />{{ nd|split('[/'~v~']',2)|last|raw }}{% else %}{% if loop.first==false %}[{{v}}]{{k}}{% endif %}{{nd|raw}}{% endif %}{% endfor %}{% endmacro %}
+
+
+{% macro rwurl(val) %}{% set url=val|lower|replace({ 'à': "a",'á': "a",'ạ': "a",'ả': "a",'ã': "a",'â': "a",'ầ': "a",'ấ': "a",'ậ': "a",'ẩ': "a",'ẫ': "a",'ă': "a",'ằ': "a",'ắ': "a",'ặ': "a",'ẳ': "a",'ẵ': "a",'e': "e",'è': "e",'é': "e",'ẹ': "e",'ẻ': "e",'ẽ': "e",'ê': "e",'ề': "e",'ế': "e",'ệ': "e",'ể': "e",'ễ': "e",'ì': "i",'í': "i",'ị': "i",'ỉ': "i",'ĩ': "i",'ò': "o",'ó': "o",'ọ': "o",'ỏ': "o",'õ': "o",'ô': "o",'ồ': "o",'ố': "o",'ộ': "o",'ổ': "o",'ỗ': "o",'ơ': "o",'ờ': "o",'ớ': "o",'ợ': "o",'ở': "o",'ỡ': "o",'ù': "u",'ú': "u",'ụ': "u",'ủ': "u",'ũ': "u",'ư': "u",'ừ': "u",'ứ': "u",'ự': "u",'ử': "u",'ữ': "u",'ỳ': "y",'ý': "y",'ỵ': "y",'ỷ': "y",'ỹ': "y" })|raw|replace({ 'à': "a",'á': "a",'ả': "a",'ã': "a",'ạ': "a",'ằ': "a",'ắ': "a",'ẳ': "a",'ẵ': "a",'ặ': "a",'ầ': "a",'ấ': "a",'ẩ': "a",'ẫ': "a",'ậ': "a",'đ': "d",'è': "e",'é': "e",'ẻ': "e",'ẽ': "e",'ẹ': "e",'ề': "e",'ế': "e",'ể': "e",'ễ': "e",'ệ': "e",'ì': "i",'í': "i",'ỉ': "i",'ĩ': "i",'ị': "i",'ò': "o",'ó': "o",'ỏ': "o",'õ': "o",'ọ': "o",'ồ': "o",'ố': "o",'ổ': "o",'ỗ': "o",'ộ': "o",'ờ': "o",'ớ': "o",'ở': "o",'ỡ': "o",'ợ': "o",'ù': "u",'ú': "u",'ủ': "u",'ũ': "u",'ụ': "u",'ừ': "u",'ứ': "u",'ử': "u",'ữ': "u",'ự': "u",'ỳ': "y",'ý': "y",'ỷ': "y",'ỹ': "y",'ỵ': "y",'&lt;': "<",'&gt;': ">" })|url_encode|raw %}{% if '%' in url %}
+{% for pt in url|raw|split('%') %}
+{% if pt matches '/^[A-Z0-9][A-Z0-9]/' %}
+{% set cut = '%'~pt[:2] %}
+{% set url = url|replace({(cut):'-'}) %}
+{% endif %}
+{% endfor %}
+{% endif %}{% for v in url|trim('-')|default('-')|split('-') %}{{v}}{% if v and loop.last==false or loop.index==2 and loop.last==true %}-{% endif %}{% endfor %}{% endmacro %}
+
+{% macro user(id,uid) %}
+{% import "func.twig" as brook %}
+{% if uid %}{{ brook.get("user_"~uid|trim,id) }}{% else %}{{ brook.get("user_"~brook.login()|trim,id) }}{% endif %}
+{% endmacro %}
+{% macro uplist(key,v,nd,up) %} {% set data = get_data(key)[0].data|json_decode[v] %} {% set id = get_data(key)|last.id %} {% set d=' '~nd|trim~' @ ' %} {% set data=data|replace({(d):""}) %} {% if up %} {{ update_data_by_id(key,id,get_data_by_id(key,id).data|json_decode|merge({(v):' '~nd~' @ '~data})|json_encode) }} {% else %} {{ update_data_by_id(key,id,get_data_by_id(key,id).data|json_decode|merge({(v):data})|json_encode) }} {% endif %} {% endmacro %}
+
+
+ {% macro paging(url,p,max,b) %}
+    {% if max > 1 %}
+        <div class="paging">
+ {# set p=pagination.current_page %} {% set max=pagination.pages|last #}
+{% set a='<a id="mi" href="/'~url~'/' %}
+ {% if p>max %}{% set p=max %}a{% endif %} 
+ {% if p>1 %}
+{{a|raw}}{{p-1}}">&lt;&lt;</a>
+{% endif %}
+{% if p>3 %}
+{{a|raw}}1">1</a>
+{% endif %}
+{% if p>4 %}
+...
+{% endif %}
+{% if p>2 %}
+{{a|raw}}{{p-2}}">{{p-2}}</a>
+{% endif %}
+{% if p>1 %}
+{{a|raw}}{{p-1}}">{{p-1}}</a>
+{% endif %}
+<span>{{p}}</span>
+{% if p<max-1 %}
+{{a|raw}}{{p+1}}">{{p+1}}</a>
+{% endif %}
+{% if p<max-2 %}
+{{a|raw}}{{p+2}}">{{p+2}}</a>
+{% endif %}
+{% if p<max-3 %}
+...
+{% endif %}
+{% if p<max %}
+{{a|raw}}{{max}}">{{max}}</a>
+{% endif %}
+{% if p<max %}
+{{a|raw}}{{p+1}}">&gt;&gt;</a>
+{% endif %}
+
+ </div>  
+    {% endif %}
+{% endmacro %}
+{% macro get(key,v) %}{% spaceless %} 
+{% if v %}
+{{ get_data_by_id(key,get_data(key)|last.id).data|json_decode[v] }}
+{% else %}
+{{ get_data_by_id(key,get_data(key)|last.id).data|raw }}{% endif %}
+ {% endspaceless %}{% endmacro %}
+ {% macro up(key,v,up) %} 
+{% set data = get_data_by_id(key,get_data(key)|last.id).data %} 
+{% set id = get_data(key)|last.id %} 
+{% if up %}
+{% set d=' '~v~' @ ' %}
+{% set data=data|replace({(d):""}) %}
+{{ update_data_by_id(key,id,' '~v~' @ '~data) }}
+{% else %}
+ {{ update_data_by_id(key,id,v) }}
+{% endif %} 
+{% endmacro %}
+
+ {% macro breadcrumbs(ca,titca,bo,titbo) %}<span typeof="v:Breadcrumb"><a title="Diễn Đàn" href="/threads" rel="v:url" property="v:title">Diễn Đàn</a></span>{% if ca and titca %} › <span typeof="v:Breadcrumb"><a title="{{titca}}" href="/threads/{{ca}}" rel="v:url" property="v:title">{{titca}}</a></span>{% endif %}{% if ca and titca and bo and titbo %} › <span typeof="v:Breadcrumb"><a title="{{titbo}}" href="/threads/{{ca}}/{{bo}}" rel="v:url" property="v:title">{{titbo}}</a></span>{% endif %}{% endmacro %}
+ {% macro auto() %}{% for i in 1..30%}{{ random('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') }}{% endfor %}{% endmacro %}
+ {% macro login() %}{% spaceless %}{% set auto=get_cookie('auto') %}{% if get_data_count('auto_'~auto)>0 %}{{ get_data_by_id('auto_'~auto,get_data('auto_'~auto)|last.id).data|trim }}{% endif %}{% endspaceless %}{% endmacro %}
+ {% macro add(key,k,v) %}
+ {% set id=get_data(key)|last.id %}
+{{ update_data_by_id(key,id,get_data_by_id(key,id).data|json_decode|merge({(k):v})|json_encode) }}
+{% endmacro %}
+
+ {% macro lever(l) %}{% if l=='admin' %}(<span class="{{l}}">Admin</span>){% elseif l=='smod' %}(<font color="green">Smod</font>){% elseif l=='mod' %}(<font color="blue">Mod</font>){% else %}(Member){% endif %}{% endmacro %}
+ {% macro edit(key,k,v) %}
+{% set id = get_get('id') %}
+{{ update_data_by_id(key,id,get_data_by_id(key,id).data|json_decode|merge({(k):v})|json_encode) }}
+{% endmacro %}
+
+{% macro sent(nd) %}
+ {% if nd %} {% from 'func.twig' import rwurl,login,get,up,add %}{% set login=login()|trim %}{% if login %}
+ {% set url=get_uri_segments() %}{% if not url[1] %}
+ {% set user = get_post('user') %}{% if request_method()|lower == "post" and user %}
+<div class="gmenu">bạn sẽ bắt đầu cuộc trò chuyện với: {{rwurl(user)}}
+<br /><form method="post" action="/messages/{{rwurl(user)}}"><button> Tiếp tục </button></form></div>
+ <script>window.location.href='/messages/{{rwurl(user)}}'</script>{% endif %}
+{% elseif get_data_count('user_'~url[1]) > 0 %}{% set user=url[1] %}{% set save=save_data('id_mail',login) %} {% set nd = get_post('nd') %}
+{{ add('user_'~login,'new',get_post('nd')) }} 
+{% if request_method()|lower == "post" and nd and get('user_'~login,'new')|trim|raw != get('user_'~login,'old')|trim|raw %} 
+{% set id=get_data_count('id_mail')+1 %}
+{% set cmt={"ten":login,"time":"now"|date("U"),"nd":nd,"type":"unread"} %}
+{% set save=save_data('mail_'~id,cmt|json_encode) %}
+{% if get_data_count('mail_'~login~' '~user) == 0 %}
+{% set save=save_data('mail_'~login~' '~user,' '~id~' @ ') %} {% else %}{{ up('mail_'~login~' '~user,id,'up') }}{% endif %}
+{% if get_data_count('mail_'~user~' '~login) == 0 %}
+{% set save=save_data('mail_'~user~' '~login,' '~id~' @ ') %} {% else %}{{ up('mail_'~user~' '~login,id,'up') }} {% endif %} 
+{% if login~' @' in get('unread_mail_'~user)|trim %}
+{% elseif not get('unread_mail_'~user)|trim %} {{ add('user_'~user,'mail',1) }}{% else %}{{ add('user_'~user,'mail',(get('user_'~user,'mail')|trim+1)) }} {% endif %}
+{% if get_data_count('mails_'~user) == 0 %}
+{% set save=save_data('mails_'~user,' '~login~' @ ') %}{% else %}{{ up('mails_'~user,login,'up') }}{% endif %}
+{% if get_data_count('mails_'~login) == 0 %}
+{% set save=save_data('mails_'~login,' '~user~' @ ') %}{% else %}{{ up('mails_'~login,user,'up') }}{% endif %} 
+{% if get_data_count('unread_mail_'~user) == 0 %}
+{% set save=save_data('unread_mail_'~user,' '~login~' @ ') %} 
+{% elseif '@' in get('unread_mail_'~user)|trim %}
+{{ up('unread_mail_'~user,login,'up') }}{% else %}
+{{ up('unread_mail_'~user,' '~login~' @ ') }} {% endif %} {% endif %} {{ add('user_'~login,'old',get_post('nd')) }} 
+{% endif %}{% endif %}{% endif %} 
+ {% endmacro %}
+{% macro sentpost(nd) %}
+ {% if nd %} 
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login %}
+ {% set login=login()|trim %}
+{% if login %}
+ {{ block( 'header' ) }} 
+ {% if get('user_'~login,'post')|trim=='' or get('user_'~login,'post')|trim=='yes' %} 
+ {% set id = get_post('id') %}
+ {% set nd = get_post('nd') %} 
+
+
+{% if get_data_count('cmt_'~id) > 0 %}
+ {% set id_top = get('cmt_'~id,'id')|trim %} 
+ {% set top = get('top_'~id_top,'act')|trim %} 
+ {% set type = get('top_'~id_top,'type')|trim %} 
+{% set ca=get('top_'~id,'ca') %}
+ {% set bo=get('top_'~id,'bo') %}
+
+
+
+
+ {% if get('top_'~id_top,('spam_'~login))==login %}
+<div class="rmenu">Bạn đã bị chặn bởi chủ thread</div>
+{% else %}
+ {% if request_method()|lower == "post" %}
+ {{ add('user_'~login,'new',get_post('nd')) }} 
+   {% if id and nd and top=='open' and get('user_'~login,'new')|trim|raw != get('user_'~login,'old')|trim|raw %} 
+
+
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+50) }} 
+
+{% set id_forum=get_data_count('id_forum')+1 %}
+
+
+
+{# Trả lời bình luận #}
+ {% if get_data_count('top_'~id)==0 %} 
+ {% if get_data_count('new_data')== 0 %}
+{% set save=save_data('new_data',' '~id~'/'~id_forum~' @ ') %}
+{% else %}
+{{ up('new_data',id~'/'~id_forum,'up') }}
+{% endif %} 
+ {% if get_data_count('th_'~id)==0 %} 
+{% set save=save_data('th_'~id,' '~id~' @ ') %}
+{% endif %}
+
+
+
+{# @#comment #}
+{% set re=get_post('re') %}
+{% if re and get_data_count('cmt_'~id~'/'~re)>0 %}
+{% set nd2='Trả lời: [b]@'~get(('user_'~get('cmt_'~id~'/'~re,'ten')|trim),'nick')~'[/b]
+'~nd|raw %}
+ {% elseif re and get_data_count('cmt_'~re)>0 %}
+{% set nd2='Trả lời: [b]@'~get(('user_'~get('cmt_'~re,'ten')|trim),'nick')~'[/b]
+'~nd|raw %} 
+{% endif %}
+
+ {% set nd = {'ten':login,'nd':nd,'id':id,"time":"now"|date("U")} %}
+{% set save=save_data('cmt_'~id~'/'~id_forum,nd|json_encode) %} 
+ {% if re and get_data_count('cmt_'~id~'/'~re)>0 %}
+{{ add('cmt_'~id~'/'~id_forum,'re',id~'/'~re) }}
+ {% set ten=get('cmt_'~id~'/'~re,'ten')|trim %}
+{% if get_data_count('notification_list_'~ten)== 0 %}
+{% set save=save_data('notification_list_'~ten,' '~id~'/'~id_forum~' @ ') %}
+{% else %}
+{{ up('notification_list_'~ten,id~'/'~id_forum,'up') }}
+{% endif %}
+ {% if get_data_count('notification_name_'~ten)== 0 %}
+{% set save=save_data('notification_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_name_'~ten,login,'up') }}
+{% endif %} 
+{{ add('user_'~ten,'notification',(get('user_'~ten,'notification')|trim|default(0))+1) }} 
+
+
+
+ {% elseif re and get_data_count('cmt_'~re)>0 %}
+{{ add('cmt_'~id~'/'~id_forum,'re',re) }} 
+ {% set ten=get('cmt_'~re,'ten')|trim %}
+{% if get_data_count('notification_list_'~ten)== 0 %}
+{% set save=save_data('notification_list_'~ten,' '~id~'/'~id_forum~' @ ') %}
+{% else %}
+{{ up('notification_list_'~ten,id~'/'~id_forum,'up') }}
+{% endif %}
+ {% if get_data_count('notification_name_'~ten)== 0 %}
+{% set save=save_data('notification_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_name_'~ten,login,'up') }}
+{% endif %} 
+{{ add('user_'~ten,'notification',(get('user_'~ten,'notification')|trim|default(0))+1) }} 
+{% endif %}
+
+
+
+{# @#comment - không trả lời #}
+ {% set ten=get('cmt_'~id,'ten')|trim %}
+{% if re %}
+{# ------- #}
+{% elseif login!=ten and id!=re %}
+{% if get_data_count('notification_list_'~ten)== 0 %}
+{% set save=save_data('notification_list_'~ten,' '~id~'/'~id_forum~' @ ') %}
+{% else %}
+{{ up('notification_list_'~ten,id~'/'~id_forum,'up') }}
+{% endif %}
+ {% if get_data_count('notification_name_'~ten)== 0 %}
+{% set save=save_data('notification_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_name_'~ten,login,'up') }}
+{% endif %} 
+{{ add('user_'~ten,'notification',(get('user_'~ten,'notification')|trim|default(0))+1) }}
+{% endif %}
+ 
+
+
+
+
+
+ {# theo dõi #}
+   {% if get_data_count('follow_'~id)==0 %}
+ {% set follow=save_data('follow_'~id,' '~login~' @ ') %}
+{% else %} 
+ {{ up('follow_'~id,login,'up') }} 
+ {% endif %} 
+
+
+
+ {# gửi theo dõi #}
+ {% if get_data_count('follow_'~id) > 0 %}
+{% for u in get('follow_'~id)|split('@') %}
+{% set ten=u|trim %}
+{% if login!=ten and ten!=get('cmt_'~id,'ten')|trim and loop.last==false %}
+ {% if get_data_count('follow_list_'~ten)== 0 %}
+{% set save=save_data('follow_list_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('follow_list_'~ten,id,'up') }}
+{% endif %}
+ {% if get_data_count('follow_unread_'~ten)== 0 %}
+{% set save=save_data('follow_unread_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('follow_unread_'~ten,id,'up') }}
+{% endif %} 
+ {% if get_data_count('follow_name_'~ten)== 0 %}
+{% set save=save_data('follow_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('follow_name_'~ten,login,'up') }}
+{% endif %} 
+ {% endif %} 
+ {% endfor %} 
+ {% endif %} 
+
+
+
+
+
+ {{ up('th_'~id,id~'/'~id_forum,'up') }}
+
+ {% else %}
+{% if type=='status' %}
+ {{ up('status_data',id,'up') }}
+{{ add('user_'~login,'stt',get('user_'~login,'stt')|trim+1) }} 
+
+{% else %} 
+{% for k in ['forum_data','ca_'~ca,'bo_'~ca~'_'~bo] %}
+{{ up(k,id,'up') }} 
+{% endfor %}
+{{ add('user_'~login,'cmt',get('user_'~login,'cmt')|trim+1) }}
+{# set save=save_data('bv_tiaxgame',id_forum) #}
+{% endif %}
+ {{ add('top_'~id,'last',login) }}
+
+ {# @#1, có trả lời #1 #} 
+ {% set re=get_post('re') %}
+{% if re and get_data_count('cmt_'~re)>0 %}
+{% set nd2='Trả lời: [b]@'~get(('user_'~get('cmt_'~re,'ten')|trim),'nick')~'[/b]
+'~nd|raw %}
+{% endif %}
+ {% set nd = {'ten':login,'nd':nd,'id':id,"time":"now"|date("U")} %}
+{% set save=save_data('cmt_'~id_forum,nd|json_encode) %} 
+ {% if re and get_data_count('cmt_'~re)>0 %} 
+{{ add('cmt_'~id_forum,'re',re) }}
+ {% set ten=get('cmt_'~re,'ten')|trim %}
+{% if get_data_count('notification_list_'~ten)== 0 %}
+{% set save=save_data('notification_list_'~ten,' '~id_forum~' @ ') %}
+{% else %}
+{{ up('notification_list_'~ten,id_forum,'up') }}
+{% endif %}
+ {% if get_data_count('notification_name_'~ten)== 0 %}
+{% set save=save_data('notification_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_name_'~ten,login,'up') }}
+{% endif %} 
+{{ add('user_'~ten,'notification',(get('user_'~ten,'notification')|trim|default(0))+1) }}
+{% endif %}
+
+{# @#1, Không trả lời #1 #}
+ {% set ten=get('cmt_'~id,'ten')|trim %}
+{% if login!=ten and id!=re %}
+{% if get_data_count('notification_list_'~ten)== 0 %}
+{% set save=save_data('notification_list_'~ten,' '~id_forum~' @ ') %}
+{% else %}
+{{ up('notification_list_'~ten,id_forum,'up') }}
+{% endif %}
+ {% if get_data_count('notification_name_'~ten)== 0 %}
+{% set save=save_data('notification_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_name_'~ten,login,'up') }}
+{% endif %} 
+{{ add('user_'~ten,'notification',(get('user_'~ten,'notification')|trim|default(0))+1) }}
+{% endif %}
+
+{# theo dõi #}
+   {% if get_data_count('follow_'~id)==0 %}
+ {% set follow=save_data('follow_'~id,' '~login~' @ ') %}
+{% else %} 
+ {{ up('follow_'~id,login,'up') }} 
+ {% endif %} 
+
+ {# gửi theo dõi #}
+ {% if get_data_count('follow_'~id) > 0 %}
+{% for u in get('follow_'~id)|split('@') %}
+{% set ten=u|trim %}
+{% if login!=ten and ten!=get('cmt_'~id,'ten')|trim and loop.last==false %}
+ {% if get_data_count('follow_list_'~ten)== 0 %}
+{% set save=save_data('follow_list_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('follow_list_'~ten,id,'up') }}
+{% endif %}
+ {% if get_data_count('follow_unread_'~ten)== 0 %}
+{% set save=save_data('follow_unread_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('follow_unread_'~ten,id,'up') }}
+{% endif %} 
+ {% if get_data_count('follow_name_'~ten)== 0 %}
+{% set save=save_data('follow_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('follow_name_'~ten,login,'up') }}
+{% endif %} 
+ {% endif %} 
+ {% endfor %} 
+ {% endif %} 
+
+ {% if get_data_count('new_data')== 0 %}
+{% set save=save_data('new_data',' '~id_forum~' @ ') %}
+{% else %}
+{{ up('new_data',id_forum,'up') }}
+{% endif %}
+{{ up('th_'~id,id_forum,'up') }} 
+{% endif %}
+{% set save=save_data('id_forum','ten') %}
+{% endif %}
+{{ add('user_'~login,'old',get_post('nd')) }}
+{# {% set t=get('th_'~id)|split(' '~id_forum~' @ ')|last|split('@')|length+1 %}
+ <script>window.location.href='/threads/{{id}}{% if t>10 %}/{{(t/10)|round(0,'ceil')}}{% endif %}'</script> #}
+{% endif %} 
+ {% endif %} 
+ {% endif %} 
+ {% else %}
+<div class="rmenu">Bạn đã bị chặn bởi ban quản trị</div>
+{% endif %} 
+ {{ block( 'footer' ) }} {% endif %}
+{% endif %}
+{% endmacro %}
+
+ {% macro farm_status(item,time,end_time,water_time) %}{% spaceless %}
+	{% if item %}
+		{% if time == 0 %}
+		6
+{% else %}
+{% set timeU = "now"|date('U') %}
+		{% set time_count = timeU - time %}
+		{% set water_time = timeU - water_time %}
+		{% set interval = (end_time - time) / 6 %}
+		{% set w_interval = 2 * interval %}
+		{% if timeU >= end_time %}
+			5_{{water_time > w_interval ? '1' : '0'}}
+{% elseif time_count >= interval * 5 %}
+			4_{{water_time > w_interval ? '1' : '0'}}
+		{% elseif time_count >= interval * 4 %}
+			3_{{water_time > w_interval ? '1' : '0'}}
+		{% elseif time_count >= interval * 2 %}
+			2_{{water_time > w_interval ? '1' : '0'}}
+		{% elseif time_count >= interval %}
+			1_0
+		{% else %}
+		0_0
+{% endif %}
+{% endif %}
+	{% else %}
+		0
+	{% endif %}
+{% endspaceless %}{% endmacro %} 
+  
+  {% macro farm_timer(time, mod) %}{% spaceless %}
+	{% if time <= 0 %} {% set time = 0 %} {% endif %}
+	{% set h = (time / 3600)|round(0,'floor') %}
+	{% set m = ((time - h * 3600) / 60)|round(0,'floor') %}
+	{% set s = time-h * 3600 - m * 60 %}
+	{% if mod %}
+		{{(h ? h~' giờ' : '')~(m ? (h ? ' ':'')~m~' phút' : '')~(mod == 2 ? (s ? (h or m ? ' ':'')~s~' giây' : '') : '' )}}
+	{% else %}
+	{{h~':'~(m < 10 ? '0' : '')~m~':'~(s < 10 ? '0' : '')~s}}
+{% endif %}
+{% endspaceless %}{% endmacro %}
+                                             
+       {% macro farm_nangsuat(ns, time, end_time, water_time) %}{% spaceless %}
+	{% if end_time == 0 %}0{% else %}
+	{% set time_1 = (end_time - time) / 3 %}
+	{% set time_2 = "now"|date('U') - water_time %}
+	{% if time_2 >= time_1 %}
+		{% set ns = ns-((100 * (time_2 - time_1) * 0.9 / time_1)|round(0,'floor')) %}
+		{% if ns < 10 %}  {% set ns = 10 %} {% endif %}
+	{% else %}
+		{% set time_2 = min("now"|date('U'), end_time) - water_time %}
+		{% set ns = ns+((100 * time_2 * 3.6 / time_1)|round(0,'ceil')) %}
+		{% if ns > 100 %}  {% set ns = 100 %} {% endif %}
+      {% endif %}
+	{{ns}}
+{% endif %}
+  {% endspaceless %}{% endmacro %}
+
+{% macro ago(time_ago) %}
+{% set cur_time="now"|date('U') %}
+{% set time_elapsed = cur_time - time_ago %}
+{% set seconds = time_elapsed %}
+ {% set minutes = (time_elapsed / 60 )|round %}
+{% set hours = (time_elapsed / 3600)|round %}
+ {% set days = (time_elapsed / 86400 )|round %}
+ {% set weeks = (time_elapsed / 604800)|round %}
+ {% set months = (time_elapsed / 2600640 )|round %}
+ {% set years = (time_elapsed / 31207680 )|round %}
+{# Seconds #}
+{% if seconds <= 60 %}
+{{ " Cách đây "~seconds~"
+giây " }}
+
+{# Minutes #}
+{% elseif minutes <=60 %}
+   {% if minutes==1 %}
+{{ "  1 phút trước " }}
+   {% else %}
+{{ " "~minutes~"
+phút trươc" }}
+   {% endif %}
+
+{# Hours #}
+{% elseif hours <=24 %}
+   {% if hours==1 %}
+{{ " 1 giờ trước " }}
+   {% else %}
+{{ " "~hours~"
+giờ trước " }}
+   {% endif %}
+
+{# Days #}
+{% elseif days <= 7 %}
+   {% if days==1 %}
+{{ " Hôm qua " }}
+   {% else %}
+{{ " "~days~" ngày trước
+" }}
+   {% endif %}
+
+{# Weeks #}
+{% elseif weeks <= 4.3 %}
+   {% if weeks==1 %}
+{{ " 1 tuần trước " }}
+   {% else %}
+{{ " "~weeks~"
+tuần trước " }}
+   {% endif %}
+
+{# Months #}
+{% elseif months <=12 %}
+   {% if months==1 %}
+{{ " 1 tháng trước " }}
+   {% else %}
+{{ " "~months~"
+tháng trước " }}
+   {% endif %}
+
+{# Years #}
+{% else %}
+   {% if years==1 %}
+{{ " 1 năm trước " }}
+   {% else %}
+{{ " "~years~" năm trước " }}
+   {% endif %}
+{% endif %}
+{% endmacro %}

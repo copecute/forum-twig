@@ -1,0 +1,15 @@
+{% set uri=get_uri_segments() %}
+{% set id=uri[1] %}
+{% if get_data(id)[0].data %}
+{% set soan=get_data(id)[0].data|json_decode %}
+{% if get_get('count')=='yes' %}{{soan.view}} views.{% else %}
+<script language="javascript" type="text/javascript">
+window.location.href="{{soan.url|raw}}";
+</script>
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL={{soan.url|raw}}">
+{{ update_data_by_id(id,get_data(id)[0].id,{"url":soan.url,"view":soan.view+1}|json_encode) }}
+{% endif %}
+{% else %}<script language="javascript" type="text/javascript">
+window.location.href="http://forum.android-developer.tk";
+</script>
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=http://forum.android-developer.tk">{% endif %}

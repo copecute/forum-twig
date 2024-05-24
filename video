@@ -1,0 +1,137 @@
+{% use '_template.php' %}
+{% from 'func.twig' import rwurl,get,login,lever,up,add,edit,paging,bbcode,ago %}
+{% use '_template.php' %}{% set login=login()|trim %}{% set title='MXH Video' %}
+{{ block( 'header' ) }}
+<style>.main-wrapper{width: 100%!important;}@-webkit-keyframes loadingAnimation{0%{background-position:150% 0}100%{background-position:-150% 0}}
+.dangvideo{-webkit-animation: copecute-slideUp 0.5s;
+-moz-animation: copecute-slideUp 0.5s;
+-ms-animation: copecute-slideUp 0.5s;
+-o-animation: copecute-slideUp 0.5s;
+animation: copecute-slideUp 0.5s;}
+.dangvideo{position: fixed;
+z-index: 999;top:0;right:0;
+background: white;width: 100%;height: 100%;padding: 2%;
+-webkit-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+-webkit-overflow-scrolling: touch;
+display: block;overflow-y: scroll;}
+.close-dangvideo{z-index: 9;position: absolute;top: 0;right: 0;background: #d25252;width: 30px;height: 30px;line-height: 30px;border-radius: 50px;text-align: center;padding: 0;margin: 10px;box-sizing: border-box;font-size: 15px;color: #fff!important;font-weight: 500;}
+@-webkit-keyframes copecute-slideUp{from{-webkit-transform:translate(0px,1000px)}to{-webkit-transform:translate(0px,0px)}}
+@-moz-keyframes copecute-slideUp{from{-moz-transform:translate(0px,1000px)}to{-moz-transform:translate(0px,0px)}}
+@-ms-keyframes copecute-slideUp{from{-ms-transform:translate(0px,1000px)}to{-ms-transform:translate(0px,0px)}}
+@-o-keyframes copecute-slideUp{from{-o-transform:translate(0px,1000px)}to{-o-transform:translate(0px,0px)}}
+@keyframes copecute-slideUp{from{transform:translate(0px,1000px)}to{transform:translate(0px,0px)}}
+@media only screen and (max-width: 800px){
+.dangvideobtn{width: 45px!important;}}
+.dangvideobtn{background: #455b64;color: white;box-shadow: 0 0 100px rgba(0,0,0,.05);position: fixed;right: 0;bottom: 0;margin: 1.5em;height: 45px;width: 115px;line-height: 45px;text-align: center;border-radius: 100px;z-index:1;}
+</style>
+{% set lv = get('user_'~login,'lever') %}
+{% if login %}
+{% set url=get_uri_segments() %}
+{% set link =get_post( 'link' ) %}
+{% set mota =get_post( 'mota' ) %}
+{% set id = get_get('id') %}
+{% set key = get_data_by_id('video',id).data|json_decode %}
+{% set cslink = key.link %}
+{% set csmota = key.mota %}
+<script language="javascript"> 
+function load_ajax(){ 
+$.ajax({ 
+beforeSend:function(){ 
+$('#submit').html('Đang gửi...');},});}
+</script>
+<div class="phdr">MXH Video {% if lv=='admin' or lv=='smod' or lv=='smod'  %}<a href="?id=xoa" style="float: right;">Xoá All</a>{% endif %}</div>
+<div class="dangvideo" id="formvideo" style="display:none">
+<a class="close-dangvideo" onclick="if(document.getElementById('formvideo') .style.display=='none') {document.getElementById('formvideo') .style.display=''}else{document.getElementById('formvideo') .style.display='none'}" style="margin: 0!important" type="button">X</a>
+<form style="padding: 23px 7px 0px 17px;" name="form" method="post" action="">
+<h2>Đăng Video</h2><br />
+<input {% if get_get('act') == 'edit' %}{% else %}id="link" {% endif %}type="text" name="link" placeholder="nhập id youtube" value="{% if get_get('act') == 'edit' %}{{cslink}}{% endif %}"/><br />
+<textarea {% if get_get('act') == 'edit' %}{% else %}id="mota" {% endif %}type="text" name="mota" placeholder="Mô tả...">{% if get_get('act') == 'edit' %}{{csmota}}{% endif %}</textarea><br />
+<button onclick="load_ajax()" style="width: 100%;padding: 13px;margin-top: -3px;" id="submit">{% if act == 'edit' %}Sửa{% else %}Đăng{% endif %}</button>
+</form>
+<div style="padding: 23px 7px 0px 17px;"><h2>Hướng dẫn</h2>
+cách lấy id:<br />
+<b>B1:</b><br /> vào youtube tìm đến video muốn xem<br />
+<b>B2:</b><br /> <img src="https://images.weserv.nl/?url=https://i.imgur.com/gZFZkAn.jpg"><br />
+chọn chia sẻ<br />
+<b>B3:</b><br /> <img src="https://images.weserv.nl/?url=https://i.imgur.com/ZfGYZ36.jpg"><br />
+chọn sao chép liên kết<br />
+<b>B4:</b><br /> dán liên kết vừa sao chép vào ô id video và xoá <font color="red"><b>https://youtu.be/</b></font> chỉ để lại id
+<img src="https://images.weserv.nl/?url=https://i.imgur.com/KQNqPeO.jpg">
+</div></div>
+{% if get_get('act') == 'xoa' and lv=='admin' or lv=='smod' %}
+{{delete_data_by_id('video',id)}}
+<div class="menu">Xóa thành công!</div><script>window.location.href='/video'</script>
+{% endif %}{% if request_method()|lower == "post" %}{% if link %}{% if get_get('act') == 'edit' %}
+{{ edit('video','link',link) }}
+{{ edit('video','mota',mota) }}
+<div class="menu">Chỉnh sửa thành công!</div><script>window.location.href='/video'</script>{% else %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+10) }} 
+{% set comment = {"name" :login,"time":"now"|date('U'), "link":link,"mota":mota} %}
+{% set status = save_data( "video", comment|json_encode ) %}{% endif %}{% endif %}{% endif %}{% endif %}
+{% set data=[] %}{% set play='yes' %}
+{% for i in 1..100 %}{% if play=='yes' %}{% set data2=get_data( 'video',100,i) %}
+{% endif %}{% if data2 %}{% set data=data2|reverse|merge(data) %}
+{% else %}{% set play='no' %}{% set data2='' %}{% endif %}{% endfor %}
+{% set total=data|length %}
+{% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}{% endif %}
+{% set url=get_uri_segments() %}
+{% set p=url[1]|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}{% endif %}{% if p>page_max %}{% set p=page_max %}{% endif %}
+{% set st=p*10-10 %}{% if get_get('id') == 'xoa' and lv=='admin' or lv=='smod' %}{% if data|length >= '1' %}
+<div class="rmenu">Xoá thành công! Phòng video trống.</div>
+{% set key = 'video' %}
+{% for i in 1..get_data_count(key) %}
+{{ delete_data_by_id(key,get_data(key)|last.id) }}
+{% endfor %}<script>window.location.href='/video'</script>{% else %}
+<div class="rmenu">Phòng video trống không cần xoá</div>
+{% endif %}{% else %}
+{% if total == '0' %}
+<div class="rmenu">Chưa có nội dung nào</div>
+{% endif %}{% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,10) %}
+{% set data='' %}{% for tiax in entries %}
+{% set entry = tiax.data|json_decode %}
+{% set user='user_'~entry.name %}
+{% set link = entry.link%}
+{% set mota = entry.mota%}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+{% set time = entry.time %}
+<div class="menu" style="margin-bottom: 20px;border-top: 1px solid #EBEBEB;box-shadow: 0px 1px 1px #ccc;-moz-box-shadow: 0px 1px 1px #ccc;-webkit-box-shadow: 0px 1px 1px #ccc;"><div class="list2"><table id="{{tiax.id}}" cellpadding="0" cellspacing="1"><tr><td width="auto"><img style="border: none;border-radius: 50%;" class="avt" src="{{get(user,'avt')}}" width="40" height="40" />{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 42px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>{% set ic=get(user,'icon') %}
+{% if ic %}
+<img src="/images/{{ic}}.png" alt="{{ic}}" />
+{% endif %}
+<b style="font-size: 16px;"><a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b><br />
+<div style="font-size: 11px;"><i class="fal fa-clock"></i> {{ ago(time) }}</div>
+</td><td style="position: absolute;right: 9px;"><style>@media only screen and (min-width: 11250px){.menuforum{right: auto;}}</style>
+<div class="dropdown">
+<button class="dropbtn" style="padding: 0px 0px;"><i class="fal fa-ellipsis-h-alt" style="font-size: 20px;"></i></button>
+<div class="dropdown-content menuforum">
+<a href="https://www.youtube.com/watch?v={{link|raw}}">Xem trên Youtube</a>
+{% if login == entry.name %}
+<a href="?act=edit&id={{tiax.id}}">Chỉnh sửa</a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<a href="?act=edit&id={{tiax.id}}">Chỉnh sửa</a>
+{% endif %}
+{% if lv=='admin' or lv=='smod' or lv=='mod' %}
+{% if login==entry.name %}
+<a href="?act=xoa&id={{tiax.id}}">Xoá</a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+ <a href="?act=xoa&id={{tiax.id}}">Xoá</a>
+{% endif %}
+{% endif %}
+</div></div>
+</td></tr></table></div>
+{{bbcode(mota|raw)}}
+<embed width="100%" height="400" src="https://www.youtube.com/embed/{{link|raw}}?html5=1&amp;rel=0&amp;hl=vi_VN&amp;version=3" class="youtube-player" type="text/html" allowscriptaccess="always" allowfullscreen="true" style="-webkit-animation-duration: 1s;-webkit-animation-iteration-count: infinite;-webkit-animation-name: loadingAnimation;-webkit-animation-timing-function: linear;background: #f6f7f8;background-image: -webkit-linear-gradient(left,#f6f7f8 0%,#edeef1 20%,#f6f7f8 40%,#f6f7f8 100%);background-image: linear-gradient(left,#f6f7f8 0%,#edeef1 20%,#f6f7f8 40%,#f6f7f8 100%);background-repeat: no-repeat;background-size: 200% auto;"/>
+</div>
+{% endfor %}
+{{ paging('video',p,page_max) }}
+{% endif %}
+<a onclick="if(document.getElementById('formvideo') .style.display=='none') {document.getElementById('formvideo') .style.display=''}else{document.getElementById('formvideo') .style.display='none'}" class="dangvideobtn"><i class="fal fa-video-plus"></i> <span>Đăng video</span></a>
+{{ block( 'footer' ) }}

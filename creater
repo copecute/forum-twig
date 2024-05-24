@@ -1,0 +1,146 @@
+{% use '_template.php' %}
+ {{ block( 'header' ) }} 
+ {% from 'func.twig' import rwurl,get,up,login,add,ca,bo %}
+{% set login=login()|trim %}
+{% if login %}
+{% set lever=get('user_'~login,'lever')|trim %}
+ {% set top=get('user_'~login,'top')|trim %} 
+{% if lever=='mem' and top=='no' %}
+ <div class="phdr">Tạo bài viết</div> 
+  <div class="topmenu">Cảnh báo cấp phép!</div> 
+<div class="rmenu"> 
+Bạn chưa được cấp quyền lập top. Vui lòng liên hệ Ban quản trị để yêu cầu cấp quyền năng này. Và xin đừng hỏi ngu là tại sao bạn không lập được top nhá. ^o^</div>
+{% else %}
+ {% set url=get_uri_segments() %}
+
+{% if url[2] and ca(url[1]) and bo(url[1],url[2]) %}
+ <div class="phdr"> {{ ca(url[1]) }} » {{ bo(url[1],url[2]) }}</div>
+
+ {% set title = get_post('title') %}
+ {% set nd = get_post('nd') %}
+ {% set tb = get_post('tb') %}
+ {% set id=get_data_count('id_forum') %} 
+{% set id=id+1 %}
+
+ {% if request_method()|lower == "post" %}
+ {{ add('user_'~login,'new',get_post('nd')) }} 
+   {% if title and nd and get('user_'~login,'new')|trim|raw != get('user_'~login,'old')|trim|raw %} 
+       {% for k in ['forum_data','ca_'~url[1],'bo_'~url[1]~'_'~url[2],'th_'~id] %}
+          {% if get_data_count(k)==0 %}
+{{ save_data(k,' '~id|json_encode~' @ ') }} 
+          {% else %}
+{{ up(k,id|json_encode,'up') }} 
+       {% endif %}
+       {% endfor %}
+{% if tb %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"@"~login~" vừa đăng bài viết [url=/threads/"~id~"/"~rwurl(title)~".hmtl]"~title~"[/url]. Mọi người cùng vào thảo luận nào!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+{% set n = {"title":(title|slice(0,100)),"act":"open","first":login,"last":login,"ca":url[1],"bo":url[2]} %} 
+{{ save_data('top_'~id,n|json_encode) }}
+{{ save_data('id_forum',title) }}
+{% set nd = {'ten':login,'nd':nd,'id':id,"time":"now"|date("U")} %}
+ {{ save_data('cmt_'~id,nd|json_encode) }} 
+ {{ add('user_'~login,'cmt',get('user_'~login,'cmt')|trim+1) }} 
+  {{ add('user_'~login,'old',get_post('nd')) }} 
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+200) }}
+<div style="width: 100%;height: 100%;background: white;position: fixed;top: 0;">
+<div class="copecute_404">
+<h2 style="font-weight: 500;">Đăng bài viết thành công</h2>
+</div></div>
+<style>
+@media only screen and (max-width: 800px){.copecute_404{margin-top: 30%;}}
+@media only screen and (min-width: 800px){.copecute_404{position: absolute;left: 20%;right: 20%;}}
+body{background:#fff;text-align:center;user-select:none}h2{font-size:30px;text-align:center;margin:5% 0 0 0;padding:0}p{font-size:14px;text-align:center}</style>
+ <script>window.location.href='/threads/{{id}}'</script> 
+ {% else %}
+<div class="rmenu">bài viết đã được tạo trước đó. Vui lòng quay lại trang bài viết kiểm tra.</div> 
+   {% endif %}
+{% endif %} 
+<div id='post_status' class="menu" style="border-bottom: 1px solid #EBEBEB;">
+  <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i> Tạo bài viết mới</span></h2>
+<form name="form" method="post" action="">
+<input type="text" name="title" style="padding: 10px;" placeholder="Tiêu đề"><br/>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class="content" style="height:auto">
+<textarea cols="10" rows="7" name="nd" id="copecute" style="padding: 10px;" placeholder="Nội dung..."></textarea>
+</div>
+<label class="pure-material-checkbox">
+<input type="checkbox" name="tb" value="tb">
+  <span> Thông báo lập top ra index</span>
+</label>
+<br />
+<a id="upload" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i>Cảm xúc</a>
+  <button class='btn_status' type="submit" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Đăng</button></form>
+    <input style="display:none" type="file" id="f" accept="image/*">
+</div>
+{% elseif ca(url[1]) and url[1]%}
+<div class="phdr"> {{ ca(url[1]) }}</div> 
+ <div class="topmenu"> Chọn chuyên mục</div> 
+   {% for k,v in bo(url[1])|json_decode %}
+ <div class="menu"><img src="/images/{{loop.index}}.png"> <a id="mi" href="/{{url[0]}}/{{url[1]}}/{{k}}">{{v}}</a></div>
+    {% endfor %}
+{% else %}
+ <div class="phdr">Tạo bài viết</div> 
+ <div class="topmenu"> Chọn chuyên mục</div> 
+ {% for k,v in ca()|json_decode %}
+ <div class="menu"><img src="/images/{{loop.index}}.png"> <a id="mi" href="/{{url[0]}}/{{k}}">{{v}}</a></div>
+    {% endfor %} 
+{% endif %} 
+
+ 
+
+{% endif %}
+{% else %}
+  <div class="phdr">Tạo bài viết mới</div> 
+  <div class="topmenu">Cảnh báo đăng nhập!</div> 
+<div class="rmenu">Vui lòng đăng nhập để tạo bài viết. Please login to creater new thread.</div>
+{% endif %}
+      <script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#upload").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = ""+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+<script src="/js/auto_tag.js"></script>
+<script>var user = []
+var data = "{% include 'tag.txt' %}"
+var sp = data.split("@");
+for(i in sp){user[i] = sp [i].trim();}
+var input = document.querySelector("#copecute");
+autocomplete(input,user)
+</script>
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+ {{ block( 'footer' ) }} 

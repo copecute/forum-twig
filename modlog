@@ -1,0 +1,89 @@
+{% from 'func.twig' import rwurl,get,login,lever,up,add,paging,bbcode %}
+ {% use '_template.php' %}
+ {% from 'time.twig' import ago %} 
+{% set login=login()|trim %}
+ {% set title='Lịch sử quản lý' %}
+ {# For Admin, Smnd and Mod #}
+ {% set lv=get('user_'~login,'lever')|trim %} 
+{% if lv=='admin' or lv=='smod' or lv=='mod' %} 
+ {{ block( 'header' ) }}
+ <div class="phdr"><span>Lịch sử quản lý - Modlog</span></div>
+{% set id = get_get('id') %}
+{% set act = get_get('act') %}
+{% if lv=='admin' %}
+{% if act == 'xoa' %}
+{{delete_data_by_id('modlog_data',id)}}
+<div class="menu">Xong rồi nhé!!!</div>
+ <script>window.location.href='/modlog'</script>
+{% endif %}{% endif %}
+{% set data=[] %}
+{% set play='yes' %}
+{% for i in 1..100 %}
+{% if play=='yes' %}
+{% set data2=get_data( 'modlog_data',100,i) %}
+{% endif %}
+{% if data2 %}
+{% set data=data2|reverse|merge(data) %}
+{% else %}
+{% set play='no' %}
+{% set data2='' %}
+{% endif %}
+{% endfor %}
+{% set total=data|length %}
+{% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set url=get_uri_segments() %}
+{% set p=url[1]|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+ {% if id == 'del' %}
+{% if total >= 1 %}
+<div class="rmenu">Xoá thành công! Lịch sử quản lí trống.</div>
+{% set key = 'modlog_data' %}
+{% for i in 1..get_data_count(key) %}
+{{ delete_data_by_id(key,get_data(key)|last.id) }}
+{% endfor %}
+{% else %}
+<div class="rmenu">Lịch sử trống không cần xoá</div>
+{% endif %}
+{% else %}
+{% if lv=='admin' %}<div class="list1"><a id="mi" href="/modlog?id=del">Xoá tất cả lịch sử quản lí</a></div>{% endif %}
+{% if total == '0' %}
+<div class="rmenu">Lịch sử quản lí trống</div>
+{% endif %}
+ {% from 'time.twig' import ago %} 
+{% set entries= data|slice(st,10) %}
+{% set data='' %} 
+{% for tiax in entries %}
+{% set entry = tiax.data|json_decode %}
+{% set user='user_'~entry.name %}
+{% set nd = entry.comment %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+ <div class="menu" id="'.$value.'"><span name="online">{% if on < ('now'|date('U')-600) %}off{% else %}on{% endif %}</span> <b><a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b> {{lever(lever)}}: {{bbcode(nd|raw)}}
+{% if login==entry.name %}
+{% if lv=='admin' %}<span style="float: right;">
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like">Xoá</a>
+</span>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<span style="float: right;">
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like">Xoá</a>
+</span>{% endif %}
+{% endif %}
+</div>
+{% endfor %}
+{% endif %}
+<div class="phdr"><span>Tổng số: {{total}}</span></div> 
+{{ paging(url[0],p,page_max) }}
+
+ {{ block( 'footer' ) }}
+{% else %}
+{% include '_404' %}
+{% endif %}

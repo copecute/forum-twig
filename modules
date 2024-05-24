@@ -1,0 +1,1716 @@
+{% use '_template.php' %}
+{% set url=get_uri_segments() %}
+{% if url[1] == 'faq' %}
+ {{ block( 'header' ) }}
+{% if url[2] == 'bbcode.php' %}
+<div class="menublock">
+<div class="phdr"> cách sử dụng bbcode</div>
+<div class="menu">chú ý link phải chứa http:// hoặc https://
+<br />
+[url=link]liên kết[/b] <a href="#">liên kết</a><br />
+hoặc<br />
+[url]link[/url] <a href="#">link</a></div>
+<div class="menu">[b]...[/b] <b>In đậm</b></div>
+<div class="menu">[i]...[/i]	<i>In nghiêng</i></div>
+<div class="menu">[u]...[/u] <u>Gạch dưới</u></div>
+<div class="menu">[s]...[/s] <s>Gạch ngang</s></div>
+<div class="menu">[red]...[/red]	<font color="red">Màu đỏ</font></div>
+<div class="menu">[blue]...[/blue] <font color="blue">Màu xanh dương</font></div>
+<div class="menu">[green]...[/green] <font color="green">Màu xanh lá</font></div>
+<div class="menu">[quote=tên]nội dung trích dẫn[/quote]	<div class="bbcode_quote"><div class="quote_container"><div class="bbcode_quote_container"></div>tên đã nói: nội dung trích dẫn</div></div></div>
+<div class="menu">[img]...[/img]	Hình ảnh
+</div></div>
+{% else %}
+<div class="phdr">Trung tâm trợ giúp</div>
+<div class="list1"><a id="mi" href="/modules/faq/bbcode.php">Hướng dẫn sử dụng bbcode</a></div>
+ {{ block( 'footer' ) }}{% endif %}
+
+{% elseif url[1] == 'smilex' %}
+{% if url[2] == 'troll' %}
+<style>#load-troll{display:none}</style>
+<a onclick="tag(' :ym', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ym.gif" width="60px"></a>
+<a onclick="tag(' :yaoming', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/yaoming.gif" width="60px"></a>
+<a onclick="tag(' :1lol', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/1lol.gif" width="60px"></a>
+<a onclick="tag(' :2lol', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/2lol.gif" width="60px"></a>
+<a onclick="tag(' :clgt', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/clgt.gif" width="60px"></a>
+<a onclick="tag(' :fa', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/fa.gif" width="60px"></a>
+<a onclick="tag(' :fu', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/fu.gif" width="60px"></a>
+<a onclick="tag(' :troll', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll.gif" width="60px"></a>
+<a onclick="tag(' :troll1', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll1.gif" width="60px"></a>
+<a onclick="tag(' :troll2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll2.gif" width="60px"></a>
+<a onclick="tag(' :troll3', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll3.gif" width="60px"></a>
+<a onclick="tag(' :troll4', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll4.gif" width="60px"></a>
+<a onclick="tag(' :troll5', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll5.gif" width="60px"></a>
+<a onclick="tag(' :troll6', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll6.gif" width="60px"></a>
+<a onclick="tag(' :troll7', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll7.gif" width="60px"></a>
+<a onclick="tag(' :troll8', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll8.gif" width="60px"></a>
+<a onclick="tag(' :troll9', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll9.gif" width="60px"></a>
+<a onclick="tag(' :troll10', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll10.gif" width="60px"></a>
+<a onclick="tag(' :troll11', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll11.gif" width="60px"></a>
+<a onclick="tag(' :troll12', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll12.gif" width="60px"></a>
+<a onclick="tag(' :troll13', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll13.gif" width="60px"></a>
+<a onclick="tag(' :troll14', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll14.gif" width="60px"></a>
+<a onclick="tag(' :troll15', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll15.gif" width="60px"></a>
+<a onclick="tag(' :troll16', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll16.gif" width="60px"></a>
+<a onclick="tag(' :troll17', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll17.gif" width="60px"></a>
+<a onclick="tag(' :troll18', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll18.gif" width="60px"></a>
+<a onclick="tag(' :troll19', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll19.gif" width="60px"></a>
+<a onclick="tag(' :troll20', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll20.gif" width="60px"></a>
+<a onclick="tag(' :troll21', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll21.gif" width="60px"></a>
+<a onclick="tag(' :troll22', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll22.gif" width="60px"></a>
+<a onclick="tag(' :troll23', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll23.gif" width="60px"></a>
+<a onclick="tag(' :troll24', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll24.gif" width="60px"></a>
+<a onclick="tag(' :troll25', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll25.gif" width="60px"></a>
+<a onclick="tag(' :troll26', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll26.gif" width="60px"></a>
+<a onclick="tag(' :troll27', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll27.gif" width="60px"></a>
+<a onclick="tag(' :troll28', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll28.gif" width="60px"></a>
+<a onclick="tag(' :troll29', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll29.gif" width="60px"></a>
+<a onclick="tag(' :troll30', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll30.gif" width="60px"></a>
+<a onclick="tag(' :troll31', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll31.gif" width="60px"></a>
+<a onclick="tag(' :troll32', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll32.gif" width="60px"></a>
+<a onclick="tag(' :troll33', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll33.gif" width="60px"></a>
+<a onclick="tag(' :troll34', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll34.gif" width="60px"></a>
+<a onclick="tag(' :troll35', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll35.gif" width="60px"></a>
+<a onclick="tag(' :troll36', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll36.gif" width="60px"></a>
+<a onclick="tag(' :troll37', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll37.gif" width="60px"></a>
+<a onclick="tag(' :troll38', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll38.gif" width="60px"></a>
+<a onclick="tag(' :troll39', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll39.gif" width="60px"></a>
+<a onclick="tag(' :troll40', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll40.gif" width="60px"></a>
+<a onclick="tag(' :troll41', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll41.gif" width="60px"></a>
+<a onclick="tag(' :troll42', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll42.gif" width="60px"></a>
+<a onclick="tag(' :troll43', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll43.gif" width="60px"></a>
+<a onclick="tag(' :troll44', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll44.gif" width="60px"></a>
+<a onclick="tag(' :troll45', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll45.gif" width="60px"></a>
+<a onclick="tag(' :troll46', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll46.gif" width="60px"></a>
+<a onclick="tag(' :troll47', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll47.gif" width="60px"></a>
+<a onclick="tag(' :troll48', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll48.gif" width="60px"></a>
+<a onclick="tag(' :troll49', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll49.gif" width="60px"></a>
+<a onclick="tag(' :troll50', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll50.gif" width="60px"></a>
+<a onclick="tag(' :troll51', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll51.gif" width="60px"></a>
+<a onclick="tag(' :troll52', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll52.gif" width="60px"></a>
+<a onclick="tag(' :troll53', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll53.gif" width="60px"></a>
+<a onclick="tag(' :troll54', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll54.gif" width="60px"></a>
+<a onclick="tag(' :troll55', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll55.gif" width="60px"></a>
+<a onclick="tag(' :troll56', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll56.gif" width="60px"></a>
+<a onclick="tag(' :troll57', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll57.gif" width="60px"></a>
+<a onclick="tag(' :troll58', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll58.gif" width="60px"></a>
+<a onclick="tag(' :troll59', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll59.gif" width="60px"></a>
+<a onclick="tag(' :troll60', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll60.gif" width="60px"></a>
+<a onclick="tag(' :troll61', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll61.gif" width="60px"></a>
+<a onclick="tag(' :troll62', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll62.gif" width="60px"></a>
+<a onclick="tag(' :troll63', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll63.gif" width="60px"></a>
+<a onclick="tag(' :troll64', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll64.gif" width="60px"></a>
+<a onclick="tag(' :troll65', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll65.gif" width="60px"></a>
+<a onclick="tag(' :troll66', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll66.gif" width="60px"></a>
+<a onclick="tag(' :troll67', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll67.gif" width="60px"></a>
+<a onclick="tag(' :troll68', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/troll68.gif" width="60px"></a>
+
+{% elseif url[2] == 'ami' %}
+<style>#load-ami{display:none}</style>
+<a onclick="tag(' :ami1', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami1.gif" width="60px"></a>
+<a onclick="tag(' :ami2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami2.gif" width="60px"></a>
+<a onclick="tag(' :ami3', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami3.gif" width="60px"></a>
+<a onclick="tag(' :ami4', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami4.gif" width="60px"></a>
+<a onclick="tag(' :ami5', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami5.gif" width="60px"></a>
+<a onclick="tag(' :ami6', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami6.gif" width="60px"></a>
+<a onclick="tag(' :ami7', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami7.gif" width="60px"></a>
+<a onclick="tag(' :ami8', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami8.gif" width="60px"></a>
+<a onclick="tag(' :ami9', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami9.gif" width="60px"></a>
+<a onclick="tag(' :ami10', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami10.gif" width="60px"></a>
+<a onclick="tag(' :ami11', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami11.gif" width="60px"></a>
+<a onclick="tag(' :ami12', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami12.gif" width="60px"></a>
+<a onclick="tag(' :ami13', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami13.gif" width="60px"></a>
+<a onclick="tag(' :ami14', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami14.gif" width="60px"></a>
+<a onclick="tag(' :ami15', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami15.gif" width="60px"></a>
+<a onclick="tag(' :ami16', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami16.gif" width="60px"></a>
+<a onclick="tag(' :ami17', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami17.gif" width="60px"></a>
+<a onclick="tag(' :ami18', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami18.gif" width="60px"></a>
+<a onclick="tag(' :ami19', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami19.gif" width="60px"></a>
+<a onclick="tag(' :ami20', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami20.gif" width="60px"></a>
+<a onclick="tag(' :ami21', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami21.gif" width="60px"></a>
+<a onclick="tag(' :ami22', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami22.gif" width="60px"></a>
+<a onclick="tag(' :ami23', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami23.gif" width="60px"></a>
+<a onclick="tag(' :ami24', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami24.gif" width="60px"></a>
+<a onclick="tag(' :ami25', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami25.gif" width="60px"></a>
+<a onclick="tag(' :ami26', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami26.gif" width="60px"></a>
+<a onclick="tag(' :ami27', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami27.gif" width="60px"></a>
+<a onclick="tag(' :ami28', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami28.gif" width="60px"></a>
+<a onclick="tag(' :ami29', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami29.gif" width="60px"></a>
+<a onclick="tag(' :ami30', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami30.gif" width="60px"></a>
+<a onclick="tag(' :ami31', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami31.gif" width="60px"></a>
+<a onclick="tag(' :ami32', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami32.gif" width="60px"></a>
+<a onclick="tag(' :ami33', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami33.gif" width="60px"></a>
+<a onclick="tag(' :ami34', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami34.gif" width="60px"></a>
+<a onclick="tag(' :ami35', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami35.gif" width="60px"></a>
+<a onclick="tag(' :ami36', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami36.gif" width="60px"></a>
+<a onclick="tag(' :ami37', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami37.gif" width="60px"></a>
+<a onclick="tag(' :ami38', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami38.gif" width="60px"></a>
+<a onclick="tag(' :ami39', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami39.gif" width="60px"></a>
+<a onclick="tag(' :ami40', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami40.gif" width="60px"></a>
+<a onclick="tag(' :ami41', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami41.gif" width="60px"></a>
+<a onclick="tag(' :ami42', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami42.gif" width="60px"></a>
+<a onclick="tag(' :ami43', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami43.gif" width="60px"></a>
+<a onclick="tag(' :ami44', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami44.gif" width="60px"></a>
+<a onclick="tag(' :ami45', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami45.gif" width="60px"></a>
+<a onclick="tag(' :ami46', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami46.gif" width="60px"></a>
+<a onclick="tag(' :ami47', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami47.gif" width="60px"></a>
+<a onclick="tag(' :ami48', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ami48.gif" width="60px"></a>
+
+{% elseif url[2] == 'khac' %}
+<style>#load-khac{display:none}</style>
+<a onclick="tag(' :menhera1', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera1.gif" width="60px"></a>
+<a onclick="tag(' :menhera2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera2.gif" width="60px"></a>
+<a onclick="tag(' :menhera3', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera3.gif" width="60px"></a>
+<a onclick="tag(' :menhera4', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera4.gif" width="60px"></a>
+<a onclick="tag(' :menhera5', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera5.gif" width="60px"></a>
+<a onclick="tag(' :menhera6', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera6.gif" width="60px"></a>
+<a onclick="tag(' :menhera7', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera7.gif" width="60px"></a>
+<a onclick="tag(' :menhera8', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera8.gif" width="60px"></a>
+<a onclick="tag(' :menhera9', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera9.gif" width="60px"></a>
+<a onclick="tag(' :menhera10', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera10.gif" width="60px"></a>
+<a onclick="tag(' :menhera11', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera11.gif" width="60px"></a>
+<a onclick="tag(' :menhera12', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera12.gif" width="60px"></a>
+<a onclick="tag(' :menhera13', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera13.gif" width="60px"></a>
+<a onclick="tag(' :menhera14', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera14.gif" width="60px"></a>
+<a onclick="tag(' :menhera15', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera15.gif" width="60px"></a>
+<a onclick="tag(' :menhera16', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera16.gif" width="60px"></a>
+<a onclick="tag(' :menhera17', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera17.gif" width="60px"></a>
+<a onclick="tag(' :menhera18', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera18.gif" width="60px"></a>
+<a onclick="tag(' :menhera19', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera19.gif" width="60px"></a>
+<a onclick="tag(' :menhera20', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera10.gif" width="60px"></a>
+<a onclick="tag(' :menhera21', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera21.gif" width="60px"></a>
+<a onclick="tag(' :menhera22', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera22.gif" width="60px"></a>
+<a onclick="tag(' :menhera23', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/menhera23.gif" width="60px"></a>
+<a onclick="tag(' :moew1', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew1.gif" width="60px"></a>
+<a onclick="tag(' :moew2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew2.gif" width="60px"></a>
+<a onclick="tag(' :moew3', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew3.gif" width="60px"></a>
+<a onclick="tag(' :moew4', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew4.gif" width="60px"></a>
+<a onclick="tag(' :moew5', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew5.gif" width="60px"></a>
+<a onclick="tag(' :moew6', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew6.gif" width="60px"></a>
+<a onclick="tag(' :moew7', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew7.gif" width="60px"></a>
+<a onclick="tag(' :moew8', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew8.gif" width="60px"></a>
+<a onclick="tag(' :moew9', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew9.gif" width="60px"></a>
+<a onclick="tag(' :moew10', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew10.gif" width="60px"></a>
+<a onclick="tag(' :moew11', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew11.gif" width="60px"></a>
+<a onclick="tag(' :moew12', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew12.gif" width="60px"></a>
+<a onclick="tag(' :moew13', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew13.gif" width="60px"></a>
+<a onclick="tag(' :moew14', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew14.gif" width="60px"></a>
+<a onclick="tag(' :moew15', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew15.gif" width="60px"></a>
+<a onclick="tag(' :moew16', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew16.gif" width="60px"></a>
+<a onclick="tag(' :moew17', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew17.gif" width="60px"></a>
+<a onclick="tag(' :moew18', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew18.gif" width="60px"></a>
+<a onclick="tag(' :moew19', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew19.gif" width="60px"></a>
+<a onclick="tag(' :moew20', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/moew20.gif" width="60px"></a>
+<a onclick="tag(' :buoi', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/buoi.gif" width="60px"></a>
+<a onclick="tag(' :buonngu', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/buonngu.gif" width="60px"></a>
+<a onclick="tag(' :chay', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/chay.gif" width="60px"></a>
+<a onclick="tag(' :chay2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/chay2.gif" width="60px"></a>
+<a onclick="tag(' :choang', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/choang2.gif" width="60px"></a>
+<a onclick="tag(' :decu', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/decu.gif" width="60px"></a>
+<a onclick="tag(' :dien', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/dien.gif" width="60px"></a>
+<a onclick="tag(' :hohuha', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/hohuha.gif" width="60px"></a>
+<a onclick="tag(' :khong', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/khong.gif" width="60px"></a>
+<a onclick="tag(' :leuleu', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/leuleu.gif" width="60px"></a>
+<a onclick="tag(' :loa', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/loa.gif" width="60px"></a>
+<a onclick="tag(' :ngap', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/ngap.gif" width="60px"></a>
+<a onclick="tag(' :nono', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/nono.gif" width="60px"></a>
+<a onclick="tag(' :o', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/o.gif" width="60px"></a>
+<a onclick="tag(' :oaoa', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/oaoa.gif" width="60px"></a>
+<a onclick="tag(' :oeoe', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/oeoe.gif" width="60px"></a>
+<a onclick="tag(' :x', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/x.gif" width="60px"></a>
+{% else %}
+<script>
+$(document).ready(function(){
+$("#btn-troll").click(function(){
+$("#troll").load("/modules/smilex/troll");});});
+</script>
+<script>
+$(document).ready(function(){
+$("#btn-ami").click(function(){
+$("#ami").load("/modules/smilex/ami");});});
+</script>
+<script>
+$(document).ready(function(){
+$("#btn-khac").click(function(){
+$("#khac").load("/modules/smilex/khac");});});
+</script>
+<div id="smilex" style="position:fixed;z-index:10;width:100%;height:100%;top:0;right: 0;">
+<div onclick="show_hide('smilex')" style="position:absolute;top:0;width: 100%;height:100%;"></div>
+<div class="list3" style="position:absolute;bottom:0;width: 100%;z-index:2;">
+<style>
+.tablink {background-color: #455b64;color: white;float: left;border: none;outline: none;cursor: pointer;padding: 14px 0px;font-size: 17px;margin: 0;border-radius: 0;width: 25%;}
+.close-tablink{position: absolute;top: -12px;right: 0;background: #d25252;width: 25px;height: 25px;line-height: 25px;border-radius: 50px;text-align: center;box-sizing: border-box;font-size: 15px;color: #fff!important;font-weight: 500;}
+.tablink:hover {background-color: #777;}
+.tabcontent {color: white;display: none;width:100%;padding: 20px 0;height: 150px;overflow:auto;}
+#icon {background-color: #eee;}
+#troll {background-color: #eee;}
+#ami {background-color: #eee;}
+#khac{background-color: #eee;}
+</style>
+<div style="width: 100%;">
+<button class="tablink" onclick="openPage('icon', this, '#777')" id="defaultOpen">Icon</button>
+<button class="tablink" id="btn-troll" onclick="openPage('troll', this, '#777')">Troll</button>
+<button class="tablink" id="btn-ami" onclick="openPage('ami', this, '#777')">Ami</button>
+<button class="tablink" id="btn-khac" onclick="openPage('khac', this, '#777')">Khác</button>
+<a onclick="show_hide('smilex')" class="close-tablink"><i class="fa fa-times"></i></a>
+</div>
+<div id="icon" class="tabcontent">
+<a onclick="tag(' :D', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/D.gif" width="20px"></a>
+<a onclick="tag(' :))', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/2.gif" width="20px"></a>
+<a onclick="tag(' :)', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/1.gif" width="20px"></a>
+<a onclick="tag(' :3', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/3.gif" width="20px"></a>
+<a onclick="tag(' :v', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/v.gif" width="20px"></a>
+<a onclick="tag(' :P', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/P.gif" width="20px"></a>
+<a onclick="tag(' :*', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/8.gif" width="20px"></a>
+<a onclick="tag(' :O', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/O.gif" width="20px"></a>
+<a onclick="tag(' -_-', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/-_-.gif" width="20px"></a>
+<a onclick="tag(' :((', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/4.gif" width="20px"></a>
+<a onclick="tag(' :(', ' ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/6.gif" width="20px"></a>
+<a onclick="tag(' (y', ') ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/6y1.gif" width="20px"></a>
+<a onclick="tag(' (n', ') ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/6n1.gif" width="20px"></a>
+<a onclick="tag(' :shit', ': ');" style="height:30px;width:30px;"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/shit.gif" width="20px"></a>
+<a onclick="tag(' :thich', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/thich.gif" width="30px"></a>
+<a onclick="tag(' :love', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/love.gif" width="30px"></a>
+<a onclick="tag(' :haha', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/haha.gif" width="30px"></a>
+<a onclick="tag(' :zuivl', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/zuivl.gif" width="30px"></a>
+<a onclick="tag(' :wow', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/wow.gif" width="30px"></a>
+<a onclick="tag(' :buon', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/buon.gif" width="30px"></a>
+<a onclick="tag(' :phanno', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/phanno.gif" width="30px"></a>
+<a onclick="tag(' :e1', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e1.gif" width="30px"></a>
+<a onclick="tag(' :e2', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e2.gif" width="30px"></a>
+<a onclick="tag(' :e3', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e3.gif" width="30px"></a>
+<a onclick="tag(' :e4', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e4.gif" width="30px"></a>
+<a onclick="tag(' :e5', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e5.gif" width="30px"></a>
+<a onclick="tag(' :e6', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e6.gif" width="30px"></a>
+<a onclick="tag(' :e7', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e7.gif" width="30px"></a>
+<a onclick="tag(' :e8', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e8.gif" width="30px"></a>
+<a onclick="tag(' :e9', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e9.gif" width="30px"></a>
+<a onclick="tag(' :e10', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e10.gif" width="30px"></a>
+<a onclick="tag(' :e11', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e11.gif" width="30px"></a>
+<a onclick="tag(' :e12', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e12.gif" width="30px"></a>
+<a onclick="tag(' :e13', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e13.gif" width="30px"></a>
+<a onclick="tag(' :e14', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e14.gif" width="30px"></a>
+<a onclick="tag(' :e15', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e15.gif" width="30px"></a>
+<a onclick="tag(' :e16', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e16.gif" width="30px"></a>
+<a onclick="tag(' :e17', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e17.gif" width="30px"></a>
+<a onclick="tag(' :e18', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e18.gif" width="30px"></a>
+<a onclick="tag(' :e19', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e19.gif" width="30px"></a>
+<a onclick="tag(' :e20', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e20.gif" width="30px"></a>
+<a onclick="tag(' :e21', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e21.gif" width="30px"></a>
+<a onclick="tag(' :e22', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e22.gif" width="30px"></a>
+<a onclick="tag(' :e23', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e23.gif" width="30px"></a>
+<a onclick="tag(' :e24', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e24.gif" width="30px"></a>
+<a onclick="tag(' :e25', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e25.gif" width="30px"></a>
+<a onclick="tag(' :e26', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e26.gif" width="30px"></a>
+<a onclick="tag(' :e27', ': ');"><img src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://copecute.github.io/images/smile/e27.gif" width="30px"></a>
+</div>
+
+<div id="troll" class="tabcontent"><div id="load-troll" style="text-align: center;"><i class="fal fa-spinner fa-spin" style="color: black;font-size: 50px;"></i></div></div>
+<div id="ami" class="tabcontent"><div id="load-ami" style="text-align: center;"><i class="fal fa-spinner fa-spin" style="color: black;font-size: 50px;"></i></div></div>
+<div id="khac" class="tabcontent"><div id="load-khac" style="text-align: center;"><i class="fal fa-spinner fa-spin" style="color: black;font-size: 50px;"></i></div></div>
+</div>
+</div></div>
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+document.getElementById("defaultOpen").click();
+</script>{% endif %}
+
+{% elseif url[1] == 'status' %}
+{% use '_template.php' %}
+
+ {% from 'func.twig' import rwurl,get,up,add,ca,bo,breadcrumbs,lever,login,paging,bbcode,ago %}
+ {% set login=login()|trim %}
+ {{ block('header') }} 
+<style>.main-wrapper{width: 100%!important;}</style>
+<div class="menublock">
+ {% if login %} 
+ {% if get('user_'~login,'stat')|trim=='' or get('user_'~login,'stat')|trim=='yes' %} 
+ {% set nd = get_post('nd') %} 
+ {% set id=get_data_count('id_forum') %} 
+{% set id=id+1 %}
+  {% set cookie=get('user_'~login,'captcha')|trim %}  
+   {% if get_data_count('blocks_'~ip())==0 or get_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id).data <= "now"|date("U") %}   
+  
+ {# {% if cookie|slice(0,-10)==fc.mh(get_post('captcha')) and "now"|date('U')-cookie|slice(-10,10) < 90 %}  
+(% else %} #}
+ {% if request_method()|lower == "post" %}
+ {{ add('user_'~login,'new',get_post('nd')) }} 
+   {% if nd and get('user_'~login,'new')|trim|raw != get('user_'~login,'old')|trim|raw %} 
+   {% set k='status_data' %}
+          {% if get_data_count(k)==0 %}
+ {% set save = save_data(k,' '~id|json_encode~' @ ') %} 
+          {% else %}
+{{ up(k,id|json_encode,'up') }} 
+       {% endif %}
+    {% set save = save_data('th_'~id,' '~id~' @ ') %}
+
+{% set n = {"title":"Bình Luận","act":"open","first":login,"last":login,"type":"status"} %} 
+ {% set save = save_data('top_'~id,n|json_encode) %}
+ {% set save = save_data('id_forum',title) %}
+{% set nd = {'ten':login,'nd':nd,'id':id,"time":"now"|date("U")} %}
+ {% set save = save_data('cmt_'~id,nd|json_encode) %} 
+ {{ add('user_'~login,'stt',get('user_'~login,'stt')|trim+1) }} 
+ {% set save = save_data('id_forum','ten') %} 
+
+
+
+
+{% if get_data_count('blocks_'~ip())==0 %}      
+      {% set save = save_data('blocks_'~ip(), "now"|date("U")) %}      
+      {% else %}   
+   {% if get_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id).data != "block" %}   
+   {% if get_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id).data+300 > "now"|date("U") %}   
+   {{ update_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id,("now"|date('U')+600)) }}   
+   {% else %}   
+   {{ update_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id,"now"|date("U")) }}   
+   {% endif %}   
+   {% endif %}   
+   {% endif %}   
+      
+      
+ 
+   
+ {{ add('user_'~login,'old',get_post('nd')) }} 
+ {{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+50) }}
+ {# <script>window.location.href='/'</script> #}
+   {% endif %}
+{% endif %} 
+{% else %}
+<div class="rmenu"> Bạn có thể tiếp tục sau {{ get_data_by_id('blocks_'~ip(),get_data('blocks_'~ip())|last.id).data - "now"|date("U") }}s</div>
+{#
+{% set m = get_post('nd') %} #}
+ {% endif %} 
+<form method="post" name="form" action="">
+<div id='post_status' style="border-bottom: 1px solid #EBEBEB;">
+ <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i> Chatbox</span><a onclick="if(document.getElementById('bbcode') .style.display=='none') {document.getElementById('bbcode') .style.display=''}else{document.getElementById('bbcode') .style.display='none'}"><span style='margin:0 0 0 8px'>BBcode</span></a></h2>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode" style="display:none"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class='content'>
+<img src='{{get('user_'~login(),'avt')}}'/>
+<textarea style="padding:0;margin:0;position:absolute;top:50%;transform:translate(0,-50%);left:50px;color:#666;background:0;border:0;outline:0;font-family:Roboto,sans-serif;font-size:15px;width:89%;" placeholder="Bạn đang nghĩ gì ?" name="nd" id="nd">{{m}}</textarea>
+  </div>
+    {#
+  {% set c1= 90-random(80) %}  
+  {% set c2= random(9) %}  
+  {{ add('user_'~login,'captcha',fc.mh((c1+c2))~now|date('U')) }}  
+<span class="center"><img class="avt" src="http://n-nhozkitboy.rhcloud.com/wap4/cap.php?v={{ random(9)}}{{fc.mh(c1~c2)}}{{random(9)}}" id="captcha" alt="reload nếu không thấy captcha"></span><br><input type="text" name="captcha" class="form-control">
+   
+
+
+    <br> #}
+  <button class='btn_status' id="submit" type="submit" onclick="load_ajax()" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Đăng</button ></form>
+<a id="upload" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i> Cảm xúc</a>
+  <a class='btn_status' href='#'><span>...</span></a>
+<input style="display:none" type="file" id="f" accept="image/*">
+<div id="imgyp"></div></div>
+ {% else %}
+<div class="rmenu">Bạn đã bị chặn bởi ban quản trị</div>
+{% endif %} 
+
+
+ {% endif %} 
+
+{% if get_data_count('status_data')==0 %}
+  <div class="rmenu"> Chưa có tâm trạng nào</div>
+{% endif %}
+
+
+
+{% set key='status_data' %}
+ {% set data=get(key)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% if total==0 %}
+ <div class="rmenu">Chưa có bài viết nào ở đây.</div>
+{% endif %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set url=get_uri_segments() %}
+
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+
+ {% for id in data|slice(0,total)|slice(0,10) %}
+{% set entry=id|trim %}
+{% set key='cmt_'~entry %} 
+ {% set top=get('top_'~entry,'act')|trim %} 
+ {% set user = 'user_'~get(key,'ten')|trim %}
+ {% set nd = get(key,'nd') %} 
+
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+ {% set last=get('th_'~entry)|split('@')|first|trim %} 
+ <div class="menu"><div class="list2"><table  id="'.$value.'" cellpadding="0" cellspacing="1"><tr><td width="auto"><img style="border: none;border-radius: 50%;" class="avt" src="{{get(user,'avt')}}" width="40" height="40" />{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 42px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>{% set ic=get(user,'icon') %}
+{% if ic %}
+<img src="/images/{{ic}}.png" alt="{{ic}}" />
+{% endif %}
+ <b style="font-size: 16px;"><a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b><br />
+<div style="font-size: 11px;"><i class="fal fa-clock"></i> {{ ago((get('cmt_'~last,'time')|trim)) }}</div>
+</td></tr></table></div>
+<div style="margin:0 5px;">{{bbcode(nd|raw)}}</div>
+<div id="action_like-cmt-share"><span class="action_like">{% if login != get(key,'ten') and get('like_'~entry,login)|trim!=login %}<a href="/modules/action/like/{{entry}}"><i class="fa fa-heart"></i> thích</a> &nbsp;{% else %}<span style="color:#E91E63"><i class="fa fa-heart"></i> đã thích</span>{% endif %}</span><span class="action_like"><i class="far fa-comments"></i> <a href="/threads/{{entry}}">{% if get('th_'~entry)|split('@')|length-2>0 %}{{get('th_'~entry)|split('@')|length-2}} Bình luận{% else %}Bình luận{% endif %}</a></span><span class="action_like"><i class="fal fa-share-square"></i> chia sẻ</span></div>
+</div> 
+{% endfor %} 
+ {% if login %}
+{% if page_max>10 %}
+{% set page_max=10 %} 
+ {% endif %} 
+{{ paging('modules/status',p,page_max) }}
+{% endif %}
+<script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#upload").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = ""+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+<script src="/js/auto_tag.js"></script>
+<script>var user = []
+var data = "{{block('tag')}}"
+var sp = data.split("@");
+for(i in sp){user[i] = sp [i].trim();}
+var input = document.querySelector("#comment");
+autocomplete(input,user)
+</script>
+{{ block('footer') }}
+
+{% elseif url[1] == 'chat' %}
+{% from 'func.twig' import rwurl,get,login,lever,up,add,edit,paging,bbcode,ago %}
+ {% use '_template.php' %}
+{% set login=login()|trim %}
+ {% set title='Phòng Chat' %}
+ {{ block( 'header' ) }}
+<style>.main-wrapper{width: 100%!important;}</style>
+{% set lv = get('user_'~login,'lever') %}
+ <div class="menublock">
+{% if login %}
+{% set cmt =get_post( 'comment' ) %}
+{% set id = get_get('id') %}
+{% set key = get_data_by_id('chat_ver0',id).data|json_decode %}
+{% set cs = key.comment %}
+<script language="javascript"> 
+function load_ajax(){ 
+$.ajax({ 
+beforeSend:function(){ 
+$('#submit').html('Đang gửi...');},});}
+</script>
+<script>function quote(username,id){content_quote = $("#chat_" + id).html().replace(/<\/?[^>]+>/gi, '').replace(/\s+/g, " ").slice(0,100);
+content_quote = "[quote=" + username + "]" + $.trim(content_quote) + "[/quote]";
+$("textarea").focus();
+$("textarea").val($("textarea").val()+content_quote);}
+</script>
+ <form id="chatbox" name="form" method="post"><div id='post_status' style="border-bottom: 1px solid #EBEBEB;">
+ <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i> Chatbox</span><a onclick="if(document.getElementById('bbcode') .style.display=='none') {document.getElementById('bbcode') .style.display=''}else{document.getElementById('bbcode') .style.display='none'}"><span style='margin:0 0 0 8px'>BBcode</span></a>{% if lv=='admin' or lv=='smod' or lv=='smod'  %}<a id="mi" href="?id=xoa" style="float: right;"><i class="fal fa-trash"></i></a>{% endif %}</h2>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['comment'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['comment'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode" style="display:none"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class='content'>
+<img src='{{get('user_'~login(),'avt')}}'/>
+<textarea style="padding:0;margin:0;position:absolute;top:50%;transform:translate(0,-50%);left:50px;color:#666;background:0;border:0;outline:0;font-family:Roboto,sans-serif;font-size:15px;width:89%;" {% if get_get('act') == 'edit' %}{% else %}id="comment" {% endif %}type= "text" name="comment" placeholder="Bạn đang nghĩ gì ?">{% if get_get('act') == 'edit' %}{{cs}}{% endif %}</textarea>
+  </div>
+{% if act == 'edit' %}
+  <button class='btn_status' id="submit" onclick="load_ajax()" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Sửa</button>
+{% else %}
+<button  class='btn_status' id="submit" onclick="load_ajax()" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Đăng</button>
+{% endif %}</form>
+<a id="upload" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i> Cảm xúc</a>
+  <a class='btn_status' href='#'><span>...</span></a>
+<input style="display:none" type="file" id="f" accept="image/*">
+<div id="imgyp"></div>
+</div>
+{% if get_get('act') == 'xoa' and lv=='admin' or lv=='smod' %}
+{{delete_data_by_id('chat_ver0',id)}}
+<div id="snackbar" class="show">Xóa thành công!</div>
+<meta http-equiv="refresh" content="1;url=/modules/chat">
+{% endif %}
+{% if request_method()|lower == "post" %}
+{% if cmt %}
+{% if get_get('act') == 'edit' %}
+{{ edit('chat_ver0','comment',cmt) }}
+<div id="snackbar" class="show">Chỉnh sửa thành công!</div>
+<meta http-equiv="refresh" content="1;url=/modules/chat">
+{% else %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+10) }} 
+{% set comment = {"name" :login,"time":"now"|date('U'), "comment":cmt} %}
+{% set status = save_data( "chat_ver0", comment|json_encode ) %}
+{% set kq=random(30) %}
+{% set so=random(10000) %}
+{% if 'bot ơi' in cmt or 'Bot ơi' in cmt or 'BOT ơi' in cmt %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"@"~login~" gọi bot có gì không? :o:"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif 'bot' in cmt or 'Bot' in cmt or 'BOT' in cmt %}
+{% set tl =random(['Có ngon thì đừng có chạy :chay:','Để anh cởi quần lót ra đã, anh sẽ cho chú biết tay :buoi:','Yêu cầu các thí chủ yên lặng :troll19:']) %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":tl} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif 'Quay' in cmt or 'quay' in cmt %}
+{% if get('user_'~login,'xu') >='150' %}
+{% if kq =='1' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+4000) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải nhất của chương trình quay số may mắn! Phần thưởng 4000 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif kq=='2' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+2500) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải nhì của chương trình quay số may mắn! Phần thưởng 2500 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif kq=='3' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+1500) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải ba của chương trình quay số may mắn! Phần thưởng 1500 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% else %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim-150) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"Muahaha @"~login~" quay được số "~so~" chúc may mắn lần sau! BOT đã lấy của @"~login~" 150 xu làm chi phí ăn nhậu :troll:
+"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% set data=[] %}
+{% set play='yes' %}
+{% for i in 1..100 %}
+{% if play=='yes' %}
+{% set data2=get_data( 'chat_ver0',100,i) %}
+{% endif %}
+{% if data2 %}
+{% set data=data2|reverse|merge(data) %}
+{% else %}
+{% set play='no' %}
+{% set data2='' %}
+{% endif %}
+{% endfor %}
+
+{% set total=data|length %}
+{% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set url=get_uri_segments() %}
+{% set p=url[2]|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+{% if get_get('id') == 'xoa' and lv=='admin' or lv=='smod' %}
+{% if data|length >= '1' %}
+<div id="snackbar" class="show">Xoá thành công! Phòng chat trống.</div>
+{% set key = 'chat_ver0' %}
+{% for i in 1..get_data_count(key) %}
+{{ delete_data_by_id(key,get_data(key)|last.id) }}
+{% endfor %}
+<meta http-equiv="refresh" content="1;url=/modules/chat">
+{% else %}
+<div class="rmenu">Nội dung chat box trống không cần xoá</div>
+{% endif %}
+{% else %}
+{% if total == '0' %}
+<div class="rmenu">Chưa có nội dung nào</div>
+{% endif %}
+ {% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,10) %}
+{% set data='' %} 
+{% for tiax in entries %}
+{% set entry = tiax.data|json_decode %}
+{% set user='user_'~entry.name %}
+{% set nd = entry.comment %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+{% set time = entry.time %}
+ <div class="menu"><div class="list2"><table  id="'.$value.'" cellpadding="0" cellspacing="1"><tr><td width="auto"><img style="border: none;border-radius: 50%;" class="avt" src="{{get(user,'avt')}}" width="40" height="40" />{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 42px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>{% set ic=get(user,'icon') %}
+{% if ic %}
+<img src="/images/{{ic}}.png" alt="{{ic}}" />
+{% endif %}
+ <b style="font-size: 16px;"><a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b><br />
+<div style="font-size: 11px;"><i class="fal fa-clock"></i> {{ ago(time) }}</div>
+</td></tr></table></div>
+<div style="margin:0 5px;" id="chat_{{tiax.id}}">{{bbcode(nd|raw)}}</div> <table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="text-align:left;"> </td><td style="text-align:right;">
+{% if login == entry.name %}
+<a id="mi" href="?act=edit&id={{tiax.id}}" class="like"><i class="fal fa-edit"></i></a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<a id="mi" href="?act=edit&id={{tiax.id}}" class="like"><i class="fal fa-edit"></i></a>
+{% endif %}
+{% if lv=='admin' or lv=='smod' or lv=='mod' %}
+{% if login==entry.name %}
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like"><i class="fal fa-trash"></i></a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like"><i class="fal fa-trash"></i></a>
+{% endif %}
+{% endif %}
+<a class="like" onclick="quote(&quot;{{get(user,'nick')}}&quot;,&quot;{{tiax.id}}&quot;)"><i class="fal fa-quote-right"></i></a>
+</td></tr></tbody></table>
+</div>
+{% endfor %}
+{{ paging('modules/chat',p,page_max) }}
+{% endif %}</div>
+<script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#upload").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = ""+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+<script src="/js/auto_tag.js"></script>
+<script>var user = []
+var data = "{{block('tag')}}"
+var sp = data.split("@");
+for(i in sp){user[i] = sp [i].trim();}
+var input = document.querySelector("#comment");
+autocomplete(input,user)
+</script>
+<script>
+$(document).ready(function(){
+$("#smilex_button").click(function(){
+$("#smilex_content").load("/modules/smilex");});});
+</script>
+ {{ block( 'footer' ) }}
+
+{# request_chat #}
+{% elseif url[1] == 'request_chat' %}
+{% from 'func.twig' import rwurl,get,login,lever,up,add,edit,paging,bbcode,ago %}
+{% set login=login()|trim %}
+{% set lv = get('user_'~login,'lever') %}
+ <style>#chatbox_index{display:none;}</style>
+{% if login %}
+{% set cmt =get_post( 'comment' ) %}
+{% set id = get_get('id') %}
+{% set key = get_data_by_id('chat_ver0',id).data|json_decode %}
+{% set cs = key.comment %}
+{% if request_method()|lower == "post" %}
+{% if cmt %}
+{% if get_get('act') == 'edit' %}
+{{ edit('chat_ver0','comment',cmt) }}
+<div class="chat-content">Xong rồi nhé!!!</div>
+{% else %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+10) }} 
+{% set comment = {"name" :login,"time":"now"|date('U'), "comment":cmt} %}
+{% set status = save_data( "chat_ver0", comment|json_encode ) %}
+{% set kq=random(30) %}
+{% set so=random(10000) %}
+{% if 'bot ơi' in cmt or 'Bot ơi' in cmt or 'BOT ơi' in cmt %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"@"~login~" gọi bot có gì không? :o:"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif 'bot' in cmt or 'Bot' in cmt or 'BOT' in cmt %}
+{% set tl =random(['Có ngon thì đừng có chạy :chay:','Để anh cởi quần lót ra đã, anh sẽ cho chú biết tay :buoi:','Yêu cầu các thí chủ yên lặng :troll19:']) %}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":tl} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif 'Quay' in cmt or 'quay' in cmt %}
+{% if get('user_'~login,'xu') >='150' %}
+{% if kq =='1' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+4000) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải nhất của chương trình quay số may mắn! Phần thưởng 4000 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif kq=='2' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+2500) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải nhì của chương trình quay số may mắn! Phần thưởng 2500 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% elseif kq=='3' %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+1500) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"À zí ạ zị. @"~login~" quay được số "~so~"! Xin chúc mừng bạn đã quay được giải ba của chương trình quay số may mắn! Phần thưởng 1500 xu!"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% else %}
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim-150) }}
+{% set comment = {"name":"bot","time":"now"|date('U'), "comment":"Muahaha @"~login~" quay được số "~so~" chúc may mắn lần sau! BOT đã lấy của @"~login~" 150 xu làm chi phí ăn nhậu :troll:
+"} %}
+{% set save = save_data( "chat_ver0", comment|json_encode ) %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% set data=[] %}
+{% set play='yes' %}
+{% for i in 1..100 %}
+{% if play=='yes' %}
+{% set data2=get_data( 'chat_ver0',100,i) %}
+{% endif %}
+{% if data2 %}
+{% set data=data2|reverse|merge(data) %}
+{% else %}
+{% set play='no' %}
+{% set data2='' %}
+{% endif %}
+{% endfor %}
+
+{% set total=data|length %}
+{% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set url=get_uri_segments() %}
+{% set p=url[1]|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+{% if get_get('id') == 'xoa' and lv=='admin' or lv=='smod' %}
+{% if data|length >= '1' %}
+<div id="snackbar" class="show">Xoá thành công! Phòng chat trống.</div>
+{% set key = 'chat_ver0' %}
+{% for i in 1..get_data_count(key) %}
+{{ delete_data_by_id(key,get_data(key)|last.id) }}
+{% endfor %}
+<meta http-equiv="refresh" content="1;url=/modules/chat">
+{% else %}
+<div class="rmenu">Nội dung chat box trống không cần xoá</div>
+{% endif %}
+{% else %}
+{% if total == '0' %}
+<div class="rmenu">Chưa có nội dung nào</div>
+{% endif %}
+ {% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,10) %}
+{% set data='' %} 
+{% for tiax in entries %}
+{% set entry = tiax.data|json_decode %}
+{% set user='user_'~entry.name %}
+{% set nd = entry.comment %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+{% set time = entry.time %}
+ <div class="menu"><div class="list2"><table  id="'.$value.'" cellpadding="0" cellspacing="1"><tr><td width="auto"><img style="border: none;border-radius: 50%;" class="avt" src="{{get(user,'avt')}}" width="40" height="40" />{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 42px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>{% set ic=get(user,'icon') %}
+{% if ic %}
+<img src="/images/{{ic}}.png" alt="{{ic}}" />
+{% endif %}
+ <b style="font-size: 16px;"><a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b><br />
+<div style="font-size: 11px;"><i class="fal fa-clock"></i> {{ ago(time) }}</div>
+</td></tr></table></div>
+<div style="margin:0 5px;" id="chat_{{tiax.id}}">{{bbcode(nd|raw)}}</div> <table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="text-align:left;"> </td><td style="text-align:right;">
+{% if login == entry.name %}
+<a id="mi" href="?act=edit&id={{tiax.id}}" class="like"><i class="fal fa-edit"></i></a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<a id="mi" href="?act=edit&id={{tiax.id}}" class="like"><i class="fal fa-edit"></i></a>
+{% endif %}
+{% if lv=='admin' or lv=='smod' or lv=='mod' %}
+{% if login==entry.name %}
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like"><i class="fal fa-trash"></i></a>
+{% elseif lv=='admin' and lever!='admin'  or lv=='smod' and lever!='admin' and lever!='smod' or lv=='mod' and lever=='mem' %}
+<a id="mi" href="?act=xoa&id={{tiax.id}}" class="like"><i class="fal fa-trash"></i></a>
+{% endif %}
+{% endif %}
+<a class="like" onclick="quote(&quot;{{get(user,'nick')}}&quot;,&quot;{{tiax.id}}&quot;)"><i class="fal fa-quote-right"></i></a>
+</td></tr></tbody></table>
+</div>
+{% endfor %}
+{{ paging('modules/chat',p,page_max) }}
+{% endif %}
+
+{% elseif url[1] == 'avatar.php' %}
+ {% from 'func.twig' import rwurl,get,up,add,breadcrumbs,lever,login,paging,bbcode %}
+{{ block('header') }}
+<style>.copecute_404{display:none;}.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}
+.goiyavt{width: 90px;height: 90px;background-size: cover;border: 4px solid #FFFFFF;box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);display: inline-block;line-height: 0;margin-top: 5px;margin-left: 5px;margin-right: 5px;}</style>
+<div class="phdr"><span>Upload ảnh đại diện</span></div>
+<div class="list1">
+<center>
+<a id="upload" class='btn_status'><div id="status">Chọn ảnh:</div></a>
+<input type="file" id="f" accept="image/*">
+</center></div>
+</div>
+<script src="/js/api-imgur.js"></script>
+<script>
+  document.querySelector("#upload").onclick = function() {
+    document.querySelector("#f").click();
+  }
+  copecute_imgur("#f",{
+    loading : function(load) {
+      document.querySelector("#status").innerHTML = '<i class="fal fa-spinner fa-spin"></i> '+load
+    },
+    loaded : function(link,size,type,time) {
+  window.location="/profile?avatar="+link;
+    }
+  })
+</script>
+<br />
+<div class="phdr"><span>Gợi ý ảnh đại diện</span></div>
+<div class="menu" style="text-align: center;">
+<div class="topmenu"><small>note: thích cái nào ấn vào cái đấy</small></div>
+<a href="/profile?avatar=https://i.imgur.com/JcZANOn.jpg"><img class="goiyavt" src="https://i.imgur.com/JcZANOn.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/wFJi0do.jpg"><img class="goiyavt" src="https://i.imgur.com/wFJi0do.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/6V1V9zQ.jpg"><img class="goiyavt" src="https://i.imgur.com/6V1V9zQ.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/UM6q9Jm.jpg"><img class="goiyavt" src="https://i.imgur.com/UM6q9Jm.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/gkkOG1n.jpg"><img class="goiyavt" src="https://i.imgur.com/gkkOG1n.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/rwj9wSC.jpg"><img class="goiyavt" src="https://i.imgur.com/rwj9wSC.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/NkgQi5H.jpg"><img class="goiyavt" src="https://i.imgur.com/NkgQi5H.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/Mm57c9R.jpg"><img class="goiyavt" src="https://i.imgur.com/Mm57c9R.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/St3Eh5u.jpg"><img class="goiyavt" src="https://i.imgur.com/St3Eh5u.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/kFlNQ6a.jpg"><img class="goiyavt" src="https://i.imgur.com/kFlNQ6a.jpg"></a>
+<div class="topmenu"><small>Avatar boy</small></div>
+<a href="/profile?avatar=https://i.imgur.com/vzweG25.jpg"><img class="goiyavt" src="https://i.imgur.com/vzweG25.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/UxOEWNb.jpg"><img class="goiyavt" src="https://i.imgur.com/UxOEWNb.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/xd21uXx.jpg"><img class="goiyavt" src="https://i.imgur.com/xd21uXx.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/JVMOCJU.jpg"><img class="goiyavt" src="https://i.imgur.com/JVMOCJU.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/4tz6lWB.jpg"><img class="goiyavt" src="https://i.imgur.com/4tz6lWB.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/XhF2WFe.jpg"><img class="goiyavt" src="https://i.imgur.com/XhF2WFe.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/fxRB22C.jpg"><img class="goiyavt" src="https://i.imgur.com/fxRB22C.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/8DTxvGS.jpg"><img class="goiyavt" src="https://i.imgur.com/8DTxvGS.jpg"></a>
+<div class="topmenu"><small>Avatar girl xinh</small></div>
+<a href="/profile?avatar=https://i.imgur.com/MfRrpDB.jpg"><img class="goiyavt" src="https://i.imgur.com/MfRrpDB.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/qKAVugi.jpg"><img class="goiyavt" src="https://i.imgur.com/qKAVugi.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/Zfvc9CL.jpg"><img class="goiyavt" src="https://i.imgur.com/Zfvc9CL.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/xiw9PmP.jpg"><img class="goiyavt" src="https://i.imgur.com/xiw9PmP.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/qp7PMhw.jpg"><img class="goiyavt" src="https://i.imgur.com/qp7PMhw.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/h7xkFFc.jpg"><img class="goiyavt" src="https://i.imgur.com/h7xkFFc.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/sBJ4EIw.jpg"><img class="goiyavt" src="https://i.imgur.com/sBJ4EIw.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/tTm7EHz.jpg"><img class="goiyavt" src="https://i.imgur.com/tTm7EHz.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/vZ3Bc8m.jpg"><img class="goiyavt" src="https://i.imgur.com/vZ3Bc8m.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/LfffTLW.jpg"><img class="goiyavt" src="https://i.imgur.com/LfffTLW.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/Bmi1nU7.jpg"><img class="goiyavt" src="https://i.imgur.com/Bmi1nU7.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/6jDWV6e.jpg"><img class="goiyavt" src="https://i.imgur.com/6jDWV6e.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/e50w3Pg.jpg"><img class="goiyavt" src="https://i.imgur.com/e50w3Pg.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/5LP5h65.jpg"><img class="goiyavt" src="https://i.imgur.com/5LP5h65.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/9VdmIR9.jpg"><img class="goiyavt" src="https://i.imgur.com/9VdmIR9.jpg"></a>
+<div class="topmenu"><small>Avatar con dấu</small></div>
+<a href="/profile?avatar=https://i.imgur.com/T1sV1Bl.jpg"><img class="goiyavt" src="https://i.imgur.com/T1sV1Bl.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/RtoXbl4.jpg"><img class="goiyavt" src="https://i.imgur.com/RtoXbl4.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/Iyt03A0.gif"><img class="goiyavt" src="https://i.imgur.com/Iyt03A0.gif"></a>
+<a href="/profile?avatar=https://i.imgur.com/7geXen3.gif"><img class="goiyavt" src="https://i.imgur.com/7geXen3.gif"></a>
+<a href="/profile?avatar=https://i.imgur.com/2oEOqBd.jpg"><img class="goiyavt" src="https://i.imgur.com/2oEOqBd.jpg"></a>
+<a href="/profile?avatar=https://i.imgur.com/JaBPAIm.jpg"><img class="goiyavt" src="https://i.imgur.com/JaBPAIm.jpg"></a>
+</div>
+{% elseif url[1] == 'cover.php' %}
+{{ block('header') }}
+<style>.copecute_404{display:none;}.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+<div class="phdr"><span>Upload ảnh bìa</span></div>
+<div class="list1">
+<center>
+<a id="bt" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+<input name="img" id="f" type="file" accept="image/*"/></center></div>
+</div>
+      <script src="/js/api-imgur.js"></script>
+<script>
+  document.querySelector("#bt").onclick = function() {
+    document.querySelector("#f").click();
+  }
+  copecute_imgur("#f",{
+    loading : function(load) {
+      document.querySelector("#status").innerHTML = ""+load
+    },
+    loaded : function(link,size,type,time) {
+  window.location="/profile?cover="+link;
+    }
+  })
+</script><br />
+<div class="phdr"><span>Gợi ý ảnh bìa</span></div>
+<div class="menu" style="text-align: center;">
+<div class="topmenu"><small>note: thích cái nào ấn vào cái đấy</small></div>
+</div>
+
+{% elseif url[1] == 'smile' %}
+ {{ block( 'header' ) }}
+<style>.main-wrapper{width: 100%!important;}</style>
+{% from 'func.twig' import rwurl,get,login,lever,up,add,paging %} 
+{% set login=login()|trim %}
+{% set url=get_uri_segments() %}
+{% if url[2] == 'icon' %}
+{% set smile=':D :)) :) :3 :v :P :* :O -_- :(( :( (y) (n) :shit: :thich: :love: :haha: :zuivl: :wow: :buon: :phanno: :e1: :e2: :e3: :e4: :e5: :e6: :e7: :e8: :e9: :e10: :e11: :e12: :e13: :e14: :e15: :e16: :e17: :e18: :e19: :e20: :e21: :e22: :e23: :e24: :e25: :e26: :e27:'|split(' ') %}
+{% elseif url[2] == 'troll' %}
+{% set smile=':ym: :yaoming: :troll: :troll: :troll1: :troll2: :troll3: :troll4: :troll5: :troll6: :troll7: :troll8: :troll9: :troll10: :troll11: :troll12: :troll13: :troll14: :troll15: :troll16: :troll17: :troll18: :troll19: :troll20: :troll21: :troll22: :troll23: :troll24: :troll25: :troll26: :troll27: :troll28: :troll29: :troll30: :troll31: :troll32: :troll33: :troll34: :troll35: :troll36: :troll37: :troll38: :troll39: :troll40: :troll41: :troll42: :troll43: :troll44: :troll45: :troll46: :troll47: :troll48: :troll49: :troll50: :troll51: :troll52: :troll53: :troll54: :troll55: :troll56: :troll57: :troll58: :troll59: :troll60: :troll61: :troll62: :troll63: :troll64: :troll65: :troll66: :troll67: :troll68: :1lol: :2lol:'|split(' ') %}
+{% elseif url[2] == 'ami' %}
+{% set smile=':ami1: :ami2: :ami3: :ami4: :ami5: :ami6: :ami7: :ami8: :ami9: :ami10: :ami11: :ami12: :ami13: :ami14: :ami15: :ami16: :ami17: :ami18: :ami19: :ami20: :ami21: :ami22: :ami23: :ami24: :ami25: :ami26: :ami27: :ami28: :ami29: :ami30: :ami31: :ami32: :ami33: :ami34: :ami35: :ami36: :ami37: :ami38: :ami39: :ami40: :ami41: :ami42: :ami43: :ami44: :ami45: :ami46: :ami47: :ami48:'|split(' ') %}
+{% elseif url[2] == 'menhera' %}
+{% set smile=':menhera1: :menhera2: :menhera3: :menhera4: :menhera5: :menhera6: :menhera7: :menhera8: :menhera9: :menhera10: :menhera11: :menhera12: :menhera13: :menhera14: :menhera15: :menhera16: :menhera17: :menhera18: :menhera19: :menhera20: :menhera21: :menhera22: :menhera23:'|split(' ') %}
+{% elseif url[2] == 'moew' %}
+{% set smile=':moew1: :moew2: :moew3: :moew4: :moew5: :moew6: :moew7: :moew8: :moew9: :moew10: :moew11: :moew12: :moew13: :moew14: :moew15: :moew16: :moew17: :moew18: :moew19: :moew20:'|split(' ') %}
+{% elseif url[2] == 'khac' %}
+{% set smile=':buoi: :buonngu: :chay: :chay2: :choang: :choang2: :clgt: :decu: :dien: :fa: :fu: :help: :hohuha: :khong: :leuleu: :loa: :ngap: :ngau: :nono: :o: :oaoa: :oeoe: :x:'|split(' ') %}
+{% endif %}
+{% set data=[] %} 
+{% set play='yes' %} 
+{% for smile in smile %} 
+{% if play=='yes' %} 
+{% set data2=smile %} 
+{% endif %} 
+{% if data2 %} 
+{% set data=data|merge([data2]) %} 
+{% else %} 
+{% set play='no' %} 
+{% set data2='' %} 
+{% endif %} 
+{% endfor %}
+{% set total=data|length %} 
+{% set page_max=total//15 %} 
+{% if total//15 != total/15 %} 
+{% set page_max=total//15+1 %} 
+{% endif %} 
+{% set url=get_uri_segments() %} 
+{% set p=url[2]|split('.')|first|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %} 
+{% set p=1 %} 
+{% endif %}
+{% if p>page_max %} 
+{% set p=page_max %} 
+{% endif %} 
+{% set st=p*15-15 %}
+{% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,15) %}
+{% set data='' %}
+<div class="phdr"><span>Danh sách smile {{total}}</span></div>
+{% if url[2] == 'icon' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }}
+{% elseif url[2] == 'troll' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }} 
+{% elseif url[2] == 'ami' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }} 
+{% elseif url[2] == 'manhera' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }} 
+{% elseif url[2] == 'moew' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }} 
+{% elseif url[2] == 'khac' %}
+{% for smile in entries %}
+{% set img=smile|replace({':': ""}) %}
+<div class="list1">
+<img src="https://copecute.github.io/images/smile/{{img|replace({')':'1','))':'2','(':'6','((':'4','=))':'5','<':'6','/':'7','*':'8'})}}.gif" alt="{{img}}" /> <input style="padding: 2px;float: right;"value="{{smile}}" readOnly="readOnly" onclick="this.select()"/> </div>
+{% endfor %}
+ {{ paging(url[0],p,page_max,'.html') }}
+{% else %}
+<div class="list1"><a id="mi" href="/smile/icon">icon</a></div>
+<div class="list1"><a id="mi" href="/smile/troll">troll</a></div>
+<div class="list1"><a id="mi" href="/smile/ami">ami</a></div>
+<div class="list1"><a id="mi" href="/smile/manhera">manhera</a></div>
+<div class="list1"><a id="mi" href="/smile/moew">moew</a></div>
+<div class="list1"><a id="mi" href="/smile/khac">khác</a></div>
+{% endif %}
+ {{ block( 'footer' ) }}
+
+{% elseif url[1] == 'thongbao' %}
+ {% from 'func.twig' import rwurl,get,login,lever,up,add,edit,paging,bbcode,ca,bo,ago %}
+ {% use '_template.php' %}
+{% set login=login()|trim %}
+ {% set title='Bảng Tin Cộng Đồng Mod' %}
+ {{ block( 'header' ) }}
+{% set login=login()|trim %}
+{% set lv = get('user_'~login,'lever') %}
+{% set id = get_get('id') %}
+{% set act = get_get('act') %}
+{% set key2 = get_data_by_id('tb',id).data|json_decode %}
+{% set cs = key2.comment %}
+{% set name = key2.name %}
+{% set tg = key2.time %}
+{% set edit = key2.edit %}
+{% if act == 'xem' %}
+{% set lever = get('user_'~name,'lever') %}
+{% set on=get('user_'~name,'on')|trim %}
+<div class="list1">
+<a id="mi" href="/profile/{{name}}"><b><span class="{{lever}}">{{get('user_'~name,'nick')}}</span></b></a> {% if on < ('now'|date('U')-600) %}<font color="red">[OFF]</font>{% else %}<font color="green">[ON]</font>{% endif %}
+<br />
+<font color="#999">{{ ago(tg) }}</font">
+</div>
+<div class="list1">
+{{bbcode(cs|raw)}}
+{% if edit %}
+<div class="edit">Last edit: {{edit}}</div>
+{% endif %}
+{% if lv == 'admin' or lv == 'smod' or lv == 'mod' %}
+{% if login == name %}
+<br />
+<a id="mi" href="/modules/thongbao?act=edit&id={{id}}">Chỉnh sửa</a> · <a id="mi" href="/modules/thongbao?act=top&id={{id}}">Top</a> · <a id="mi" href="/modules/thongbao?act=xoa&id={{id}}">Xoá</a>
+{% elseif lv == 'admin' and lever != 'admin' or lv == 'smod' and lever != 'admin' and lever != 'smod' or lv == 'mod' and lever == 'mem' %}
+<br />
+<a id="mi" href="/modules/thongbao?act=edit&id={{id}}">Chỉnh sửa</a> · <a id="mi" href="/modules/thongbao?act=top&id={{id}}">Top</a> · <a id="mi" href="/modules/thongbao?act=xoa&id={{id}}">Xoá</a>
+{% endif %}
+{% endif %}
+</div>
+{% else %}
+ <div class="phdr"><span>Bảng Tin Cộng Đồng Mod</span>
+{% if login %}
+{% if lv == 'admin' or lv == 'smod' or lv == 'mod' %}
+<a id="mi" href="?id=xoa" style="float: right;"><i class="fal fa-trash"></i></a>
+{% endif %}
+{% endif %}
+</div>
+{% if login %}
+{% if lv == 'admin' or lv == 'smod' or lv == 'mod' %}
+{% set cmt = get_post( 'comment' )|trim %}
+ <div class="gmenu">
+ <form
+method="post" action="">
+Nội dung:<br />
+<textarea type= "text" name="comment">{% if act == 'edit' %}{{cs}}{% endif %}</textarea><br />
+<button
+type="submit">Đăng</button>
+</form>
+</div>
+{% if act == 'top' %}
+{% if edit %}
+{% set cmt = {"name":name,"time":tg, "comment":cs,"edit":edit} %}
+{% else %}
+{% set cmt = {"name":name,"time":tg, "comment":cs} %}
+{% endif %}
+{% set status = save_data("tb", cmt|json_encode ) %}
+{{delete_data_by_id('tb',id)}}
+<div id="snackbar" class="show">Chờ 1 tí!!!</div>
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">{% endif %}
+{% if act == 'xoa' and lv=='admin' or lv=='smod' %}
+{{delete_data_by_id('tb',id)}}
+<div id="snackbar" class="show">Xong rồi nhé!!!</div>
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">
+{% endif %}
+{% if request_method()|lower == "post" %}
+{% if cmt %}
+{% if act == 'edit' %}
+{{ edit('tb','comment',cmt) }}
+{{ edit('tb','edit',login) }}
+<div id="snackbar" class="show">Xong rồi nhé!!!</div>
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">
+{% else %}
+{% if get_data_count('tb') <= 20 %}
+{% if cmt|length <= '5000' %}
+{% set comment = {"name" :login,"time":"now"|date('U'), "comment":cmt} %}
+{% set status = save_data("tb", comment|json_encode ) %}
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">
+{% else %}
+<div id="snackbar" class="show">Lỗi!. Nội dung nhập vào không được vượt quá 5000 kí tự</div>
+{% endif %}
+{% else %}
+<div id="snackbar" class="show">Bạn chỉ có thể đăng tối đa 20 thông báo</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% set data=[] %}
+{% set play='yes' %}
+{% for i in 1..100 %}
+{% if play=='yes' %}
+{% set data2=get_data('tb',100,i) %}
+{% endif %}
+{% if data2 %}
+{% set data=data2|reverse|merge(data) %}
+{% else %}
+{% set play='no' %}
+{% set data2='' %}
+{% endif %}
+{% endfor %}
+{% set total=data|length %}
+{% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+{% set url=get_uri_segments() %}
+{% set p=url[2]|default(1) %}
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %}
+{% set st=p*10-10 %}
+ {% if id == 'xoa' and lv=='admin' or lv=='smod' %}
+{% if total >= '1' %}
+<div id="snackbar" class="show">Xoá thành công!</div>
+{% set key = 'tb' %}
+{% for i in 1..get_data_count(key) %}
+{{ delete_data_by_id(key,get_data(key)|last.id) }}
+{% endfor %}
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">
+{% else %}
+<div class="rmenu">Thông báo trống không cần xoá</div>
+<meta http-equiv="refresh" content="1;url=/modules/thongbao">
+{% endif %}
+{% else %}
+{% if total == '0' %}
+<div class="rmenu">Chưa có thông báo nào</div>
+{% endif %}
+ {% from 'func.twig' import ago %} 
+{% set entries= data|slice(st,10) %}
+{% set data='' %} 
+{% for tiax in entries %}
+{% set entry = tiax.data|json_decode %}
+{% set user='user_'~entry.name %}
+{% set nd = entry.comment %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+{% set time = entry.time %}
+{% set edit = entry.edit %}
+<div class="menu">
+<a id="mi" href="/profile/{{entry.name}}"><font class="{{lever}}">{{get(user,'nick')}}</font></a>: 
+  {% if nd|length > 200 %}
+{{ nd|slice(0,200)|raw }} ... <a id="mi" href="/modules/thongbao?act=xem&id={{tiax.id}}">Xem thêm >></a>
+{% else %} 
+{{ bbcode(nd)|raw }}
+{% endif %}
+{% if lv == 'admin' or lv == 'smod' or lv == 'mod' %}
+{% if edit %}
+<span class="edit">chỉnh sửa lần cuối: {{get('user_'~edit,'nick')}}</span>
+{% endif %}
+{% endif %}
+<span style="float: right;">
+{% if lv == 'admin' or lv == 'smod' or lv == 'mod' %}
+{% if login == entry.name %}
+<a id="mi" href="/modules/thongbao?act=edit&id={{tiax.id}}"><i class="fal fa-edit"></i></a> · <a id="mi" href="?act=deltb&id={{tiax.id}}"><i class="fal fa-trash"></i></a>
+{% elseif lv == 'admin' and lever != 'admin' or lv == 'smod' and lever != 'admin' and lever != 'smod' or lv == 'mod' and lever == 'mem' %}
+<a id="mi" href="/modules/thongbao?act=edit&id={{tiax.id}}"><i class="fal fa-edit"></i></a> · <a id="mi" href="/modules/thongbao?act=xoa&id={{tiax.id}}"><i class="fal fa-trash"></i></a>
+{% endif %}
+{% endif %}
+</span></div>
+{% endfor %}
+<div class="phdr"> Tổng số: {{total}}</div> 
+{{ paging(url[1],p,page_max) }}
+{% endif %}
+{% endif %}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+ {{ block( 'footer' ) }} 
+
+{% elseif url[1] == 'action' %}
+{% use '_template.php' %}
+
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login %}
+ {% set login=login()|trim %}
+{% if login %}
+ {{ block( 'header' ) }} 
+{% set url=get_uri_segments() %}
+{% set lever=get('user_'~login,'lever')|trim %}
+{% set act=url[2] %}
+{% set id=url[3] %}
+ {% set re=url[4] %}
+{% if re %}
+{% set id=id~'/'~re %}
+{% endif %} 
+
+
+{# For all member #}
+
+{# Like #}
+{% if act=='like' and get_data_count('cmt_'~id)>0 %}
+{% set ten=get('cmt_'~id,'ten')|trim %}
+{% if get_data_count('like_'~id)==0 %}
+{% set like=save_data('like_'~id,{"Like":"Like"}|json_encode) %}
+
+ {% endif %} 
+ {% set like=get('like_'~id,login)|trim %} 
+   {% if login!=ten %}
+        {% if like %}
+<div style="position: fixed;background: white;width: 100%;height: 100%;top: 0;"><span style="font-size: 50px;text-align: center;position: fixed;top: 40%;">Bạn đã Like bài viết này rồi</span></div>
+        {% else %}
+<div style="position: fixed;background: white;width: 100%;height: 100%;top: 0;"><span style="font-size: 50px;text-align: center;position: fixed;top: 40%;">Like bài viết thành công</span></div>
+ {% if get_data_count('notification_like_list_'~ten)== 0 %}
+{% set save=save_data('notification_like_list_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('notification_like_list_'~ten,id,'up') }}
+{% endif %}
+ {% if get_data_count('notification_like_unread_'~ten)== 0 %}
+{% set save=save_data('notification_like_unread_'~ten,' '~id~' @ ') %}
+{% else %}
+{{ up('notification_like_unread_'~ten,id,'up') }}
+{% endif %} 
+ {% if get_data_count('notification_like_name_'~ten)== 0 %}
+{% set save=save_data('notification_like_name_'~ten,' '~login~' @ ') %}
+{% else %}
+{{ up('notification_like_name_'~ten,login,'up') }}
+{% endif %} 
+ 
+{{ add('like_'~id,login,login) }}
+ {% if not re %}
+     {% if get_data_count('follow_'~id)==0 %}
+ {% set follow=save_data('follow_'~id,' '~login~' @ ') %}
+{% else %} 
+ {{ up('follow_'~id,login,'up') }} 
+{% endif %}
+{{ add('user_'~ten,'like',get('user_'~ten,'like')|trim+1) }} 
+{% endif %}
+ <script>window.location.href='/threads/{{get('cmt_'~id,'id')|trim}}#{{id}}'</script> 
+        {% endif %}
+   {% else %}
+Bạn không thể like bài viết của chính mình
+   {% endif %}
+{% endif %}
+
+
+
+
+
+ {# Block spam top #}
+{% if act=='spam' and get_data_count('cmt_'~id)>0 %}
+{% set ten=get('cmt_'~id,'ten')|trim %}
+ {% set id_top=get('cmt_'~id,'id')|trim %} 
+ {% set top=get('cmt_'~id_top,'ten')|trim %} 
+   {% if login!=ten and login==top %}
+        {% if get('top_'~id_top,'spam_'~ten)|trim %}
+<div style="position: fixed;background: white;width: 100%;height: 100%;top: 0;"><span style="font-size: 50px;text-align: center;position: fixed;top: 40%;">Bạn đã xóa spam người này rồi.</span></div>
+        {% else %}
+           {% set spam=get_post('spam') %}
+             {% if request_method()|lower == "post" and spam %} 
+<div style="position: fixed;background: white;width: 100%;height: 100%;top: 0;"><span style="font-size: 50px;text-align: center;position: fixed;top: 40%;">Đã xóa thành công.</span></div>
+{{ add('top_'~id_top,'spam_'~ten,ten) }}
+ 
+ <script>window.location.href='/threads/{{get('cmt_'~id,'id')|trim}}#{{id}}'</script> 
+               {% else %}
+<div class="phdr"><span>Xóa người dùng bài viết</span></div> <div class="gmenu"> <form method="post" action="">Bạn muốn xóa bình luận người này !? Chặn @{{get('user_'~ten,'nick')}}<br><input type="submit" name="spam" value=" Đồng ý "></form></div>
+              {% endif %}
+        {% endif %}
+   {% else %}
+<div style="position: fixed;background: white;width: 100%;height: 100%;top: 0;"><span style="font-size: 50px;text-align: center;position: fixed;top: 40%;">Bạn không thể xóa bài viết của chính mình</span></div>
+   {% endif %}
+{% endif %}
+
+
+
+
+ {# Edit comment for members #}
+ {% if act=='edit' and get_data_count('cmt_'~id)>0 and (get('cmt_'~id,'ten')|trim)==login and lever=='mem' %} 
+{% set nd=get_post('nd') %}
+ {% if request_method()|lower == "post" and nd %} 
+{{ add('cmt_'~id,'nd_edit',nd) }}
+ {{ add('cmt_'~id,'time_edit','now'|date('U')) }} 
+ {{ add('cmt_'~id,'editer',login) }}
+ {{ add('cmt_'~id,'type_edit','Chỉnh sửa') }}
+ Đã edit thành công.
+ <script>window.location.href='/threads/{{url[3]}}'</script> 
+{% else %}
+<div class="menublock">
+<div class="phdr"><span>Chỉnh Sửa nội dung</span></div>
+ <form id="chatbox" name="form" method="post" action=""><div id='post_status' style="border-bottom: 1px solid #EBEBEB;">
+  <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i> Chỉnh sửa</span><a onclick="if(document.getElementById('bbcode') .style.display=='none') {document.getElementById('bbcode') .style.display=''}else{document.getElementById('bbcode') .style.display='none'}"><span style='margin:0 0 0 8px'>BBcode</span></a></h2>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class='content' style="height: auto;">
+<textarea style="padding:0;margin:0;color:#666;background:0;border:0;outline:0;font-family:Roboto,sans-serif;font-size:15px;max-width: 100%;width: 100%;" cols="10" rows="20" id="nd" name="nd">{{get('cmt_'~id,'nd_edit')|default(get('cmt_'~id,'nd'))}}</textarea></div>
+  <button class='btn_status' type="submit" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Đăng</button></form>
+<a id="bt" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i>Cảm xúc</a>
+  <a class='btn_status' href='#'><span>...</span></a>
+<input style="display:none" type="file" id="f" accept="image/*">
+</div></div>
+{% endif %}
+ {% endif %} 
+
+
+
+ 
+
+{# For Admin, Smnd and Mod #}
+{% if lever=='admin' or lever=='smod' or lever=='mod' %}
+
+
+
+
+ {# Edit comment #}
+ {% if act=='edit' and get_data_count('cmt_'~id)>0 %} 
+{% set nd=get_post('nd') %}
+ {% if request_method()|lower == "post" and nd %} 
+{{ add('cmt_'~id,'nd_edit',nd) }}
+ {{ add('cmt_'~id,'time_edit','now'|date('U')) }} 
+ {{ add('cmt_'~id,'editer',login) }}
+ {{ add('cmt_'~id,'type_edit','Chỉnh sửa') }}
+ Đã edit thành công.
+ <script>window.location.href='/threads/{{url[3]}}'</script> 
+{% else %}
+<div class="menublock">
+<div class="phdr"><span>Chỉnh Sửa nội dung</span></div>
+ <form id="chatbox" name="form" method="post" action=""><div id='post_status' style="border-bottom: 1px solid #EBEBEB;">
+  <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i> Chỉnh sửa</span><a onclick="if(document.getElementById('bbcode') .style.display=='none') {document.getElementById('bbcode') .style.display=''}else{document.getElementById('bbcode') .style.display='none'}"><span style='margin:0 0 0 8px'>BBcode</span></a></h2>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class='content' style="height: auto;">
+<textarea style="padding:0;margin:0;color:#666;background:0;border:0;outline:0;font-family:Roboto,sans-serif;font-size:15px;max-width: 100%;width: 100%;" cols="10" rows="20" id="nd" name="nd">{{get('cmt_'~id,'nd_edit')|default(get('cmt_'~id,'nd'))}}</textarea></div>
+  <button class='btn_status' type="submit" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Đăng</button></form>
+<a id="bt" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i>Cảm xúc</a>
+  <a class='btn_status' href='#'><span>...</span></a>
+<input style="display:none" type="file" id="f" accept="image/*">
+</div></div>
+      <script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#bt").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = '<i class="fal fa-spinner fa-spin"></i> '+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+{% endif %}
+ {% endif %} 
+
+{# Rename tnpic #}
+ {% if act=='rename' and get_data_count('top_'~id)>0 %} 
+{% set title=get_post('title')|trim %}
+ {% if request_method()|lower == "post" and title %} 
+{{ add('top_'~id,'title',title) }}
+Đã đổi tên bài viết.
+ {% set comment = {"name" :login,"time":"now"|date('U'), "comment": 'Đã đổi tên [url=/threads/'~id~']'~title~'[/url] ' } %}
+{% set status = save_data( "modlog_data", comment|json_encode ) %} 
+ <script>window.location.href='/threads/{{id}}'</script> 
+{% else %}
+<div class="phdr"><span>Đổi tên bài viết</span></div> <div class="gmenu"> <form method="post" action="">Tiêu đề:<br><input name="title" value="{{get('top_'~id,'title')}}"><button> Lưu </button></form></div>
+{% endif %}
+ {% endif %} 
+
+{% set top = get('top_'~id,'act')|trim %}
+ {% set type = get('top_'~id,'type')|trim %} 
+ {% set ca=get('top_'~id,'ca') %}
+ {% set bo=get('top_'~id,'bo') %} 
+{% if top=='delete' %}
+ {% if lever=='admin' or lever=='smod' %} 
+{% set ok='ok' %}
+{% endif %}
+{% else %}
+ {% set ok='ok' %} 
+ {% endif %}
+ 
+{# Close top #}
+ {% if act=='close' and get_data_count('top_'~id)>0 and ok %} 
+ Đã đóng bài viết 
+{{ add('top_'~id,'act','close') }}
+ {% set comment = {"name" :login,"time":"now"|date('U'), "comment": 'Đã đóng cửa [url=/threads/'~id~']'~get('top_'~id,'title')~'[/url] ' } %}
+{% set status = save_data( "modlog_data", comment|json_encode ) %} 
+ <script>window.location.href='/threads/{{id}}'</script> 
+{% endif %}
+
+{# Open top #}
+ {% if act=='open' and get_data_count('top_'~id)>0 and ok %} 
+{% if top=='delete' and type!='status' %}
+ {{ up('bin_data',(' '~get('bin_data')|trim~' ')|replace({(' '~id~' @ '):""})) }} 
+  {% for k in ['forum_data','ca_'~ca,'bo_'~ca~'_'~bo] %}
+ {{ up(k,id,'up') }}  
+       {% endfor %} 
+{% endif %}
+Đã mở bài viết
+{{ add('top_'~id,'act','open') }}
+ {% set comment = {"name" :login,"time":"now"|date('U'), "comment": 'Đã mở cửa [url=/threads/'~id~']'~get('top_'~id,'title')~'[/url] ' } %}
+{% set status = save_data( "modlog_data", comment|json_encode ) %} 
+ <script>window.location.href='/threads/{{id}}'</script> 
+{% endif %} 
+
+{# Delete top #}
+{% if lever=='admin' or lever=='smod' %} 
+ {% if act=='delete' and get_data_count('top_'~id)>0 %} 
+ {% set delete=get_post('delete') %}
+ {% if request_method()|lower == "post" and delete %} 
+Đã xóa bài viết
+{{ add('top_'~id,'act','delete') }}
+{% if type=='status' %}
+{% set k='status_data' %}
+ {{ up(k,(' '~get(k)|trim~' ')|replace({(' '~id~' @ '):""})) }}
+{% else %} 
+ {% if get_data_count('bin_data') == 0 %}
+{% set save=save_data('bin_data',' '~id~' @ ') %}
+{% else %}
+{{ up('bin_data',id,'up') }}
+  {% for k in ['forum_data','ca_'~ca,'bo_'~ca~'_'~bo] %}
+{{ up(k,(' '~get(k)|trim~' ')|replace({(' '~id~' @ '):""})) }} 
+       {% endfor %} 
+{% endif %} 
+{% endif %}
+ {% set comment = {"name" :login,"time":"now"|date('U'), "comment": 'Đã xóa [url=/threads/'~id~']'~get('top_'~id,'title')~'[/url] ' } %}
+{% set status = save_data( "modlog_data", comment|json_encode ) %} 
+ <script>window.location.href='/threads/{{id}}'</script> 
+ {% else %}
+<div class="phdr"><span>Xóa bài viết</span></div> <div class="gmenu"> <form method="post" action="">Bạn muốn xóa bài viết !?<br><input type="submit" name="delete" value=" Đồng ý "></form></div>
+{% endif %} 
+{% endif %} 
+ {% endif %} 
+{% endif %}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}</style>
+ {{ block( 'footer' ) }} 
+{% endif %}
+
+{% elseif url[1] == 'manager' %}
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login %}
+ {% set login=login()|trim %}
+ {% set lever=get('user_'~login,'lever')|trim %} 
+{% if login %}
+{% if lever=='admin' or lever=='smod' or lever=='mod' %} 
+ {{ block( 'header' ) }} 
+{% set url=get_uri_segments() %}
+<div class="phdr"><span>Quản lý thành viên - Manager members</span></div>
+
+
+ {% set form='<div class="gmenu">Bạn muốn quản lý ai.?<br><form method="post" action="/modules/manager"><input name="user"><br><button> Quản Lý</button></form></div>' %}
+ {% if not url[2] %}
+{% set lv=get('user_'~user,'lever')|trim %}
+{% set user=rwurl(get_post('user')) %}
+{% if user%}
+ <script>window.location.href='/modules/manager/{{ rwurl(user) }}'</script>
+{% endif %}
+{{form|raw}}
+{% elseif url[2] and get_data_count('user_'~url[2]) == 0 %}
+<div class="rmenu">Tài khoản này không tồn tại.</div>
+ {{form|raw}}
+{% else %}
+     {% if login==url[2] %}
+ <div class="rmenu">Bạn không có quyền quản lý người này.</div> 
+ {{form|raw}} 
+{% else %}
+
+{% set user=url[2] %}
+ {% set lv=get('user_'~user,'lever')|trim %} 
+{% if lever=='admin' and lv!='admin'  or lever=='smod' and lv!='admin' and lv!='smod' or lever=='mod' and lv=='mem' %}
+{% set save=get_post('save') %}
+ {% set top=get_post('top') %}
+ {% set stat=get_post('stat') %} 
+ {% set post=get_post('post') %} 
+ {% set spam_status=get_post('spam_status') %} 
+{% set avt=get_post('avt')|trim %}
+{% set cv=get_post('cv')|trim %}
+{% set xu=get_post('xu')|trim %}
+{% set tamtrang=get_post('tamtrang')|trim %}
+{% set name=get_post('name')|trim %}
+{% if request_method()|lower == "post" and save %}
+ {% set comment = {"name" :login,"time":"now"|date('U'), "comment": 'Đã quản lý [url=/profile/'~user~']@'~get('user_'~user,'nick')~'[/url] ' } %}
+{% set status = save_data( "modlog_data", comment|json_encode ) %} 
+{% if top %}
+{{ add('user_'~user,'top','yes') }} 
+{% else %}
+ {{ add('user_'~user,'top','no') }} 
+{% endif %}
+
+ {% if stat %}
+{{ add('user_'~user,'stat','yes') }} 
+{% else %}{{ add('user_'~user,'stat','no') }}{% endif %}{% if post %}{{ add('user_'~user,'post','yes') }} 
+{% else %}{{ add('user_'~user,'post','no') }}{% endif %} 
+{% if spam_status %}
+{{ add('user_'~user,'spam_status','yes') }} 
+{{ add('user_'~user,'stat','no') }} {% else %}
+{{ add('user_'~user,'spam_status','no') }}
+{% endif %} 
+{{ add('user_'~user,'manager',login) }}
+{% endif %}
+
+{% if avt %}
+{{ add('user_'~user,'avt',avt) }} 
+{% endif %} 
+{% if cv %}
+{{ add('user_'~user,'lever',cv) }} 
+{% endif %} 
+{% if xu %}
+ {% set tien=get('user_'~user,'xu')|trim %} 
+{% if xu matches '/^[0-9]+[0-9]$/' %}
+{% if xu >= '10' %}
+ {% if xu|length < '15' %}
+{{ add('user_'~user,'xu',xu) }}
+{% elseif tien|length >= '15' %}
+{% if xu|length <= '15' %}
+{{ add('user_'~user,'xu',xu) }}
+{% else %}
+<div class="rmenu">Số xu của người này đã trên 15 kí tự ko thể chỉnh sửa hơn 15 kí tự, vui lòng pm Admin để edit</div>
+{% endif %}
+{% else %}
+<div class="rmenu">Số xu nhập vào phải nhỏ hơn 15 kí tự</div>
+{% endif %}
+{% else %}
+<div class="rmenu">Số xu nhập vào phải từ 10 xu trở lên</div>
+{% endif %}
+{% else %}
+<div class="rmenu">Số xu nhập vào không hợp lệ. Giá trị xu nhập vào phải là số và phải từ 10 xu trở lên</div>
+{% endif %}
+{% endif %}
+{% if tamtrang %}
+{% if tamtrang|length>3 and tamtrang|length<=50 %}
+{{ add('user_'~user,'tamtrang',tamtrang) }}
+{% else %}
+<div class="rmenu">Tâm trạng phải từ 3 đến 50 kí tự
+{% endif %}
+{% endif %}
+{% if name %}
+{% if name|length>2 and name|length<=50 %}
+{{ add('user_'~user,'nick',name) }}
+{% else %}
+<div class="rmenu">Tên hiển thị phải từ 2 đến 50 kí tự</div>
+{% endif %}
+{% endif %}
+ <div class="topmenu">Thành viên: <a id="mi" href="/profile/{{user}}">{{ get('user_'~user,'nick') }}</a></div>
+ {% if get('user_'~user,'manager')|trim %} 
+<div class="rmenu">Quản lý cuối: {{ get('user_'~get('user_'~user,'manager')|trim,'nick') }}</div>
+{% endif %} 
+<div class="menu"><form method="post" action="">
+<input type="checkbox" name="top" value="yes"{% if lv=='admin' or lv=='smod' or lv=='mod' or lv=='mem' and get('user_'~user,'top')|trim=='yes' %} checked="yes"{% endif %}> Cho phép lập Top
+ <br>
+ <input type="checkbox" name="spam_status" value="yes"{% if get('user_'~user,'spam_status')|trim=='yes' %} checked="yes"{% endif %}> Chặn spam và Xóa tất cả Status nhìn thấy 
+<br>
+ <input type="checkbox" name="stat" value="yes"{% if get('user_'~user,'stat')|trim=='' or get('user_'~user,'stat')|trim=='yes' %} checked="yes"{% endif %}> Cho phép đăng Status (chỉ bật được khi tắt chặn spam)
+ <br>
+ <input type="checkbox" name="post" value="yes"{% if get('user_'~user,'post')|trim=='' or get('user_'~user,'post')|trim=='yes' %} checked="yes"{% endif %}> Cho phép bình luận
+<br />
+{% if lever == 'admin' or lever =='smod' or lever == 'mod' %}
+Tên hiển thị(2 - 50):<br />
+<input type="text" name="name"><br />
+{% endif %}
+Tâm trạng(3 - 50) <br /><input type="text" name="tamtrang"><br />
+Tài sản: <br /><input type="text" name="xu">
+<br />Link avatar: <br /><input type="text" name="avt">
+{% if lever=='admin' or lever=='smod' %}
+<br />Chức vụ:<br />
+<input type="radio" name="cv" value="mem" /> Member<br />
+<input type="radio" name="cv" value="mod" /> Mod<br />
+{% endif %}
+{% if lever=='admin' %}
+<input type="radio" name="cv" value="smod" /> Smod <br />
+<input type="radio" name="cv" value="admin" /> Admin
+{% endif %}
+<br /><input type="submit" name="save" value="Lưu"> </form></div>
+{% else %}
+<div class="rmenu">Bạn không có quyền quản lý người này.</div> 
+{{form|raw}} 
+{% endif %}{% endif %}{% endif %} 
+{{ block( 'footer' ) }} 
+{% endif %}{% endif %}
+
+{% else %}
+{% include '_404' %}
+{% endif %}

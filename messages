@@ -1,0 +1,148 @@
+{% use '_template.php' %}
+ {% from 'func.twig' import rwurl,login,get,lever,add,up,sent,paging,bbcode,ago %}
+{% set login=login()|trim %}
+{% if login %}
+ {{ block( 'header' ) }}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}#mess{background:#fff;overflow:auto;height:380px;width:100%;margin:0 auto}.list_mess{clear:both;padding:5px 10px;border-top:1px solid #f1f1f1}.list_mess .content-sms{border-radius:5px;border:1px solid #f2f2f2;margin:2px 7px;padding:7px 10px;color:#005500;font-size:16px;width:70%;min-width:65%}#mess span{clear:both}#mess .me{float:right;background:#455b64;display:block;font-size:16px;padding:5px 10px;color:#fff;margin:2px 5px;border-radius:10px;max-width:65%;text-align:justify}#mess .me:before{right:-10px}#mess .me a{color:#FF9900!important}#mess .you{float:left;background:#f1f1f1;color:#000;font-size:16px;display:block;padding:5px 10px;margin:2px 5px;border-radius:10px;max-width:65%;text-align:justify}#mess .me:after{left:-10px}#mess .you a{color:#FF9900!important}.action-sms{color:gray;float:right;font-size:13px;font-style:italic;margin-right:10px}</style>
+ {% set url=get_uri_segments() %}
+
+{% set form='<div class="phdr">Tin nhắn</div><div class="gmenu">Bạn muốn nhắn tin với ai.?<br><form method="post" action="/messages"><input name="user"><br><button> Chat Riêng</button></form></div>' %}
+ {% if not url[1] %}
+ {{ sent(get_post('user')) }} 
+ {% if login %}
+{% set mail=get('user_'~login,'mail')|trim %}
+{% if mail>0 %}
+{# <script>window.location.href='/messages/{{ get('unread_mail_'~login)|split('@')|first|trim}}'</script> #}
+{% endif %}
+{% endif %} 
+{{form|raw}}
+ {% set mails=get('mails_'~login)|trim %}
+{% if mails %}
+{% for v in mails|split('@') %}{% if loop.last==false %}
+<div class="menu">{{('<img style="width: 40px;height: 40px;border-radius: 50%;border: none;" src="'~get('user_'~v|trim,'avt')~'"/>')|raw}} {{('<a style="top: -15px;position: relative;" href="/messages/'~v|trim~'#b">'~get('user_'~v|trim,'nick')~'</a>')|raw}}</div>
+{% endif %}{% endfor %} 
+{% else %}
+<div class="rmenu">Tin nhắn trống.</div>
+{% endif %} 
+{% elseif url[1] and get_data_count('user_'~url[1]) == 0 %}
+<div class="rmenu">Tài khoản này không tồn tại.</div>
+ {{form|raw}}
+{% elseif login==url[1] %}
+ <div class="rmenu">Tôi không nghĩ rằng bạn thích tự chat với chính mình.</div> 
+ {{form|raw}} 
+{% else %}
+ {{ sent(get_post('nd')) }} 
+{% set user=url[1] %}
+{% set data=get('mail_'~login~' '~user) %}
+{% if not data %}
+ {% set data=get('mail_'~user~' '~login) %} 
+{% endif %}
+<script>window.onload=function () {
+var objDiv = document.getElementById("mess");
+objDiv.scrollTop = objDiv.scrollHeight;}</script>
+<style>
+@media only screen and (max-width: 800px){.header{display:none;}.footer{display:none;}.menublock{margin:0px;}.main-container{padding:0;}.phdr{padding: 5px 5px 5px 5px;}}
+@media only screen and (min-width: 800px){.left_iconxx{display:none;}}
+</style>
+<div class="menublock">
+<div class="phdr"><a id="mi" href="/messages" class="left_iconxx"><i class="far fa-chevron-left" style="background: #455b64;font-size: 16px;padding: 5px 10px;color: #fff;margin: 0px 2px;border-radius: 10px;width: 10px;text-align: justify;"></i></a> {{get('user_'~user,'nick')}} <span style="float:right"><svg style="height: 24px;" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="phone-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-phone-alt fa-w-16 fa-fw fa-lg"><path fill="currentColor" d="M493.09 351.3L384.7 304.8a31.36 31.36 0 0 0-36.5 8.9l-44.1 53.9A350 350 0 0 1 144.5 208l53.9-44.1a31.35 31.35 0 0 0 8.9-36.49l-46.5-108.5A31.33 31.33 0 0 0 125 .81L24.2 24.11A31.05 31.05 0 0 0 0 54.51C0 307.8 205.3 512 457.49 512A31.23 31.23 0 0 0 488 487.7L511.19 387a31.21 31.21 0 0 0-18.1-35.7zM456.89 480C222.4 479.7 32.3 289.7 32.1 55.21l99.6-23 46 107.39-72.8 59.5C153.3 302.3 209.4 358.6 313 407.2l59.5-72.8 107.39 46z" class=""></path></svg>  <i style="font-size: 24px;" class="fal fa-video"></i></span></div>
+<div id="mess"><div id="content-mess">
+{% if not data %}
+<span class="you">Tin nhắn trống !</span></div></div>
+{% else %}
+ {% set data=data|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//100 %}
+{% if total//100 != total/100 %}
+{% set page_max=total//100+1 %}
+{% endif %}
+{% set p=url[2]|default(1) %}
+
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=page_max %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %} 
+ 
+ 
+{% set st=p*100-100 %}
+
+{% for entry in data|slice(0,total)|slice(st,100)|reverse %} 
+{% set entry=entry|trim %} 
+{% set key='mail_'~entry %} 
+{% set user='user_'~get(key,'ten') %} 
+{% set nd=get(key,'nd') %} 
+{% set time=get(key,'time') %} 
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %} 
+{% set us=get(key,'ten') %} 
+
+<span id="{{entry}}" class="{% if us|trim==login|trim %}me{% else %}you{% endif %}">
+{% if login != get(key,'ten')|trim %}{{add(key,'type','read')}}{% endif %}
+{{bbcode(nd|raw)}}</span><span class="action-sms">{% if get(key,'type')|trim == 'unread' %}<i class="fal fa-check"></i> Đã gửi{% endif %}</span>
+{% endfor %}
+<span id="b" style="display:block;"></span></div></div>
+{{paging(url[0]~'/'~url[1],p,page_max)}} 
+ {% set user=url[1] %}
+{% if user~' @' in get('unread_mail_'~login)|trim %}
+{{ up('unread_mail_'~login,(' '~get('unread_mail_'~login)|trim|replace({(user~' @'):""})~' ')) }}
+{% if get('user_'~login,'mail')|trim > 0 %}
+{{ add('user_'~login,'mail',(get('user_'~login,'mail')|trim-1)) }}
+ {% endif %} 
+{% endif %} 
+{% endif %} 
+<form id="messages" method="post" action="/messages/{{user}}#b"><div id='post_status' style="border-top: 1px solid #eee;">
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['messages'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['messages'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {document.form.nd.value += text1+text2;}}
+function show_hide(elem) {obj = document.getElementById(elem);if( obj.style.display == "none" ) {obj.style.display = "block";
+} else {obj.style.display = "none";}}
+function load_ajax(){ 
+$.ajax({ 
+beforeSend:function(){ 
+$('#submit').html('Đang gửi...'); }, }); }
+</script>
+<div id="bbcode"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class='content'>
+<textarea id="comment" name="nd" style="max-width: 100%;width: 100%;height: 61px;margin: 0px;" placeholder="soạn tin nhắn..." type="text"></textarea>
+  </div>
+  <button class='btn_status'  id="submit" type="submit" onclick="load_ajax()" id="chat" style='float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;'>Gửi</button></form>
+<a id="upload" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i>Cảm xúc</a>
+    <input style="display:none" type="file" id="f" accept="image/*">
+</div>
+<script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#upload").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = ""+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+<script src="/js/auto_tag.js"></script>
+<script>var user = []
+var data = "{{block('tag')}}"
+var sp = data.split("@");
+for(i in sp){user[i] = sp [i].trim();}
+var input = document.querySelector("#comment");
+autocomplete(input,user)
+</script>
+ {% endif %}
+
+ {{ block( 'footer' ) }} 
+{% endif %}

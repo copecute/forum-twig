@@ -1,0 +1,519 @@
+{% use '_template.php' %}
+{% set act = get_get('act') %}
+{% if act == 'daovang' %}
+<title>Đào Vàng</title>
+{% elseif act == 'oantuti' %}
+<title>Oẳn tù tì</title>
+{% endif %}
+ {% set url=get_uri_segments() %}
+{% if url[1] == 'daptrung' %}
+   {% set title='Game đập trứng' %}   
+{% elseif url[1] == 'duameo' %}
+   {% set title='Đua Mèo' %}
+{% elseif url[1] == 'duckhunt' %}
+   {% set title='Dunk Hunt' %}
+{% elseif url[1] == 'volleymal' %}
+   {% set title='Game thú chơi bóng' %}
+{% elseif url[1] == 'duaxe' %}
+   {% set title='Đua Xe' %}
+{% elseif url[1] == '2048' %}
+   {% set title='2048' %}
+{% elseif url[1] == 'cityblock' %}
+   {% set title='Xây thành phố' %}
+{% else %}
+{% set title='Trò Chơi' %}
+{% endif %}
+{{ block('header') }} 
+{% from 'func.twig' import rwurl,get,login,add,up %} 
+{% set login=login()|trim %}
+{% set tien=get('user_'~login,'xu') %}
+
+{# Game đào vàng #}
+{% if act == 'daovang' %}
+<style>#menugame{display:none;}</style>
+   {% if login %}   
+   <div class="phdr">Game đào vàng</div>
+   {% set kq=random(['một thỏi vàng','một viên kim cương','một tảng đá','một túi tiền','một cục shit']) %}   
+   {% set xu=random(1050) %}   
+   {% set suachua=get_post('suachua')|trim %}   
+   {% set dao=get_post('dao')|trim %}   
+   {% set db=get('user_'~login,'db') %}
+    {% if request_method()|lower == "post" and db %}   
+             {% if suachua %}
+{% if tien >= '5000' %}
+{% if db <= '0' %}
+   <div class="list1">Sửa chửa thành công, hệ thống xin của {{get('user_'~login,'nick')}} 5000 xu làm chi phí ăn nhậu nhé! Vui lòng <a href="/game?act=daovang">Cick</a> để tiếp tục.
+</div>
+ <script>window.location.href='/game?act=daovang'</script>
+   {{ add('user_'~login,'db',100) }}   
+   {{ add('user_'~login,'xu',get('user_'~login,'xu')|trim-5000) }}
+{% else %}
+<div class="rmenu">Máy chủ của bạn còn tốt không cần sửa chữa</div>
+{% endif %}
+{% else %}
+<div class="rmenu">Bạn không có đủ xu để sửa chữa</div>
+   {% endif %}
+{% endif %}
+   {% if dao %}   
+   {% if db <= '0' %}<div class="rmenu">Ồh! Máy đào của bạn có vẻ hư hỏng rất nặng, sửa chửa ngay để đào tiếp nhé</div>   
+   {% else %}   
+   <div class="list1">Chúc mừng bạn đào được {{kq}} và được cộng {{xu}} xu vào tài khoản.</div>   
+   {{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+xu) }}   
+   {{ add('user_'~login,'db',get('user_'~login,'db')|trim-5) }}{% endif %}{% endif %}{% endif %}   
+      
+<form method="post" action=""><div class="list1"><input type="submit" name="suachua" value="Sửa chửa"> (5000 xu)</div>   
+<div class="list1" style="background: url(http://i.imgur.com/MreO5M3.png) repeat-x;height: 125px;color: white;">
+<marquee behavior="scroll" direction="left" scrollamount="1" style="margin-top: 5px;position: absolute;"><img src="/images/farm_may.png"></marquee>
+Tài sản: {{get('user_'~login,'xu')}} Xu <br>Độ bền: {{db}}/100%<br><marquee behavior="scroll" direction="left" scrollamount="2" style="position: absolute;" class="cloud_2"><img src="/images/farm_may2.png"></marquee></div><div class="nen" style="background: url('/images/farm_dat.png') repeat;height: 200px;width: 100%;margin-top: -9px;position: relative;text-align: center;"><img src="https://copecute.github.io/images/game/daovang.png"><br>
+<input type="submit" name="dao" value="Đào vàng"></div></div></form>
+{% else %}<div class="rmenu">Chỉ dành cho thành viên đăng nhập.</div>{% endif %}
+{# End code Game đào vàng #}
+
+{# code Game Oẳn tù tì #}
+{% elseif act == 'oantuti' %}
+<style>#menugame{display:none;}</style>
+{% set cuoc = 50 %}
+{% set chon = get_post('chon') %}
+
+{% set ketqua = random(['thua','thang','hoa']) %}
+<div class="phdr">Oẳn tù tì <span style="float: right;"><small>Tài sản: {{get('user_'~login,'xu')}} Xu</small></span></div>
+{% if request_method()|lower == "post" %}
+
+{% if (get('user_'~login,'xu') > 50) %}không đủ xu{%endif%}
+
+{%if chon==''%}<div class="topmenu">Lựa chọn không hợp lệ!!<br/><a id="mi" href="?act=oantuti">Quay lại</a></div>{%else%}
+{%if ketqua=='thang'%}
+<div class="topmenu">Thật bất ngờ, bạn quả nhiên có công lực thâm hậu
+<br>Kết quả đã chọn: <b>{{chon}}</b> vs <b>{{chon|replace({'keo':'bao','bao':'bua','bua':'keo'})|raw}}</b>
+<br>Bạn được cộng <b>120</b> coin vào tài khoản, thừa thắng xông lên đê :))</div>
+<div class="list1">» <a id="mi" href="?act=oantuti">Quay lại</a></div>
+{{add('user_'~login,'xu',get('user_'~login,'xu')|trim+120)}}
+{%elseif ketqua=='hoa'%} <div class="topmenu">Hai bạn có lẽ đã đạt đến cảnh giới linh cảm tương thông ^^, hòa nhau vì có chung đáp án là <b>{{chon}}</b>, quay lại chiến tiếp nha</div>
+<div class="list1">» <a id="mi" href="?act=oantuti">Quay lại</a></div>
+{{add('user_'~login,'xu',get('user_'~login,'xu')|trim-cuoc)}}
+{%elseif ketqua=='thua'%} 
+<div class="topmenu">Đã yếu còn ra gió, công lực của bạn quá kém nên đã thua
+<br>Kết quả đã chọn: <b>{{chon}}</b> vs <b> {{chon|replace({'keo':'bua','bao':'keo','bua':'bao'})|raw}}</b>
+<br>Bạn bị trừ <b>120</b> coin vào tài khoản, cay quá làm lại phát nữa nha :D</div>
+{{add('user_'~login,'xu',get('user_'~login,'xu')|trim-120)}}
+<div class="list1">» <a id="mi" href="?act=oantuti">Quay lại</a></div>
+{%endif%}
+{%endif%}
+{% else %}
+<div class="topmenu">QUY TẮC: mỗi lượt chơi sẽ tốn 50 coin! Thắng nhận được 120 coin! Thắng 3 lần liên tiếp thưởng thêm 120 coin! Chúc các bạn may mắn!</div>
+<div class="menu">
+<form action="" method="post">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+{#<tr valign="middle"><td width="33%" align="center"><b>Kéo</b></td><td width="34%" align="center"><b>Búa</b></td><td width="33%" align="center"><b>Bao</b></td></tr>#}
+<tr valign="middle"><td width="33%" align="center"><label for="s_1"><img src="https://copecute.github.io/images/game/keo.png" max-width="100%"/></label></td><td width="34%" align="center"><label for="s_2"><img src="https://copecute.github.io/images/game/bua.png" max-width="100%"/></label></td><td width="33%" align="center"><label for="s_3"><img src="https://copecute.github.io/images/game/bao.png" max-width="100%"/></label></td></tr>
+<tr valign="middle"><td width="33%" align="center"><input type="radio" name="chon" value="keo" id="s_1"/></td><td width="34%" align="center"><input type="radio" name="chon" value="bua" id="s_2"/></td><td width="33%" align="center"><input type="radio" name="chon" value="bao" id="s_3"/></td></tr></table>
+<br><div style="text-align: -webkit-center;"><input style="padding: 10px;" type="submit" name="submit" value="Chơi luôn"></div></form>
+</div><br />
+{% endif %}{% endif %}
+{# End code Oẳn tù tì #}
+
+{# game đua Mèo #}
+{% if url[1] == 'duameo' %}
+{% set login=login()|trim %}{%set xu,tien,thu,rand,sx=get('user_'~login,'xu')|trim,get_post('tien')|trim,get_post('thu')|trim,random(6)+1,{'1':'Mèo vằn','2':'Mèo tuyết','3':'Tiểu hồ','4':'Bông xù','5':'Hồng điệp','6':'Tiểu bảo','7':'Hỏa long'}%}<div class="phdr"><span>Game Đua Mèo</span></div>{%if login%}{%if request_method()|lower=="post"%}{%if tien>xu%}<div class="rmenu">Lỗi! Không đủ tiền để cược{%elseif tien<10%}<div class="rmenu">Lỗi! số tiền bạn đặt phải trên 10 xu{%elseif thu<1 or thu>7%}<div class="rmenu">Lỗi! Thú bạn đặt không phù hợp{%else%}<div class="list1">{%if rand==thu%}{{add('user_'~login,'xu',xu+tien)}}Chúc mừng! Thú {{sx[thu]}} mà bạn chọn đã dành chiến thắng! Bạn được cộng {{tien}} xu{%else%}{{add('user_'~login,'xu',xu-tien)}}Xin chia buồn! <b> {{sx[thu]}} </b> mà bạn chọn đã thua trong lượt đua này!{%endif%}<br/><a id="mi" href="/game/duameo"><font color="blue">{%if rand==thu%}Tiếp tục{%else%}Chơi lại{%endif%}</font></a>{%set play='yes'%}{%endif%}</div>{%endif%}{%if play=='yes'%}
+<style>
+.game-area {position: relative;}
+.dd {background: url('/images/dd.png');}
+.kg{background: url(/images/kg.png);repeat-x: ;height: 120px;}
+.buico {background: url('/images/buico.png') repeat-x; height: 24px;}
+.ani {width: 55px;height: 45px;background-repeat: no-repeat;}
+.game-area .list-group-item .ani {float:left;}
+.game-area .list-group-item:after {clear:both;display: block;height: 0;line-height: 0;content: " "}
+.ani1 {background-image: url('/images/meo_1.gif')}
+.ani2 {background-image: url('/images/meo_2.gif')}
+.ani3 {background-image: url('/images/meo_3.gif')}
+.ani4 {background-image: url('/images/meo_4.gif')}
+.ani5 {background-image: url('/images/meo_5.gif')}
+.ani6 {background-image: url('/images/meo_6.gif')}
+.ani7 {background-image: url('/images/meo_7.gif')}
+</style>
+<div class="kg"></div><div class="dd">
+{%for i in 1..7%}{%if thu==rand and i==thu%}
+{%set rand1=10%}{%else%}{%if i==thu%}
+{%set rand1=5%}{%else%}{%set rand1=random(5)+4%}{%endif%}{%endif%}<marquee behavior="alternate" direction="right" scrollamount="{{rand1}}" loop="1"><div class="ani ani{{i}}"></div></marquee>{%endfor%}</div><div class="buico"></div>{%else%}<form method="post">
+{%for i,title in sx%}<div class="list1"><img src="/images/meo_{{i}}.gif"> <b>{{title}}<input style="float: right;width: 20px;height: 20px;" name="thu" type="radio" value="{{i}}"></div>{%endfor%}
+<div class="list1">Tiền cược: <br/><input type="number" name="tien"/> xu<input type="submit" value="Đua thôi"/></form></div>
+{%endif%}{%else%}<div class="rmenu">Vui lòng đăng nhập để chơi game</div>
+{% endif %}
+{# End code Game đua mèo #}
+
+{# game 2048 #}
+{% elseif url[1] == '2048' %}
+<div class="loading" style="position: fixed;width: 100%;height: 100%;background: #faf8ef;z-index: 200;font-size: 30px;text-align: center;color:#776e65">đang tải...</div>
+<link href="https://copecute.github.io/forum/css/2048_main.css" rel="stylesheet" type="text/css">
+<style>body{padding:0!important;}</style>
+ <div class="container">
+    <div class="heading">
+      <h1 class="title">2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
+    </div>
+    <div class="above-game">
+      <p class="game-intro">Cộng Đồng Mod Android Trên Facebook</p>
+      <a class="restart-button">Chơi Mới</a>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+	        <a class="keep-playing-button">Tiếp Tục</a>
+          <a class="retry-button">Thử Lại</a>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">Cách Chơi:</strong> sử dụng <strong>phím mũi tên</strong> để di chuyển. Khi 2 ô cùng giá trị <strong>sẽ cộng vào nhau!</strong>
+    </p>
+  </div>
+
+  <script src="https://copecute.github.io/forum/js/2048_bind_polyfill.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_classlist_polyfill.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_animframe_polyfill.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_keyboard_input_manager.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_html_actuator.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_grid.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_tile.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_local_storage_manager.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_game_manager.js"></script>
+  <script src="https://copecute.github.io/forum/js/2048_application.js"></script>
+{# end game 2048 #}
+
+{# game Xây thành phố #}
+{% elseif url[1] == 'cityblock' %}
+    <style>
+        *{margin:0;padding:0}
+html{background:#FFF;height:100%}
+body{margin:0 auto;text-align:center;width:100%;height:100%;background:#F95240 url(https://copecute.github.io/images/game/xay-thanh-pho_main-bg.png)}
+@media screen and (min-height:560px){html{font-size:100px}}
+@media screen and (min-height:640px){html{font-size:112.5px}}
+@media screen and (min-height:720px){html{font-size:125px}}
+@media screen and (min-height:800px){html{font-size:137.5px}}
+@media screen and (min-height:880px){html{font-size:150px}}
+@media screen and (min-height:960px){html{font-size:162.5px}}
+@media screen and (min-height:1040px){html{font-size:180px}}
+@media screen and (min-height:1200px){html{font-size:200px}}
+html{font-size:17.6vh}
+.main-container{padding:0!important}
+.footer{display:none}
+#canvas{position:fixed;left:0;top:0;right:0;bottom:0;margin:auto;display:-webkit-box;padding-top:100px}
+a{text-decoration:none}
+li,ul,ol{list-style-type:none;padding:0;margin:0}
+.hide{display:none}
+.clear{clear:both}
+.loading{background-color:#F05A50;height:100%;width:100%}
+.loading .main{width:60%;margin:0 auto;color:#FFF}
+.loading .main img{width:60%;margin:1rem auto 0}
+.loading .main .title{font-size:.3rem}
+.loading .main .text{font-size:.15rem}
+.loading .main .bar{height:.12rem;width:100%;border:3px solid #FFF;border-radius:.6rem;margin:.1rem 0}
+.loading .main .bar .sub{height:.1rem;width:98%;margin:.008rem auto 0}
+.loading .main .bar .percent{height:100%;width:0;background-color:#FFF;border-radius:.6rem}
+.loading .logo{position:absolute;bottom:.3rem;left:0;right:0}
+.loading .logo img{width:1rem}
+.content{height:100vh;margin:0 auto;position:relative}
+.landing .title{width:60%}
+.landing .logo{width:30%;position:absolute;right:.2rem;top:.2rem}
+.landing .action-2{position:absolute;bottom:.2rem;width:100%}
+.landing .start{width:65%}
+.slideTop{-webkit-animation:st 1s ease-in-out;animation:st 1s ease-in-out}
+@-webkit-keyframes st{0%{transform:translateZ(0)}100%{transform:translate3d(0,-100%,0)}}
+@keyframes st{0%{transform:translateZ(0)}100%{transform:translate3d(0,-100%,0)}}
+.slideBottom{-webkit-animation:sb 1s ease-in-out;animation:sb 1s ease-in-out}
+@-webkit-keyframes sb{0%{transform:translateZ(0)}100%{transform:translate3d(0,200%,0)}}
+@keyframes sb{0%{transform:translateZ(0)}100%{transform:translate3d(0,200%,0)}}
+.swing{-webkit-animation:sw 2s ease-in-out alternate infinite;animation:sw 2s ease-in-out alternate infinite}
+@-webkit-keyframes sw{0%{transform:rotate(5deg);transform-origin:top center}100%{transform:rotate(-5deg);transform-origin:top center}}
+@keyframes sw{0%{transform:rotate(5deg);transform-origin:top center}100%{transform:rotate(-5deg);transform-origin:top center}}
+.modal .mask{background-color:#000;opacity:.6;position:fixed;height:100%;width:100%;top:0;left:0;z-index: 11;}
+.modal .modal-content{position:fixed;height:100%;top:0;z-index: 12;}
+.modal .main{width:85%;margin:0 auto}
+.modal .container{position:relative}
+.modal .bg{width:100%;position:absolute;top:0;left:0}
+.modal .modal-main{width:100%;position:absolute;top:0;left:0;margin-top:-0.4rem}
+.modal .over-img{width:45%;margin:.8rem auto 0}
+.modal .over-score{margin-top:-0.2rem;font-size:.5rem;color:#FF735C;text-shadow:-2px -2px 0 #FFF,2px -2px 0 #FFF,-2px 2px 0 #FFF,2px 2px 0 #FFF}
+.modal .tip{font-size:.16rem;color:#9B724E}
+.modal .over-button-b{width:70%;margin:0.1rem auto 0}
+.wxShare{background:#000;position:absolute;top:0;left:0;width:100%;height:100%;z-index:11;opacity:.9}
+.wxShare img{width:50%;float:right;margin:10px 10px 0 0}
+</style><canvas id="canvas" class="hide"></canvas><div class="content"><div class="loading"><div class="main">
+<img src="https://copecute.github.io/images/game/xay-thanh-pho_main-loading.gif">
+<div class="progress"><div class="title font-wenxue">0%</div><div class="bar"><div class="sub">
+<div class="percent"></div></div></div><div class="text">Đang tải</div></div></div></div><div class="landing hide">
+<div class="action-1"><img src="https://copecute.github.io/images/game/xay-thanh-pho_main-index-title.png" class="title swing"></div>
+<div class="action-2"><img id="start" src="https://copecute.github.io/images/game/xay-thanh-pho_main-index-start.png" class="start"></div></div>
+<div id="modal" class="modal hide"><div class="mask"></div><div class="js-modal-content modal-content"><div class="main">
+<div class="container"><imgsrc="https://copecute.github.io/images/game/xay-thanh-pho_main-modal-bg.png"class="bg">
+<div class="modal-main"><div id="over-modal" class="hide js-modal-card"><img src="https://copecute.github.io/images/game/xay-thanh-pho_main-modal-over.png" class="over-img">
+<div id="score" class="over-score"></div><div id="over-zero" class="hide"><div class="tip"><p>Điểm</p>
+<img src="https://copecute.github.io/images/game/xay-thanh-pho_main-modal-again-b.png" class="over-button-b js-reload"><img src="https://copecute.github.io/images/game/xay-thanh-pho_main-modal-invite-b.png" class="over-button-b js-invite"></div>
+</div></div></div></div></div></div></div><div class="wxShare hide">
+<img src="https://copecute.github.io/images/game/xay-thanh-pho_main-share-icon.png"></div></div>
+<script src="https://copecute.github.io/forum/js/xay-thanh-pho_main.js"></script>
+<script src="https://copecute.github.io/forum/js/xay-thanh-pho_copecute-1.1.6.min.js"></script>
+<script>
+  var domReady, loadFinish, canvasReady, loadError, gameStart, game, score, successCount
+  var gameWidth = window.innerWidth
+  var gameHeight = window.innerHeight
+  var ratio = 1.5
+  if (gameHeight / gameWidth < ratio) {
+    gameWidth = Math.ceil(gameHeight / ratio)
+  }
+  $('.content').css({ "height": gameHeight + "px", "width": gameWidth + "px" })
+  $('.js-modal-content').css({ "width": gameWidth + "px" })
+  function hideLoading() {
+    if (domReady && canvasReady) {
+      $('#canvas').show()
+      loadFinish = true
+      setTimeout(function () {
+        $('.loading').hide()
+        $('.landing').show()
+      }, 1000)
+    }
+  }
+  function updateLoading(status) {
+    var success = status.success
+    var total = status.total
+    var failed = status.failed
+    if (failed > 0 && !loadError) {
+      loadError = true
+      alert('Tải không thành công Vui lòng làm mới và thử lại')
+      return
+    }
+    var percent = parseInt((success / total) * 100);
+    if (percent === 100 && !canvasReady) {
+      canvasReady = true
+      hideLoading()
+    }
+    percent = percent > 98 ? 98 : percent
+    percent = percent + '%'
+    $('.loading .title').text(percent);
+    $('.loading .percent').css({
+      'width': percent
+    })
+  }
+  function overShowOver() {
+    $('#modal').show()
+    $('#over-modal').show()
+    $('#over-zero').show()
+  }
+  const option = {
+    width: gameWidth,
+    height: gameHeight,
+    canvasId: 'canvas',
+    soundOn: true,
+    setGameScore: function (s) {
+      score = s
+    },
+    setGameSuccess: function (s) {
+      successCount = s
+    },
+    setGameFailed: function (f) {
+      $('#score').text(score)
+      if (f >= 3) overShowOver()
+    }
+  }
+  function gameReady() {
+    game = TowerGame(option)
+    game.load(function () {
+      game.playBgm()
+      game.init()
+    }, updateLoading)
+  }
+  var isWechat = navigator.userAgent.toLowerCase().indexOf("micromessenger") !== -1
+  if (isWechat) {
+    document.addEventListener("WeixinJSBridgeReady", gameReady, false)
+  } else {
+    gameReady()
+  }
+  function indexHide() {
+    $('.landing .action-1').addClass('slideTop')
+    $('.landing .action-2').addClass('slideBottom')
+    setTimeout(function () {
+      $('.landing').hide()
+    }, 950)
+  }
+  $('#start').on('click', function () {
+    if (gameStart) return
+    gameStart = true
+    indexHide()
+    setTimeout(game.start, 400)
+  })
+  $('.js-reload').on('click', function () {
+    window.location.href = window.location.href + '?s=' + (+new Date())
+  })
+  $('.js-invite').on('click', function () {
+    $('.wxShare').show()
+  })
+  $('.wxShare').on('click', function () {
+    $('.wxShare').hide()
+  })
+  window.addEventListener('load', function () {
+    domReady = true
+    hideLoading()
+  }, false);
+</script>
+{# End game Xây thành phố #}
+
+{# Game đập trứng #}
+{% elseif url[1] == 'daptrung' %}
+ {% from 'func.twig' import rwurl,up,ca,bo,get,add,login %}
+   {% set login=login()|trim %}
+   <div class="phdr"><span>Game đập trứng</span></div>
+{% if login %}
+{% set t = get_get('t') %}
+{% set dap = get_get('dap') %}
+{% set xu=get('user_'~login,'xu') %}
+{% if t == 'ketqua' %}
+{% set nick=get('user_'~login,'nick') %}
+{% set ketqua=random(4) %}
+{% set mayman = random(4) %}
+{% set tien = 1000 %}
+{% set tientrung=tien*3 %}
+{% if dap < 0 or dap > 4 %}
+<div class="rmenu">Ui từ 0-4 thui bạn ui!<br/>&laquo; <a id="mi" href="/game/daptrung">Quay lại</a></div>
+{% elseif xu < '500' %}
+<div class="rmenu">Bạn không đủ xu</div>
+{% else %}
+{% if dap == ketqua %}
+{% if dap == mayman %}
+<div class="list1"><img src="/images/trungvo.png"> Xin chúc mừng {{nick}} đã đập trúng trứng {{kq}} cùng trúng trứng may mắn Và  nhận được x3 tiền thắng lên {{tientrung}} xu </div><div class="list1">» <a id="mi" href="/trung">Chơi tiếp</a></div>
+{{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+tientrung) }}
+{% else %}
+<div class="list1"><img src="/images/trungvo.png"alt="Trứng vỡ" /> Xin chúc mừng {{nick}} đã đập trúng trứng {{kq}} Và nhận được 1000 Xu
+<br />
+» <a id="mi" href="/game/daptrung">Chơi tiếp</a>
+</div>
+  {{ add('user_'~login,'xu',get('user_'~login,'xu')|trim+tien) }}
+{% endif %}
+{% else %}
+<div class="list1"><img src="/images/trungvo.png" alt="Trứng vỡ" /> Ui trứng đúng là {{ketqua}} rất tiếc bạn đã đập trật và bị trừ 500 xu
+<br />
+» <a id="mi" href="/game/daptrung">Chơi tiếp</a>
+</div>
+  {{ add('user_'~login,'xu',get('user_'~login,'xu')|trim-500) }}
+{% endif %}
+{% endif %}
+{% else %}
+<div class="list1">
+•&nbsp;Số dư của tài khoản: <b>{{xu}} xu</b><br />•&nbsp;Thắng sẽ được 1000, thua bị trừ 500 xu.
+<br/>•&nbsp;Trong khi đập nếu may mắn trúng trứng đặc biệt sẽ được x3.
+<br />•&nbsp;Số trứng gồm 5 trứng 0-4<br />&bull; Chọn Một  Trứng:
+<br />
+{% for i in 0..4 %}
+<a id="mi" href="/game/daptrung?t=ketqua&dap={{i}}"><img src="/images/trung.png" alt="Trứng {{i}}" /></a>
+{% endfor %}
+</div>
+{% endif %}
+{% else %}
+<div class="rmenu">Vui lòng đăng nhập để chơi game</div>
+{% endif %}
+{# End code game đập trứng #}
+
+
+{# game Duck Hunt #}
+{% elseif url[1] == 'duckhunt' %}
+<iframe src="https://duckhuntjs.com/" style="width: 100%;border: none;height: -webkit-fill-available;"></iframe>
+{# end game Duck Hunt #}
+
+{# game thú chơi bóng #}
+{% elseif url[1] == 'volleymal' %}
+<iframe src="https://0.s3.envato.com/files/94546086/index.html" style="width: 100%;border: none;height: -webkit-fill-available;"></iframe>
+{# end thú chơi bóng #}
+
+{# game pc #}
+{# game đua xe #}
+{% elseif url[1] == 'duaxe' %}
+<iframe src="https://hexgl.bkcore.com/play/" style="width: 100%;border: none;height: -webkit-fill-available;"></iframe>
+{# end game đua xe #}
+{# end game pc #}
+
+{# Danh sách trò chơi #}
+{% else %}
+{% if login %}
+<div id="menugame">
+<div class="phdr"><span>Trò chơi kiếm xu</span></div>
+
+<div style="height:37px;background-image:url(https://copecute.github.io/images/game/avatar_nha.png);background-repeat:repeat">
+<marquee behavior="scroll" direction="left" scrollamount="3" style="margin-top: -10px"><img src="https://copecute.github.io/images/game/avatar_dammaynho.png" width="15"></marquee><marquee behavior="scroll" direction="left" scrollamount="2" style="margin-top: 6px"><img src="https://copecute.github.io/images/game/avatar_dammaylon.png" width="20"></marquee></div>
+<table style="width:100%;background-image:url(https://copecute.github.io/images/game/avatar_bmap.png);background-repeat:repeat"><tbody><tr><td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay">
+<span style=""><a id="mi" href="/map/ngoaio"><img src="http://mxhavatar.com/icon/iconxoan/ngoaio.png" width="26px" title="Ngoại Ô"><br><b><font color="white">Khu ngoại ô</font></b></a></span></div></td>
+<td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay">
+<span style=""><a id="mi" href="/map/khugiaitri"><img src="http://mxhavatar.com/images/giaitri.png" width="26px" title="Khu giải trí"><br><font color="white"><b>Khu giải trí</b></font></a></span></div></td>
+<td style="width:32%;text-align:center;padding:1px; float: left; font-size: 10px;background-repeat : repeat;"><div class="xoay"><span style=""><a id="mi" href="/map/farm"><img src="https://copecute.github.io/images/farm/farm.png" width="26px" title="Nông Trại"><br><b><font color="white">Khu Nông Trại</font></b></a></span></div>
+</td></tr></tbody></table>
+<div style="height:26px;background-image:url(https://copecute.github.io/images/game/avatar_nhamap2.png);background-repeat:repeat"><marquee behavior="scroll" direction="left" scrollamount="4" style="margin-top: 5px"><img src="https://copecute.github.io/images/game/avatar_dammaynho.png" width="15"></marquee></div>
+
+<div class="list1"><img src="https://copecute.github.io/images/farm/farm.png" style="width: 30px;height: 30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/map/farm" style="top: -10px;position: relative;">Nông trại</a></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/daovang.png" style="width: 30px;height: 30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game?act=daovang" style="top: -10px;position: relative;">Đào vàng</a></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/keo.png" style="width: 30px;height: 30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game?act=oantuti" style="top: -10px;position: relative;">Oẳn tù tì</a></div>
+<div class="list1"><img src="/images/trung.png" style="width: 30px;height: 30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/daptrung" style="top: -10px;position: relative;">Đập trứng</a></div>
+<div class="list1"><img src="/images/icon-duameo.png" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/duameo" style="top: -10px;position: relative;">Đua mèo</a></div>
+<br />
+<div class="phdr"><span>Trò chơi giải trí</span></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/icon-2048.png" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/2048" style="top: -10px;position: relative;">Game 2048</a></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/CityStory-icon.png" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a href="/game/cityblock" style="top: -10px;position: relative;">Game Xây thành phố</a></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/icon-duckhunt.jpg" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/duckhunt" style="top: -10px;position: relative;">Game Duck Hunt</a></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/volleymal.png" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/volleymal" style="top: -10px;position: relative;">Game Thú chơi bóng</a></div>
+
+<div class="gamepc"><br /><div class="phdr"><span>Game PC</span></div>
+<div class="list1"><img src="https://copecute.github.io/images/game/icon-duaxe3d.jpg" style="width:30px;height:30px;padding: 1px 5px 1px 1px;">
+<a id="mi" href="/game/duaxe" style="top: -10px;position: relative;">Game dua xe 3D</a></div>
+
+</div></div>
+{% else %}
+<div class="rmenu">Vui lòng đăng nhập để dùng toàn bộ chứng năng của diễn đàn</div>
+{% endif %}
+{% endif %}
+<style>.main-wrapper{width: 100%!important;}
+.post{display:none;!important;}
+@media only screen and (max-width: 800px){.gamepc{display:none;}}</style>
+{{ block('footer') }} 

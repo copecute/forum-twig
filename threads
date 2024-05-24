@@ -1,0 +1,366 @@
+{% use '_template.php' %}
+
+ {% from 'func.twig' import rwurl,get,up,add,breadcrumbs,lever,login,paging,bbcode,ca,bo,ago %}
+ {% set login=login()|trim %}
+ {% if login %}
+ {% set lv=get('user_'~login,'lever')|trim %}
+{% endif %} 
+ 
+ {% set url=get_uri_segments() %}
+{% set p=url[2]|split('-')|first|default(1) %} 
+{% set id=url[1] %}
+
+
+{# ----------------View thread or Reply comment--------------- #}
+{% if get_data_count('cmt_'~id)>0 %}
+ {% set id_top = get('cmt_'~id,'id')|trim %} 
+ {% set top = get('top_'~id_top,'act')|trim %} 
+{% if top=='delete' and login and lv=='mem' or top=='delete' and login and lv=='mod' or top=='delete' and not login %}
+ {{ block( 'header' ) }} 
+<div class="rmenu">Bài viết đã bị xóa bởi ban quản trị.</div>
+{% else %}
+
+
+
+ {% set ca=get('top_'~id,'ca') %}
+ {% set bo=get('top_'~id,'bo') %}
+ {% set title=get('top_'~id_top,'title')|trim %} 
+ {% if title|trim matches '/^\\[(.+?)\\](.+?)$/' %}
+{% set sub=title|split(']')|first|split('[')|last %}
+{% set title=title|split(']',2)|last %}
+{% endif %} 
+ {% set seo='<meta name="keywords" content="'~title~', '~title|split(' ')|join(', ')~', '~rwurl(title)|split('-')|join(' ') ~'"> <meta name="description" content="'~get('cmt_'~id,'nd')|trim|slice(0,250)~'"> <link rel="canonical" href="/'~id~'/'~rwurl(title)~'.html">' %} 
+ {% set title=title %} 
+ {{ block( 'header' ) }} 
+{% from 'func.twig' import sentpost %}
+{{ sentpost(get_post('nd')) }}
+
+
+ {% set title=get('top_'~id_top,'title')|trim %} 
+ {% if title|trim matches '/^\\[(.+?)\\](.+?)$/' %}
+{% set sub=title|split(']')|first|split('[')|last %}
+{% set title=title|split(']',2)|last %}
+{% endif %} 
+
+ {% set data=get('th_'~id)|split('@') %}
+ {% if get_data_count('th_'~id)==0 %} 
+ {% set data=(' '~id~' @ ')|split('@') %}
+{% endif %} 
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %}
+
+
+{% if p matches '/[a-zA-z]|%/' or p<1 %}
+{% set p=1 %}
+{% endif %}
+{% if p>page_max %}
+{% set p=page_max %}
+{% endif %} 
+<div class="menublock" style="margin: 0px 0px 10px 0px;">
+ {% if get_data_count('top_'~id)==0 %} 
+ <div class="phdr" xmlns:v="http://rdf.data-vocabulary.org/#">{{breadcrumbs(id_top,get('top_'~id_top,'title'))}}</div>
+<div class="phdr" style="display:none">{{breadcrumbs(id_top,get('top_'~id_top,'title'))}}</div>
+{% elseif get('top_'~id,'type')|trim=='status' %}
+ <div class="phdr" xmlns:v="http://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb"><a title="Home" href="/" rel="v:url" property="v:title">Trang Chủ</a></span> › <span typeof="v:Breadcrumb"><a title="Status" href="/modules/status" rel="v:url" property="v:title">Status</a></span></div> 
+{% else %}
+ <div class="phdr" xmlns:v="http://rdf.data-vocabulary.org/#">{{breadcrumbs(ca,ca(ca),bo,bo(ca,bo))}}</div> 
+ {% endif %} 
+ {% if get_data_count('view_'~id)==0 %}
+{% set save=save_data('view_'~id,'1') %}
+{% set view=1 %}
+{% else %}
+{{ up('view_'~id,get('view_'~id)|trim+1) }}
+ {% endif %}
+
+<style>
+.mxh{text-align: center;
+margin-bottom: 15px;}
+.mxh a{color: white;font-size: 11px;}
+.share{padding: 2px 4px;
+display: inline-block;margin: 1px;
+min-width: 58px;border-radius: 5px;}
+.share:hover{opacity: .8;}
+.fb{background: #0062BD;}
+.tw{background: #0097DF;}</style>
+<script>function quote(username,id){content_quote = $("#comment_" + id).html().replace(/<\/?[^>]+>/gi, '').replace(/\s+/g, " ").slice(0,100);
+content_quote = "[quote=" + username + "]" + $.trim(content_quote) + "[/quote]";
+$("textarea").focus();
+$("textarea").val($("textarea").val()+content_quote);}
+</script>
+ <div class="menu">
+{% if get('top_'~id,'type')|trim=='status' %}{% else %}
+<h2 style="text-align: center;color: #455b64;">{% if get_data_count('top_'~id)==0 %}Trả lời bình luận{% else %}{{title|raw}}{% endif %}</h2>{% endif %}
+<span><i class="fal fa-eye"></i> lượt xem: {{ get('view_'~id)|trim }}</span><br />
+<span>Tổng số: {{total}} bình luận</span><br />
+<span class="mxh">Chia sẻ: <a class="share fb" href="https://www.facebook.com/sharer/sharer.php?u=https://forum.android-developer.tk/{{url[0]}}/{{id}}" rel="nofollow" target="_blank" title="Chia sẻ lên FaceBook"><font color="white"><i class="fab fa-facebook-f"></i> FaceBook</font></a>
+<a class="share tw" href="https://twitter.com/home?status=https://forum.android-developer.tk/{{url[0]}}/{{id}}" rel="nofollow" target="_blank" title="Chia sẻ lên Twitter"><font color="white"><i class="fab fa-twitter"></i> Twitter</font></a></span></div>
+</div>
+ {{ paging(url[0]~'/'~id,p,page_max,'-'~rwurl(title)~'.html') }} 
+
+ {% if top=='close' %}
+<div class="rmenu">Bài viết đã đóng cửa.</div>
+{% endif %} 
+ {% if top=='delete' %}
+<div class="rmenu">Bài viết đã bị xóa.</div>
+{% endif %} 
+{% set st=p*10-10 %}
+
+ {% for entry in data|slice(0,total)|reverse|slice(st,10) %}
+{% set entry=entry|trim %}
+{% set key='cmt_'~entry %} 
+{% set user='user_'~get(key,'ten') %}
+ {% set nd=get(key,'nd') %} 
+ {% set nd_edit=get(key,'nd_edit') %} 
+ 
+ {% set time=get(key,'time') %}
+{% set lever=get(user,'lever')|trim %} 
+{% set on=get(user,'on')|trim %}
+<div class="menublock" style="margin: 0px 0px 10px 0px;"><div class="menu"  id="post{{entry}}" style="box-shadow: 0px 1px 1px #ccc;-moz-box-shadow: 0px 1px 1px #ccc;-webkit-box-shadow: 0px 1px 1px #ccc;"><div style="border-bottom: 1px solid #F2F2F2;background: #f2f2f2;margin: -4px;"><table id="{{entry}}" width="100%" cellpadding="0" cellspacing="1"><tr><td width="50px"><img style="border: none;border-radius: 50%;" width="40" height="40" class="avt" src="{{get(user,'avt')}}" width="40" height="40" />{% if on < ('now'|date('U')-600) %}{% else %}<span name="online" style="position: absolute;left: 42px;"><i class="fas fa-circle" style="position: absolute;bottom: -44px;color: green;font-size: 11px;"></i></span>{% endif %}</td><td>
+{% set ic=get(user,'icon') %}
+{% if ic %}
+<img src="/images/{{ic}}.png" alt="{{ic}}" />
+{% endif %}
+<b><a id="mi" href="/profile/{{ get(key,'ten') }}"><font class="{{lever}}">{{get(user,'nick')}}</font></a></b>
+<br /><div style="font-size: 11px;">{{get(user,'tamtrang')}}
+</td>
+{% if login %}
+<td style="float: right;"><style>@media only screen and (min-width: 800px){.menuforum{right: auto;}}</style>
+<div class="dropdown">
+<button class="dropbtn" style="padding: 0px 0px;"><i class="fal fa-ellipsis-h-alt" style="font-size: 20px;"></i></button>
+<div class="dropdown-content menuforum">
+<a><i class="fal fa-thumbs-up"></i> {{get(user,'like')}}, <i class="fal fa-comment-alt"></i> {{get(user,'cmt')}}</a>
+{% if login==get(key,'ten') and lv=='mem' %}
+<a href="/modules/action/edit/{{entry}}"><i class="fal fa-pen"></i> chỉnh sửa</a>
+ {% elseif lv=='admin' or lv=='smod' or lv=='mod' %} 
+<a href="/modules/action/edit/{{entry}}"><i class="fal fa-pen"></i> chỉnh sửa</a>
+{% if get(key,'ip') %}
+ <a href="/ip?ip={{get(key,'ip')}}">{{get(key,'ip')}}</a>
+{% endif %}{% endif %}
+{% if login==get('top_'~id,'first')|trim %}
+<a href="/modules/action/spam/{{entry}}"><i class="fal fa-user-times"></i> xóa</a>{% endif %}
+</div></div>
+</td>{% endif %}</div></tr></table></div>
+<div class="post_num"><i class="fal fa-clock"></i> {{ ago(time|trim) }} <a href="#post{{entry}}" style="float:right;" id="{{entry}}">#{{entry}}</a></div>
+ {% if get('top_'~id,('spam_'~get(key,'ten')|trim))==get(key,'ten')|trim %}
+<div class="rmenu">Bình luận bị xóa tự động bởi chủ thread</div>
+ {{ up('th_'~id,((' '~get('th_'~id)|trim~' ')|replace({(' '~entry~' @ '):""}))) }}
+ {{ add('user_'~get(key,'ten')|trim,'cmt',get('user_'~get(key,'ten')|trim,'cmt')|trim-1) }} 
+{% else %}
+ {% set re=get(key,'re')|trim %}
+{% if re %}
+<div class="bbcode_quote"><div class="quote_container"><div class="bbcode_quote_container"></div>{{get(('user_'~get('cmt_'~re,'ten')|trim),'nick')|trim}}: 
+ {% set rnd=get('cmt_'~re,'nd') %}
+ {% set rnd_edit=get('cmt_'~re,'nd_edit') %} 
+{% if rnd_edit %}{% set rnd=rnd_edit %}{% endif %} 
+ {% if rnd|length > 200 %}
+{{ rnd|slice(0,200)|raw }} ...
+{% else %} 
+{{ bbcode(rnd)|raw }}
+{% endif %}</div></div>
+{% endif %}
+
+{# ----------------- #}
+ {% if get(user,'report')|trim=='yes' %}
+<div class="rmenu">Bình luận bị ẩn - Reported</div>
+{% endif %}
+ {% if get(user,'report')|trim=='yes' and login and get('user_'~login,'lever')|trim!='mem' or get(user,'report')|trim!='yes' %}
+ {% if nd_edit %}
+<div id="comment_{{entry}}">{{ bbcode(nd_edit)|raw }} </div>
+<div class="edit">{{ get(key,'type_edit') }} bởi: {{get('user_'~get(key,'editer')|trim,'nick') }}</div>
+{% else %}
+<div id="comment_{{entry}}"> {{ bbcode(nd)|raw }} </div>
+{% endif %}
+{% endif %} 
+{% endif %}
+{% set like=get('like_'~entry)|trim|json_decode %}
+ {% if like|length-1 > 0 %} 
+<div style="background-color: #fafafa;padding: 5px;margin: 1px -4px -4px -4px;"><button class="button_like"><i class="fa fa-heart"></i> {{like|length-1}}</button> {% for v in like|slice(1,like|length-1) %}{{get('user_'~v,'nick')}}{% if loop.last==false %} , {% endif %}{% endfor %} thích điều này
+</div>
+{% endif %} 
+ {% if login() and login != get(key,'ten') and top=='open' or login==get(key,'ten') and (('now'|date('U'))-time|trim)<1800 and lv=='mem' %}
+<table style="font-size:13px;" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="text-align:left;"> </td><td style="text-align:right;">
+ {% elseif lv=='admin' or lv=='smod' or lv=='mod' %}
+<table style="font-size:13px;" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="text-align:left;"> </td><td style="text-align:right;">
+{% endif %}
+<div id="action_like-cmt-share"><span class="action_like"> {% if login() and top=='open' %}
+ {% if login==get(key,'ten') %}<span style="color:#E91E63"><i class="fa fa-heart"></i> đã thích</span>{% elseif login in get('like_'~entry)|trim|json_decode %}<span style="color:#E91E63"><i class="fa fa-heart"></i> đã thích</span>{% else %}<a href="/modules/action/like/{{entry}}"><i class="fa fa-heart"></i> thích</a> &nbsp;{% endif %}</span><span class="action_like">{% if get_data_count('top_'~id)>0 and id!=entry %}<a href="/threads/{{entry}}"><i class="far fa-comments"></i> {% if get('th_'~entry)|split('@')|length-2>0 %}{{get('th_'~entry)|split('@')|length-2}} câu trả lời{% else %}Trả lời{% endif %}</a>{% else %}<a href="/threads/{{entry}}#post"><i class="far fa-comments"></i> Trả lời</a>{% endif %}</span><span class="action_like"><a onclick="quote(&quot;{{get(user,'nick')}}&quot;,&quot;{{entry}}&quot;)"><i class="fal fa-share"></i> trích</a>
+{% endif %}
+</span></div>
+ {% if login() and login != get(key,'ten') and top=='open' or login==get(key,'ten') and (('now'|date('U'))-time|trim)<1800 and lv=='mem' %}
+</td></tr></tbody></table>
+ {% elseif lv=='admin' or lv=='smod' or lv=='mod' %}
+</td></tr></tbody></table>
+{% endif %}
+</div></div>
+{% endfor %} 
+{% if login %}
+ {% if top=='open' %}
+ {% if get('top_'~id_top,('spam_'~login))==login %}
+<div class="rmenu">Bình luận bị xóa bởi chủ thread</div>
+{% else %}
+{% set t=get('th_'~id)|split(' '~id_forum~' @ ')|last|split('@')|length+1 %}
+<div class="menublock">
+<form id="post" name="form" method="post" action="/threads/{{id}}{% if t>10 %}/{{(t/10)|round(0,'ceil')}}{% endif %}"><input id="name" type="hidden" name="id" value="{{id}}">
+<div id='post_status'>
+  <h2><span style='padding: 0 7px 0 0; border-right: 1px solid #ddd'><i class="fa fa-pencil" aria-hidden="true"></i>Bình luận</span><a id="mi" href="/threads/1/noi-quy-dien-dan-cong-dong-mod.html"><span style='margin:0 0 0 8px'><i class="fa fa-question" aria-hidden="true"></i>Q&amp;A</span></a></h2>
+<script>
+function tag(text1, text2) {
+if ((document.selection)) {
+document.form.comment.focus();
+document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
+} else if(document.forms['form'].elements['nd'].selectionStart!=undefined) {
+var element = document.forms['form'].elements['nd'];
+var str = element.value;
+var start = element.selectionStart;
+var length = element.selectionEnd - element.selectionStart;
+element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
+} else {
+document.form.nd.value += text1+text2;
+}
+}
+function show_hide(elem) {
+obj = document.getElementById(elem);
+if( obj.style.display == "none" ) {
+obj.style.display = "block";
+} else {
+obj.style.display = "none";
+}
+}
+</script>
+<div id="bbcode"><a href="javascript:tag('[b]', '[/b]')" rel="nofollow"><i class="fa fa-bold"></i></a> <a href="javascript:tag('[i]', '[/i]')" rel="nofollow"><i class="fal fa-italic"></i></a> <a href="javascript:tag('[u]', '[/u]')" rel="nofollow"><i class="fal fa-underline"></i></a> <a href="javascript:tag('[s]', '[/s]')" rel="nofollow"><i class="fal fa-strikethrough"></i></a>
+<a href="javascript:tag('[img]', '[/img]')" rel="nofollow"><i class="fal fa-image"></i></a> <a href="javascript:tag('[url=]', '[/url]')" rel="nofollow"><i class="fal fa-link"></i></a> <a href="javascript:tag('[code]', '[/code]')" rel="nofollow"><i class="fal fa-code"></i></a> <a href="javascript:tag('[noi]', '[/noi]')" rel="nofollow"><i class="fal fa-microphone"></i></a> <a href="javascript:tag('[red]', '[/red]')" rel="nofollow"><span style="font-size:10px;color:red">Text</span></a> <a href="javascript:tag('[blue]', '[/blue]')" rel="nofollow"><span style="font-size:10px;color:blue">Text</span></a> <a href="javascript:tag('[green]', '[/green]')" rel="nofollow"><span style="font-size:10px;color:green">Text</span></a> <a href="javascript:tag('[h2]', '[/h2]')" rel="nofollow"><i class="fal fa-h2"></i></a>
+</div>
+<div class="content" style="height: 100%!important;">
+<textarea id="comment" type= "text"
+name="nd" style="height: 60px;position: unset;transform: none;width: 100%;"></textarea>
+</div>
+{% if get_data_count('cmt_'~id~'/'~url[2])>0 and login!=get('cmt_'~id~'/'~url[2],'ten')|trim %}
+<label class="pure-material-checkbox">
+  <input type="checkbox" name="re" value="{{url[2]}}" checked="yes">
+  <span>  Trả lời: <b>@{{get('user_'~get('cmt_'~id~'/'~url[2],'ten'),'nick')}}</b></span>
+</label>{% elseif login!=get('cmt_'~id,'ten')|trim %}
+<label class="pure-material-checkbox">
+  <input type="checkbox" name="re" value="{{id}}">
+  <span>   Trả lời: <b>@{{get('user_'~get('cmt_'~id,'ten'),'nick')}}</b></span>
+</label><br>{% endif %}
+  <button class='btn_status' type="submit" style="float: right; color: #fff; background: #455b64; border-radius: 4px;margin: 10px 0 0 0;display: inline-block;padding: 5px 15px;">Đăng</button></form>
+<a id="upload" class='btn_status'><div id="status"><i style='color:#5db98b' class="fal fa-image" aria-hidden="true"></i> Ảnh</div></a>
+  <a class='btn_status' id="smilex_button"><i style='color:#cc7762' class="fa fa-heartbeat" aria-hidden="true"></i>Cảm xúc</a>
+  <a class='btn_status' href='#'><span>...</span></a>
+<input style="display:none" type="file" id="f" accept="image/*">
+</div></div>
+{% endif %} {% endif %} {% endif %} 
+
+ {% if get_data_count('top_'~id)>0 %} 
+ {% set link=rwurl(title|raw) %} 
+ {{ block('share') }} 
+ {% if login %}
+{% if lv=='admin' or lv=='smod' or lv=='mod' %}
+<div class="rmenu">
+ <a id="mi" href="/modules/action/rename/{{id}}"> Đổi tên bài viết </a>
+ 
+<br>
+{% if top=='open' %}<a id="mi" href="/modules/action/close/{{id}}">Đóng cửa bài viết</a>
+{% else %}
+ <a id="mi" href="/modules/action/open/{{id}}">Mở cửa bài viết</a>
+{% endif %}
+ {% endif %}
+ 
+ {% if lv=='admin' or lv=='smod' %} 
+ <br><a id="mi" href="/modules/action/delete/{{id}}">Xóa bài viết</a> 
+{% endif %}
+{% endif %} 
+</div>
+ {% endif %} 
+
+ {% endif %} 
+{% else %}
+
+{# ----------------------------------------------------View and show list forum, catergory, board and bin------------------------------------------------------------------------------------------- #}
+ {{ block( 'header' ) }} 
+ {% set url=get_uri_segments() %}
+
+{% if url[2] and ca(url[1]) and bo(url[1],url[2]) %}
+
+ <div class="phdr" xmlns:v="http://rdf.data-vocabulary.org/#">{{breadcrumbs(url[1],ca(url[1]))}} › <span>{{bo(url[1],url[2])}}</span></div> 
+ <div class="topmenu">{% if login() %}
+<a id="mi" href="/creater/{{url[1]}}/{{url[2]}}">Tạo bài viết mới.</a>
+{% else %}
+Đăng Nhập để tạo bài viết
+{% endif %}</div> 
+ {% set key='bo_'~url[1]~'_'~url[2] %}
+  {% set p=url[3]|split('.')|first|default(1) %} 
+ {{ block( 'forum' ) }} 
+ {% set data=get(key)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %} 
+ {{ paging(url[0]~'/'~url[1]~'/'~url[2],p,page_max,'.html') }} 
+{% elseif ca(url[1]) and url[1]%}
+ <div class="phdr" xmlns:v="http://rdf.data-vocabulary.org/#">{{breadcrumbs()}} › <span>{{ca(url[1])}}</span></div> 
+ <div class="topmenu">{% if login() %}
+<a id="mi" href="/creater/{{url[1]}}">Tạo bài viết mới.</a>
+{% else %}
+Đăng Nhập để tạo bài viết
+{% endif %}</div> 
+   {% set key='ca_'~url[1] %} 
+ {% set p=url[2]|split('.')|first|default(1) %} 
+ {{ block( 'forum' ) }} 
+ {% set data=get(key)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %} 
+ {{ paging(url[0]~'/'~url[1],p,page_max,'.html') }}  
+ <div class="phdr"><span>Chuyên mục</span></div> <div class="topmenu">Chuyên mục con</div> 
+  {% for k,v in bo(url[1])|json_decode %}
+ <div class="list1"><img src="/images/{{loop.index}}.png"> <a id="mi" href="/{{url[0]}}/{{url[1]}}/{{k}}" title="{{v}}">{{v}}</a></div>
+    {% endfor %} 
+ {% elseif url[1]=='thung-rac' and login %}
+ {% set key='bin_data' %}
+ <div class="phdr"><span>Thùng Rác - The Bin<span></div> 
+ {{ block( 'forum' ) }} 
+{% else %}
+ {% set key='forum_data' %}
+ <div class="phdr"><span>Các bài viết trong diễn đàn</span></div> 
+ {% set p=url[1]|split('.')|first|default(1) %} 
+ {{ block( 'forum' ) }} 
+ {% set data=get(key)|split('@') %}
+ {% set total=data|length-1 %} 
+ {% set page_max=total//10 %}
+{% if total//10 != total/10 %}
+{% set page_max=total//10+1 %}
+{% endif %} 
+ {{ paging(url[0],p,page_max,'.html') }} 
+</div><div class="sidebar-wrapper"><div class="phdr"><span>Danh mục bài viết</span></div> <div class="topmenu">Chọn chuyên mục</div> 
+ {% for k,v in ca()|json_decode %}
+ <div class="list1"><img src="/images/{{loop.index}}.png"> <a id="mi" href="/{{url[0]}}/{{k}}" title="{{v}}">{{v}}</a></div>
+    {% endfor %} 
+{% endif %} 
+
+{% endif %}
+      <script src="/js/api-imgur.js"></script>
+<script>
+document.querySelector("#upload").onclick = function() {
+document.querySelector("#f").click();}
+copecute_imgur("#f",{loading : function(load) {document.querySelector("#upload").innerHTML = ""+load},
+loaded : function(link,size,type,time) {
+var input = $("textarea").val();
+$("textarea").val(input+" [img]"+link+"[/img] ");
+$("#upload").html('<div id="status"><i style="color:#5db98b" class="fal fa-image" aria-hidden="true"></i> Ảnh</div>');}})
+</script>
+<script src="/js/auto_tag.js"></script>
+<script>var user = []
+var data = "{{block('tag')}}"
+var sp = data.split("@");
+for(i in sp){user[i] = sp [i].trim();}
+var input = document.querySelector("#comment");
+autocomplete(input,user)
+</script>
+ {{ block( 'footer' ) }}
